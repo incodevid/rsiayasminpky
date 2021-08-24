@@ -37,6 +37,9 @@ else {
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+
 
   <!-- DataTables -->
   <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -49,6 +52,9 @@ else {
   <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
+   <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
 
  <style>
 .myScrollTable {
@@ -58,6 +64,13 @@ height:auto;
 width:auto;
 overflow-y:auto;
 overflow-x:scroll;
+}
+.circular-image {
+     border: 1px solid #ffffff;
+     width: 150px;
+     height: 150px;
+     overflow: hidden;
+     border-radius: 50%; /* Tambahkan baris berikut */
 }
 </style>
 
@@ -188,7 +201,7 @@ overflow-x:scroll;
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="?p=klayanan" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kategori Layanan</p>
                 </a>
@@ -379,6 +392,13 @@ overflow-x:scroll;
         include "pages/kategori_dokter/hapus.php";
         break;
 
+        case "ddokter";
+        include "pages/dokter/tampil.php";
+        break;
+        case "hddokter";
+        include "pages/dokter/hapus.php";
+        break;
+
 
         case "visi_misi";
         include "pages/visi_misi/tampil.php";
@@ -426,14 +446,11 @@ overflow-x:scroll;
 
 
 
-        case "agenda";
-        include "pages/agenda/tampil.php";
+        case "klayanan";
+        include "pages/kategori_layanan/tampil.php";
         break;
-        case "uagenda";
-        include "pages/agenda/ubah.php";
-        break;
-        case "hagenda";
-        include "pages/agenda/hapus.php";
+        case "hklayanan";
+        include "pages/kategori_layanan/hapus.php";
         break;
 
 
@@ -557,6 +574,7 @@ overflow-x:scroll;
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
+<!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
@@ -593,6 +611,9 @@ overflow-x:scroll;
 
 <!-- Select2 -->
 <script src="plugins/select2/js/select2.full.min.js"></script>
+
+<!-- bs-custom-file-input -->
+<script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
 
 
@@ -725,6 +746,12 @@ overflow-x:scroll;
     });
 
   })
+</script>
+
+<script>
+$(function () {
+  bsCustomFileInput.init();
+});
 </script>
 
 </body>
