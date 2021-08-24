@@ -1,3 +1,26 @@
+
+<?php
+error_reporting(0);
+session_start();
+include 'config.php';
+date_default_timezone_set('Asia/Jakarta');
+$tgl=date('Y-m-d');
+function tglIndonesia($str){
+       $tr   = trim($str);
+       $str    = str_replace(array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'), array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum\'at', 'Sabtu', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'), $tr);
+       return $str;
+   }
+if (empty($_SESSION['username']) AND empty($_SESSION['password']))
+ {echo "<script>document.location='login' </script> ";}
+else {
+    
+    
+            $id_akun=$_SESSION['id_akun'];
+            $sql = mysqli_query($koneksi, "SELECT * FROM tb_akun where id_akun='$id_akun' ");
+            $t = mysqli_fetch_assoc($sql);
+            
+        
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +36,32 @@
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+
+  <!-- Select2 -->
+  <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+
+ <style>
+.myScrollTable {
+
+border:0px solid 3FF6600;
+height:auto;
+width:auto;
+overflow-y:auto;
+overflow-x:scroll;
+}
+</style>
+
+
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -30,7 +79,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Selamat Datang di Sistem Administrator Wesite RSIA YASMIN, Nama</a>
+        <a href="#" class="nav-link">Selamat Datang di Sistem Administrator Wesite RSIA YASMIN, <?php echo $t['nama_akun']; ?></a>
       </li>
     </ul>
 
@@ -61,14 +110,16 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="dist/img/admin1.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Nama Pengguna</a>
+          <a href="#" class="d-block"><?php echo $t['nama_akun']; ?></a>
+          <a href="#" class="d-block">NIK : <?php echo $t['nik']; ?></a>
+          <a href="#" class="d-block">DEP : <?php echo $t['departemen']; ?></a>
         </div>
       </div>
 
-      <!-- SidebarSearch Form -->
+      <!-- SidebarSearch Form 
       <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
           <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
@@ -78,7 +129,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -114,15 +165,38 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="?p=kdokter" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kategori Dokter</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link ">
+                <a href="?p=ddokter" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Dokter</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-user-md"></i>
+              <p>
+                Kelola Data Layanan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kategori Layanan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Layanan</p>
                 </a>
               </li>
             </ul>
@@ -160,6 +234,18 @@
                   <p>Profil RS</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Jam Besuk</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kerjasama</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
@@ -167,6 +253,14 @@
               <i class="nav-icon fas fa-newspaper"></i>
               <p>
                 Berita
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-clone"></i>
+              <p>
+                Kelola Slide
               </p>
             </a>
           </li>
@@ -238,7 +332,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
+            <a href="logout" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>Keluar</p>
             </a>
@@ -273,11 +367,16 @@
         case "akun";
         include "pages/akun/tampil.php";
         break;
-        case "uakun";
-        include "pages/akun/ubah.php";
-        break;
         case "hakun";
         include "pages/akun/hapus.php";
+        break;
+
+
+        case "kdokter";
+        include "pages/kategori_dokter/tampil.php";
+        break;
+        case "hkdokter";
+        include "pages/kategori_dokter/hapus.php";
         break;
 
 
@@ -477,5 +576,157 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard2.js"></script>
+
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+
+
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+<script src="js/jam.js" ></script>
+
+
+<!-- Select2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
+
+
+
+
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+      "language" : {
+      "url":"indonesia.json",
+      "sEmptyTable":"Tidads"
+      }
+    });
+  });
+</script>
+
+<script>
+  $(function () {
+    $("#example2").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+      "language" : {
+      "url":"indonesia.json",
+      "sEmptyTable":"Tidads"
+      }
+    });
+  });
+</script>
+
+<script>
+  $('#pesan').fadeIn('slow').delay(3000).fadeOut('slow');
+</script>
+
+<script >
+    function tgl_indo($tanggal){
+    $bulan = array (
+        1 =>   'Januari',
+        'Februari',
+        'Maret',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Agustus',
+        'September',
+        'Oktober',
+        'November',
+        'Desember'
+    );
+    $pecahkan = explode('-', $tanggal);
+    
+    // variabel pecahkan 0 = tanggal
+    // variabel pecahkan 1 = bulan
+    // variabel pecahkan 2 = tahun
+ 
+    return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+}
+</script>
+
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date range picker
+    $('#reservationdate').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+      }
+    })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+    
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    $('.my-colorpicker2').on('colorpickerChange', function(event) {
+      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+    });
+
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    });
+
+  })
+</script>
+
 </body>
 </html>
+<?php } ?>
