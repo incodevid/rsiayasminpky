@@ -10,7 +10,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="?p=dashboard" style="color:white;">Beranda</a></li>
+              <li class="breadcrumb-item"><a href="?p=dashboard" style="color:black;">Beranda</a></li>
               <li class="breadcrumb-item active">Kelola Akun Pengguna</li>
             </ol>
           </div><!-- /.col -->

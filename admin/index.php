@@ -55,6 +55,9 @@ else {
    <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
 
+    <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+
 
  <style>
 .myScrollTable {
@@ -76,12 +79,12 @@ overflow-x:scroll;
 
 
 </head>
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition  sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed" onload="startclock()">
 <div class="wrapper">
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <a class="animation__wobble" style="color: white;"><i class="fas fa-hourglass-start"></i> Mohon Tunggu...</a>
+    <a class="animation__wobble" style="color: black;"><i class="fas fa-hourglass-start"></i> Mohon Tunggu...</a>
   </div>
 
   <!-- Navbar -->
@@ -99,11 +102,9 @@ overflow-x:scroll;
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
-      
-
-      <!-- Messages Dropdown Menu -->
-      
-      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item" style="color: white;">
+        <span id="date"></span>, <span id="clock"></span><span>  WIB</span>
+      </li>
       
       
     </ul>
@@ -207,7 +208,7 @@ overflow-x:scroll;
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link ">
+                <a href="?p=layanan" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Layanan</p>
                 </a>
@@ -224,13 +225,13 @@ overflow-x:scroll;
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="?p=visimisi" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Visi dan Misi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link ">
+                <a href="?p=struktur_organisasi" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Struktur Organisasi</p>
                 </a>
@@ -420,9 +421,6 @@ overflow-x:scroll;
         case "struktur_organisasi";
         include "pages/struktur_organisasi/tampil.php";
         break;
-        case "ustruktur_organisasi";
-        include "pages/struktur_organisasi/ubah.php";
-        break;
         case "hstruktur_organisasi";
         include "pages/struktur_organisasi/hapus.php";
         break;
@@ -451,6 +449,24 @@ overflow-x:scroll;
         break;
         case "hklayanan";
         include "pages/kategori_layanan/hapus.php";
+        break;
+
+
+        case "layanan";
+        include "pages/layanan/tampil.php";
+        break;
+        case "hlayanan";
+        include "pages/layanan/hapus.php";
+        break;
+
+        case "visimisi";
+        include "pages/visimisi/tampil.php";
+        break;
+        case "hpsvisi";
+        include "pages/visimisi/hapusvisi.php";
+        break;
+        case "hpsmisi";
+        include "pages/visimisi/hapusmisi.php";
         break;
 
 
@@ -615,6 +631,9 @@ overflow-x:scroll;
 <!-- bs-custom-file-input -->
 <script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+
 
 
 
@@ -752,6 +771,71 @@ overflow-x:scroll;
 $(function () {
   bsCustomFileInput.init();
 });
+</script>
+
+<script>
+  $(function () {
+    // Summernote
+    $('#summernote').summernote()
+
+    // CodeMirror
+    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+      mode: "htmlmixed",
+      theme: "monokai"
+    });
+  })
+</script>
+
+<script>
+  $(function () {
+    // Summernote
+    $('#summernoteubah').summernote()
+
+    // CodeMirror
+    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+      mode: "htmlmixed",
+      theme: "monokai"
+    });
+  })
+</script>
+
+<script>
+  $(function () {
+    // Summernote
+    $('#summernotevisi').summernote()
+
+    // CodeMirror
+    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+      mode: "htmlmixed",
+      theme: "monokai"
+    });
+  })
+</script>
+
+<script>
+  $(function () {
+    // Summernote
+    $('#summernotemisi').summernote()
+
+    // CodeMirror
+    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+      mode: "htmlmixed",
+      theme: "monokai"
+    });
+  })
+</script>
+
+<script>
+  $(function () {
+    // Summernote
+    $('#summernotemisi2').summernote()
+
+    // CodeMirror
+    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+      mode: "htmlmixed",
+      theme: "monokai"
+    });
+  })
 </script>
 
 </body>
