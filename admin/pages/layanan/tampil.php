@@ -147,7 +147,7 @@ while($data  = mysqli_fetch_assoc($query)){
                       <a data-toggle="modal" data-target="#modalUbah<?php echo $data['id_layanan']; ?>" class="btn btn-block btn-info" ><i class="fas fa-pen" style="color:white;"></i></a>
                  
                   
-                      <a href="?p=hklayanan&akn=<?php echo $data['id_kategori_layanan']; ?>" onclick="return confirm('Yakin mau di hapus?');" class="btn btn-block btn-danger" ><i class="fas fa-trash" style="color:white;"></i></a>
+                      <a href="?p=hlayanan&akn=<?php echo $data['id_layanan']; ?>" onclick="return confirm('Yakin mau di hapus?');" class="btn btn-block btn-danger" ><i class="fas fa-trash" style="color:white;"></i></a>
                 
                     </td>
                   </tr>

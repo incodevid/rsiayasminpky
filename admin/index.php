@@ -115,8 +115,7 @@ overflow-x:scroll;
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <img src="dist/img/logo-yasmin.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">RSIA YASMIN</span>
+      <center><span class="brand-text font-weight-light"><h3>RSIA YASMIN PKY</h3></span></center>
     </a>
 
     <!-- Sidebar -->
@@ -124,7 +123,7 @@ overflow-x:scroll;
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="dist/img/admin1.png" class="img-circle elevation-2" alt="User Image">
+          <img src="dist/img/logo-yasmin.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block"><?php echo $t['nama_akun']; ?></a>
@@ -237,13 +236,13 @@ overflow-x:scroll;
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="?p=sejarah" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sejarah</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="?p=profil_rs" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Profil RS</p>
                 </a>
@@ -426,8 +425,19 @@ overflow-x:scroll;
         break;
 
 
-        case "profil_kadis";
-        include "pages/profil_kadis/tampil.php";
+        case "sejarah";
+        include "pages/sejarah/tampil.php";
+        break;
+        case "hsejarah";
+        include "pages/sejarah/hapus.php";
+        break;
+
+
+        case "profil_rs";
+        include "pages/profil_rs/tampil.php";
+        break;
+        case "hprofil_rs";
+        include "pages/profil_rs/hapus.php";
         break;
 
 
