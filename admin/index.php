@@ -248,13 +248,13 @@ overflow-x:scroll;
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="?p=besuk" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Jam Besuk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="?p=kerjasama" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Kerjasama</p>
                 </a>
@@ -441,6 +441,14 @@ overflow-x:scroll;
         break;
 
 
+        case "besuk";
+        include "pages/jam_besuk/tampil.php";
+        break;
+        case "hbesuk";
+        include "pages/jam_besuk/hapus.php";
+        break;
+
+
 
         case "berita";
         include "pages/berita/tampil.php";
@@ -503,14 +511,11 @@ overflow-x:scroll;
         break;
 
 
-        case "pengumuman";
-        include "pages/pengumuman/tampil.php";
+        case "kerjasama";
+        include "pages/kerjasama/tampil.php";
         break;
-        case "upengumuman";
-        include "pages/pengumuman/ubah.php";
-        break;
-        case "hpengumuman";
-        include "pages/pengumuman/hapus.php";
+        case "hkerjasama";
+        include "pages/kerjasama/hapus.php";
         break;
 
 
