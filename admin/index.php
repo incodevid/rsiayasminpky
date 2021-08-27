@@ -298,13 +298,13 @@ overflow-x:scroll;
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="?p=album" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Album</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link ">
+                <a href="?p=galeri" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Galeri</p>
                 </a>
@@ -312,7 +312,7 @@ overflow-x:scroll;
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="?p=video" class="nav-link">
               <i class="nav-icon fas fa-photo-video"></i>
               <p>
                 Kelola Video Profil
@@ -320,7 +320,7 @@ overflow-x:scroll;
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/kanban.html" class="nav-link">
+            <a href="?p=kontak" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Kelola Kontak
@@ -328,7 +328,7 @@ overflow-x:scroll;
             </a>
           </li>
           <li class="nav-item">
-            <a href="pages/kanban.html" class="nav-link">
+            <a href="?p=medsos" class="nav-link">
               <i class="nav-icon fas fa-share-alt-square"></i>
               <p>
                 Kelola Media Sosial
@@ -508,9 +508,6 @@ overflow-x:scroll;
         case "album";
         include "pages/album/tampil.php";
         break;
-        case "ualbum";
-        include "pages/album/ubah.php";
-        break;
         case "halbum";
         include "pages/album/hapus.php";
         break;
@@ -518,9 +515,6 @@ overflow-x:scroll;
 
         case "galeri";
         include "pages/galeri/tampil.php";
-        break;
-        case "ugaleri";
-        include "pages/galeri/ubah.php";
         break;
         case "hgaleri";
         include "pages/galeri/hapus.php";
@@ -538,9 +532,6 @@ overflow-x:scroll;
         case "video";
         include "pages/video/tampil.php";
         break;
-        case "uvideo";
-        include "pages/video/ubah.php";
-        break;
         case "hvideo";
         include "pages/video/hapus.php";
         break;
@@ -548,6 +539,9 @@ overflow-x:scroll;
 
         case "kontak";
         include "pages/kontak/tampil.php";
+        break;
+        case "hkontak";
+        include "pages/kontak/hapus.php";
         break;
 
 
@@ -567,9 +561,6 @@ overflow-x:scroll;
 
         case "medsos";
         include "pages/medsos/tampil.php";
-        break;
-        case "umedsos";
-        include "pages/medsos/ubah.php";
         break;
         case "hmedsos";
         include "pages/medsos/hapus.php";
