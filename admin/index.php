@@ -273,7 +273,7 @@ overflow-x:scroll;
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="?p=slider" class="nav-link">
               <i class="nav-icon fas fa-clone"></i>
               <p>
                 Kelola Slide
@@ -281,7 +281,7 @@ overflow-x:scroll;
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="?p=artikel" class="nav-link">
               <i class="nav-icon fas fa-newspaper"></i>
               <p>
                 Artikel
@@ -458,6 +458,22 @@ overflow-x:scroll;
         break;
         case "hberita";
         include "pages/berita/hapus.php";
+        break;
+
+
+        case "artikel";
+        include "pages/artikel/tampil.php";
+        break;
+        case "hartikel";
+        include "pages/artikel/hapus.php";
+        break;
+
+
+        case "slider";
+        include "pages/slider/tampil.php";
+        break;
+        case "hslider";
+        include "pages/slider/hapus.php";
         break;
 
 
