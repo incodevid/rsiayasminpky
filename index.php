@@ -1,3 +1,11 @@
+<?php
+error_reporting(0);
+include'config.php';
+
+$qkontak = mysqli_query($koneksi,"SELECT * FROM tb_kontak");
+$datkon = mysqli_fetch_assoc($qkontak);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,10 +19,10 @@
     <meta name="description" content="">
 
     <!-- ========== Page Title ========== -->
-    <title>MediHub - Medical & Health Template</title>
+    <title>RSIA Yasmin - Beranda</title>
 
     <!-- ========== Favicon Icon ========== -->
-    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/img/logo-yasmin.jpg" type="image/x-icon">
 
     <!-- ========== Start Stylesheet ========== -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -24,17 +32,12 @@
     <link href="assets/css/owl.carousel.min.css" rel="stylesheet" />
     <link href="assets/css/owl.theme.default.min.css" rel="stylesheet" />
     <link href="assets/css/animate.css" rel="stylesheet" />
-    <link href="assets/css/bootsnav.css" rel="stylesheet" />
-    <link href="style.css" rel="stylesheet">
     <link href="assets/css/responsive.css" rel="stylesheet" />
+    <link href="style_gabung.css" rel="stylesheet" />
+    
     <!-- ========== End Stylesheet ========== -->
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="assets/js/html5/html5shiv.min.js"></script>
-      <script src="assets/js/html5/respond.min.js"></script>
-    <![endif]-->
+    
 
     <!-- ========== Google Fonts ========== -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -42,7 +45,7 @@
 
 </head>
 
-<body>
+<body onload="startclock()">
 
     <!-- Preloader Start -->
     <div class="se-pre-con"></div>
@@ -57,19 +60,19 @@
                     <div class="info box">
                         <ul>
                             <li>
-                                <i class="fas fa-map-marker-alt"></i> California, TX 70240
+                                <i class="fas fa-map-marker-alt"></i> <?php echo substr($datkon['alamat'],0,30) ?>
                             </li>
                             <li>
-                                <i class="fas fa-envelope-open"></i> Info@gmail.com
+                                <i class="fas fa-envelope-open"></i> <?php echo $datkon['email']; ?>
                             </li>
                             <li>
-                                <i class="fas fa-phone"></i> +123 456 7890
+                                <i class="fas fa-phone"></i> <?php echo $datkon['fax_telp']; ?>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-4 bar-btn text-right">
-                    <a href="#">Make Appoinment</a>
+                    <a href="#"><span id="date"></span>, <span id="clock"></span> WIB</span></a>
                 </div>
             </div>
         </div>
@@ -116,8 +119,8 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="index-2.html">
-                        <img src="assets/img/logo.png" class="logo" alt="Logo">
+                    <a class="navbar-brand" href="index">
+                        <img src="assets/img/logo-yasmin1.png" class="logo" alt="Logo">
                     </a>
                 </div>
                 <!-- End Header Navigation -->
@@ -126,102 +129,44 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right" data-in="#" data-out="#">
                         <li class="dropdown active">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Home</a>
+                            <a href="#"   >Beranda</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Informasi</a>
                             <ul class="dropdown-menu">
-                                <li><a href="index-2.html">Home Version One</a></li>
-                                <li><a href="index-3.html">Home Version Two</a></li>
-                                <li><a href="index-4.html">Home Version Three</a></li>
-                                <li><a href="index-5.html">Home Version Four</a></li>
-                                <li><a href="index-6.html">Home Version Five</a></li>
-                                <li><a href="index-7.html">Home Version Six</a></li>
-                                <li><a href="index-8.html">Home Version Seven <span class="badge">New</span></a></li>
-                                <li><a href="index-9.html">Home Version Eight <span class="badge">New</span></a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Home Onepage</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="index-op.html">Version One</a></li>
-                                        <li><a href="index-op-2.html">Version Two</a></li>
-                                        <li><a href="index-op-3.html">Version Three</a></li>
-                                        <li><a href="index-op-4.html">Version Four</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="#">Berita</a></li>
+                                <li><a href="#">Artikel</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Pages</a>
+                            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Profil</a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >About</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="about.html">Version One</a></li>
-                                        <li><a href="about-2.html">Version Two</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Services</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="services.html">Version One</a></li>
-                                        <li><a href="services-2.html">Version Two</a></li>
-                                        <li><a href="services-3.html">Version Three</a></li>
-                                        <li><a href="services-details.html">Services Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
-                                <li><a href="404.html">Error Page</a></li>
+                                <li><a href="#">Visi Dan Misi</a></li>
+                                <li><a href="#">Struktur Organisasi</a></li>
+                                <li><a href="#">Sejarah</a></li>
+                                <li><a href="#">Profil RS</a></li>
+                                <li><a href="#">Kerjasama</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Departments</a>
+                            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Layanan</a>
                             <ul class="dropdown-menu">
-                                <li><a href="services-details.html">Medecine and Health</a></li>
-                                <li><a href="services-details.html">Dental Care and Surgery</a></li>
-                                <li><a href="services-details.html">Eye Treatment</a></li>
-                                <li><a href="services-details.html">Children Chare</a></li>
-                                <li><a href="services-details.html">Traumatology</a></li>
+                                <?php
+                                $qukat = mysqli_query($koneksi, "SELECT * FROM tb_kategori_layanan ORDER BY id_kategori_layanan DESC");
+                                while($datkat=mysqli_fetch_assoc($qukat)){
+                                ?>
+                                <li><a href="#"><?php echo $datkat['nama_kategori']; ?></a></li>
+                                <?php } ?>
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Doctors</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="doctors.html">Version Grid</a></li>
-                                <li><a href="doctors-2.html">Version Carousel</a></li>
-                                <li><a href="doctor-details.html">Doctor Single</a></li>
-                            </ul>
-                        </li>  
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Gallery</a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Grid Colum</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="gallery-grid-2-colum.html">Gallery Two Colum</a></li>
-                                        <li><a href="gallery-grid-3-colum.html">Gallery Three Colum</a></li>
-                                        <li><a href="gallery-grid-4-colum.html">Gallery Four Colum</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Masonary Colum</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="gallery-masonary-2-colum.html">Gallery Two Colum</a></li>
-                                        <li><a href="gallery-masonary-3-colum.html">Gallery Three Colum</a></li>
-                                        <li><a href="gallery-masonary-4-colum.html">Gallery Four Colum</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <a href="#"  >Dokter Kami</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Blog</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="blog-standard.html">Blog Standard</a></li>
-                                <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                <li><a href="blog-single.html">Blog Single Standard</a></li>
-                                <li><a href="blog-single-left-sidebar.html">Single Left Sidebar</a></li>
-                                <li><a href="blog-single-right-sidebar.html">Single Right Sidebar</a></li>
-                            </ul>
+                            <a href="#"  >Galeri</a>
                         </li>
                         <li>
-                            <a href="contact.html">contact</a>
+                            <a href="#">Kontak Kami</a>
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -1189,7 +1134,9 @@
     <script src="assets/js/bootsnav.js"></script>
     <script src="assets/js/main.js"></script>
 
+    <script src="js/jam.js" ></script>
+
 </body>
 
-<!-- Mirrored from webhunt.store/themeforest/medihub/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 28 Jun 2021 05:02:45 GMT -->
+
 </html>
