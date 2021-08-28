@@ -163,6 +163,11 @@ overflow-x:scroll;
               </p>
             </a>
           </li>
+          <?php 
+    
+    if($_SESSION['level_akses']=="super"){
+        
+        ?>
           <li class="nav-item">
             <a href="?p=akun" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -171,6 +176,7 @@ overflow-x:scroll;
               </p>
             </a>
           </li>
+        <?php } ?>
           <li class="nav-item">
             <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-user-md"></i>
@@ -342,7 +348,7 @@ overflow-x:scroll;
           
           <li class="nav-header">PENGATURAN</li>
           <li class="nav-item">
-            <a href="iframe.html" class="nav-link">
+            <a href="?p=profil" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>Profil Akun</p>
             </a>
