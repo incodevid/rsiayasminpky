@@ -105,14 +105,16 @@
                   <tr>
                     <th>No</th>
                     <th>Foto Slider</th>
+                    <th>Status Aktif</th>
                     <th>Aksi</th>
                   </tr>
                   </thead>
                   <tbody>
                     <?php 
                   $no = 1;
-$query = mysqli_query($koneksi,"SELECT * FROM tb_slide ORDER BY id_slide DESC");
+$query = mysqli_query($koneksi,"SELECT *,COUNT(aktif) AS jml_aktif FROM tb_slide GROUP BY id_slide DESC");
 while($data  = mysqli_fetch_assoc($query)){
+
 ?>
                   <tr>
                     <td><?php echo $no ?></td>
@@ -122,8 +124,17 @@ while($data  = mysqli_fetch_assoc($query)){
                       </center>
                     </td>
                     <td>
+                      <?php
+                      if($data['jml_aktif']=='1'){
+                      ?>
+                      <a class="btn btn-block btn-success"><?php echo $data['aktif']; ?></a>
+                    <?php }else{ ?>
+                      <a class="btn btn-block btn-success">Tidak Aktif</a>
+                    <?php } ?>
+                    </td>
+                    <td>
                   
-                                     
+                      <a data-toggle="modal" data-target="#modalUbah<?php echo $data['id_slide']; ?>" class="btn btn-block btn-info" ><i class="fas fa-pen" style="color:white;"></i></a>               
                   
                       <a href="?p=hslider&akn=<?php echo $data['id_slide']; ?>" onclick="return confirm('Yakin mau di hapus?');" class="btn btn-block btn-danger" ><i class="fas fa-trash" style="color:white;"></i></a>
                 
@@ -193,15 +204,15 @@ while($data  = mysqli_fetch_assoc($query)){
 
 <?php
 
-$quakun = mysqli_query($koneksi,"SELECT * FROM tb_kategori_dokter ORDER BY id_kategori_dokter DESC");
-while($datkun=mysqli_fetch_assoc($quakun)){
+$quslide = mysqli_query($koneksi,"SELECT * FROM tb_slide ORDER BY id_slide DESC");
+while($datslide=mysqli_fetch_assoc($quslide)){
 
 ?>
-<div class="modal fade" id="modalUbah<?php echo $datkun['id_kategori_dokter']; ?>">
+<div class="modal fade" id="modalUbah<?php echo $datslide['id_slide']; ?>">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Ubah Data Kategori</h4>
+              <h4 class="modal-title">Ubah Status Slide</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -211,18 +222,19 @@ while($datkun=mysqli_fetch_assoc($quakun)){
             <?php
       
        
-    if (isset($_POST['BtnUbahKategoriDokter'])) {
+    if (isset($_POST['BtnUbahStatusSlide'])) {
     
-    $id_kategori_dokter        = $_POST['id_kategori_dokter'];
-    $nama_kategori             = $_POST['nama_kategori'];
+    $id_slide        = $_POST['id_slide'];
+    $aktif           = $_POST['aktif'];
     
-            $sql = mysqli_query($koneksi," UPDATE tb_kategori_dokter set nama_kategori='$nama_kategori' WHERE id_kategori_dokter='$id_kategori_dokter'  ");
+            $sql1 = mysqli_query($koneksi," UPDATE tb_slide SET aktif='no' WHERE aktif='active'  ");
+            $sql = mysqli_query($koneksi," UPDATE tb_slide SET aktif='$aktif' WHERE id_slide='$id_slide'  ");
 
 
             if ($sql) {
-               echo '<script> alert ("Ubah Data Kategori Berhasil!");window.location.href="?p=kdokter" </script>' ;
+               echo '<script> alert ("Update Status Berhasil!");window.location.href="?p=slider" </script>' ;
              } else {
-              echo '<script> alert ("Ubah Data Kategori Gagal!");window.location.href="?p=kdokter" </script>' ;
+              echo '<script> alert ("Update Status Gagal!");window.location.href="?p=slider" </script>' ;
              }
       
 
@@ -236,10 +248,14 @@ while($datkun=mysqli_fetch_assoc($quakun)){
               <!-- form start -->
               <form role="form" method="POST" enctype="multipart/form-data" >
                 <div class="card-body">
+                  <input type="hidden" name="id_slide" value="<?php echo $datslide['id_slide']; ?>">
                   <div class="form-group">
-                    <label for="">Nama Kategori</label>
-                    <input type="text" name="nama_kategori" class="form-control"  value="<?php echo $datkun['nama_kategori']; ?>" required>
-                    <input type="hidden" name="id_kategori_dokter" class="form-control"  value="<?php echo $datkun['id_kategori_dokter']; ?>" required>
+                    <label for="">Status Aktif</label>
+                    <select class="form-control select2" name="aktif" required>
+                      <option value="">--PILIH STATUS--</option>
+                      <option value="active">Aktif</option>
+                      <option value="no">Tidak</option>
+                    </select>
                   </div>
                                     
                  
@@ -249,7 +265,7 @@ while($datkun=mysqli_fetch_assoc($quakun)){
                 
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                  <button type="submit" name="BtnUbahKategoriDokter" class="btn btn-primary">Simpan</button>
+                  <button type="submit" name="BtnUbahStatusSlide" class="btn btn-primary">Simpan</button>
                 </div>
               </form>
             </div>

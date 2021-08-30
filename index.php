@@ -4,6 +4,15 @@ include'config.php';
 
 $qkontak = mysqli_query($koneksi,"SELECT * FROM tb_kontak");
 $datkon = mysqli_fetch_assoc($qkontak);
+
+
+$qvideo=mysqli_query($koneksi,"SELECT * FROM tb_video_profil");
+$dvideo=mysqli_fetch_assoc($qvideo);
+
+$qsejarah=mysqli_query($koneksi,"SELECT * FROM tb_sejarah");
+$dsejarah=mysqli_fetch_assoc($qsejarah);
+$kalimat = substr($dsejarah['text_sejarah'], 0, 700);
+
 ?>
 
 <!DOCTYPE html>
@@ -43,13 +52,65 @@ $datkon = mysqli_fetch_assoc($qkontak);
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,500,600,700,800" rel="stylesheet">
 
+    <style type="text/css">
+    .pre-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000
+}
+.pre-loader .preloader-3 {
+   
+  position: relative;
+  animation: rotate 1s infinite linear;
+  border: 2px solid rgba(255, 255, 255, .25);
+  width: 90px;
+  height: 90px;
+  border-radius: 999px;
+  margin: 300px auto;
+
+}
+
+.pre-loader .preloader-3 span {
+    
+ 
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border: 2px solid transparent;
+  border-top: 2px solid #fff;
+  top: -2px;
+  left: -2px;
+  border-radius: 999px;
+  
+  
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.gradient-color{background:#000428;background:-webkit-linear-gradient(315deg, #000428, #0074da);background:linear-gradient(135deg, #000428, #52b000)}
+    </style>
+
 </head>
 
 <body onload="startclock()">
 
-    <!-- Preloader Start -->
-    <div class="se-pre-con"></div>
-    <!-- Preloader Ends -->
+    <!-- Start PreLoader Section-->
+    <div class="pre-loader gradient-color">
+        <div class="preloader-3">
+            <span></span>
+        </div>
+    </div>
+    <!-- End PreLoader Section-->
 
     <!-- Start Header Top 
     ============================================= -->
@@ -105,13 +166,13 @@ $datkon = mysqli_fetch_assoc($qkontak);
 
             <div class="container">
 
-                <!-- Start Atribute Navigation -->
+                <!-- Start Atribute Navigation 
                 <div class="attr-nav">
                     <ul>
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                         <li class="side-menu"><a href="#"><i class="fa fa-bars"></i></a></li>
                     </ul>
-                </div>        
+                </div> disini-->        
                 <!-- End Atribute Navigation -->
 
                 <!-- Start Header Navigation -->
@@ -163,7 +224,15 @@ $datkon = mysqli_fetch_assoc($qkontak);
                             <a href="#"  >Dokter Kami</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#"  >Galeri</a>
+                            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Galeri</a>
+                            <ul class="dropdown-menu">
+                                <?php
+                                $qukat = mysqli_query($koneksi, "SELECT * FROM tb_album ORDER BY id_album DESC");
+                                while($datkat=mysqli_fetch_assoc($qukat)){
+                                ?>
+                                <li><a href="#"><?php echo $datkat['nama_album']; ?></a></li>
+                                <?php } ?>
+                            </ul>
                         </li>
                         <li>
                             <a href="#">Kontak Kami</a>
@@ -214,20 +283,23 @@ $datkon = mysqli_fetch_assoc($qkontak);
         <div id="bootcarousel" class="carousel inc-top-heading slide carousel-fade animate_text" data-ride="carousel">
             <!-- Wrapper for slides -->
             <div class="carousel-inner carousel-zoom">
-                <div class="item active">
-                    <div class="slider-thumb bg-cover" style="background-image: url(assets/img/banner/1.jpg);"></div>
+                <?php
+                $qslide = mysqli_query($koneksi,"SELECT * FROM tb_slide");
+                while($dslide=mysqli_fetch_assoc($qslide)){
+                ?>
+                <div class="item <?php echo $dslide['aktif']; ?>">
+                    <div class="slider-thumb bg-cover" style="background-image: url(admin/dist/img/slider/<?php echo $dslide['foto_slide']; ?>);"></div>
                     <div class="box-table">
                         <div class="box-cell">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div class="content">
-                                            <h1 data-animation="animated fadeInUp">Best <span>Care</span></h1>
-                                            <h2 data-animation="animated fadeInDown">Your health is our priority</h2>
+                                            <h1 data-animation="animated fadeInUp">RSIA <span>Yasmin</span></h1>
+                                            <h2 data-animation="animated fadeInDown">"Ikhlas Melayani"</h2>
                                             <p data-animation="animated slideInUp">
-                                                The ourselves suffering the sincerity. Inhabit her manners adapted age certain.<br> Debating offended at branched striking be subjects.
+                                                Memberikan pelayanan kesehatan terbaik bagi ibu dan anak.
                                             </p>
-                                            <a data-animation="animated slideInUp" class="btn btn-theme effect btn-md" href="#">View Details</a>
                                         </div>
                                     </div>
                                 </div>
@@ -235,48 +307,7 @@ $datkon = mysqli_fetch_assoc($qkontak);
                         </div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="slider-thumb bg-cover" style="background-image: url(assets/img/banner/2.jpg);"></div>
-                    <div class="box-table">
-                        <div class="box-cell">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="content">
-                                            <h1 data-animation="animated fadeInUp">Best <span>Technology</span></h1>
-                                            <h2 data-animation="animated fadeInDown">Affordable solution by better technology</h2>
-                                            <p data-animation="animated slideInUp">
-                                                The ourselves suffering the sincerity. Inhabit her manners adapted age certain.<br> Debating offended at branched striking be subjects.
-                                            </p>
-                                            <a data-animation="animated slideInUp" class="btn btn-theme effect btn-md" href="#">View Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="slider-thumb bg-cover" style="background-image: url(assets/img/banner/3.jpg);"></div>
-                    <div class="box-table">
-                        <div class="box-cell">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="content">
-                                            <h1 data-animation="animated fadeInUp"><span>Best</span> specialist</h1>
-                                            <h2 data-animation="animated fadeInDown">The country's best heart specialist</h2>
-                                            <p data-animation="animated slideInUp">
-                                                The ourselves suffering the sincerity. Inhabit her manners adapted age certain.<br> Debating offended at branched striking be subjects.
-                                            </p>
-                                            <a data-animation="animated slideInUp" class="btn btn-theme effect btn-md" href="#">View Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <?php } ?>
             </div>
             <!-- End Wrapper for slides -->
 
@@ -300,21 +331,22 @@ $datkon = mysqli_fetch_assoc($qkontak);
             <div class="row">
                 <div class="about-items">
                     <div class="col-md-6 info">
-                        <h4>Has been working since 2000</h4>
-                        <h2>A Great Place to Work. A Great Place to Receive Care. Leading Medicine.</h2>
+                        <h4>RSIA YASMIN Dibangun Sejak 2007</h4>
+                        <h2>Sejarah Rumah Sakit</h2>
                         <p>
-                            However venture pursuit he am mr cordial. Forming musical am hearing studied be luckily. Ourselves for determine attending how led gentleman sincerity. Valley afford uneasy joy she thrown though bed set. In me forming general prudent on country carried. Behaved an or suppose justice. Seemed whence how son rather easily and change missed.
+                        <?php echo $kalimat; ?> <a style="color: #52b000;" href="">-->Selanjutnya</a>
                         </p>
                         <div class="bottom">
                             <div class="video">
-                                <a href="https://www.youtube.com/watch?v=5vY-D42NFP4" class="popup-youtube relative theme video-play-button item-center">
+                                <a href="<?php echo $dvideo['link_video']; ?>" class="popup-youtube relative theme video-play-button item-center">
                                     <i class="fa fa-play"></i>
                                 </a>
                             </div>
                             <div class="content">
-                                <h4>Let’s see our intro video</h4>
+                                
+                                <h4><?php echo $dvideo['judul_video']; ?></h4>
                                 <p>
-                                    If your smile is not becoming to you, then you should be coming to me!
+                                    <?php echo $dvideo['keterangan']; ?>
                                 </p>
                             </div>
                         </div>
@@ -322,26 +354,27 @@ $datkon = mysqli_fetch_assoc($qkontak);
                     <div class="col-md-6 tabs-items">
                         <!-- Tab Nav -->
                         <ul class="nav nav-pills">
+                            <!-- disembunyikan dulu
                             <li class="active">
                                 <a data-toggle="tab" href="#tab1" aria-expanded="true">
                                     <i class="fas fa-notes-medical"></i> Consultation
                                 </a>
-                            </li>
-                            <li>
-                                <a data-toggle="tab" href="#tab2" aria-expanded="false">
-                                    <i class="fas fa-map-marker-alt"></i> Location
+                            </li>-->
+                            <li class="active">
+                                <a data-toggle="tab" href="#tab3" aria-expanded="true">
+                                    <i class="fas fa-clock"></i> Jam Besuk
                                 </a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#tab3" aria-expanded="false">
-                                    <i class="fas fa-clock"></i> Opening Hour
+                                <a data-toggle="tab" href="#tab2" aria-expanded="false">
+                                    <i class="fas fa-map-marker-alt"></i> Lokasi
                                 </a>
                             </li>
                         </ul>
                         <!-- End Tab Nav -->
                         <!-- Start Tab Content -->
                         <div class="tab-content tab-content-info">
-                            <!-- Single Item -->
+                            <!-- Single Item disembunykan dulu
                             <div id="tab1" class="tab-pane fade active in">
                                 <div class="info title">
                                     <h3>Consulted by experienced doctors</h3>
@@ -353,38 +386,37 @@ $datkon = mysqli_fetch_assoc($qkontak);
                                     </p>
                                     <a class="btn btn-theme border btn-md" href="#">Make Appoinment</a>
                                 </div>
-                            </div>
+                            </div>-->
                             <!-- End Single Item -->
 
                             <!-- Single Item -->
                             <div id="tab2" class="tab-pane fade">
                                 <div class="info title">
-                                    <h3>Our location</h3>
+                                    <h3>Lokasi</h3>
                                     <p>
-                                        Calling nothing end fertile for venture way boy. Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression. Way mrs end gave tall walk fact bed. 
+                                        Gunakan informasi lokasi berikut untuk mendapatkan lokasi tempat yang tepat dan akurat, untuk membantu penanganan penyelamatan darurat lebih cepat.
                                     </p>
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d14767.262289338461!2d70.79414485000001!3d22.284975!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1424308883981"></iframe>
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1993.4396197872977!2d113.9092888244675!3d-2.1993456790673256!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dfcb251b1b2594f%3A0xdc197c41dc44e666!2sRumah%20Sakit%20Ibu%20dan%20Anak%20Yasmin!5e0!3m2!1sid!2sid!4v1630290735096!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                 </div>
                             </div>
                             <!-- End Single Item -->
 
                             <!-- Single Item -->
-                            <div id="tab3" class="tab-pane fade">
+                            <div id="tab3" class="tab-pane fade active in">
                                 <div class="info title">
-                                    <h3>Schedule of working hours</h3>
+                                    <h3>Jam Besuk Pengunjung</h3>
                                     <p>
-                                        Calling nothing end fertile for venture way boy. Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression. Way mrs end gave tall walk fact bed. 
+                                        Jam besuk pengunjung dapat berubah sewaktu-waktu sesuai dengan kebijakan RSIA Yasmin. 
                                     </p>
                                     <ul>
-                                        <li> <span> Mon - Tues :  </span>
-                                          <div class="pull-right"> 6.00 am - 10.00 pm </div>
+                                        <?php
+                                        $qbesuk = mysqli_query($koneksi,"SELECT * FROM tb_besuk");
+                                        while($dbesuk=mysqli_fetch_assoc($qbesuk)){
+                                        ?>
+                                        <li> <span><?php echo $dbesuk['hari_besuk']; ?></span>
+                                          <div class="pull-right"><?php echo $dbesuk['jam_besuk']; ?></div>
                                         </li>
-                                        <li> <span> Wednes - Thurs :</span>
-                                          <div class="pull-right"> 8.00 am - 6.00 pm </div>
-                                        </li>
-                                        <li> <span> Sun : </span>
-                                          <div class="pull-right closed"> Closed </div>
-                                        </li>
+                                        <?php } ?>
                                     </ul>
                                 </div>
                             </div>
@@ -406,9 +438,9 @@ $datkon = mysqli_fetch_assoc($qkontak);
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="site-heading text-center">
-                        <h2>Centres of <span>Excellence</span></h2>
+                        <h2>Pelayanan <span>Kami</span></h2>
                         <p>
-                            While mirth large of on front. Ye he greater related adapted proceed entered an. Through it examine express promise no. Past add size game cold girl off how old
+                            Berikut pelayanan yang tersedia di Rumah Sakit Ibu dan Anak YASMIN.
                         </p>
                     </div>
                 </div>
@@ -503,58 +535,7 @@ $datkon = mysqli_fetch_assoc($qkontak);
     </div>
     <!-- End Services -->
 
-    <!-- Start Why Chose Us 
-    ============================================= -->
-    <div class="chose-us-area item-half">
-        <div class="container-full">
-            <div class="row">
-                <div class="col-md-6 thumb bg-cover" style="background-image: url(assets/img/banner/4.jpg);"></div>
-                <div class="col-md-6 info">
-                    <div class="heading">
-                        <h2>Why Chose us</h2>
-                        <p>
-                            Offering confined entrance no. Nay rapturous him see something residence. Highly talked do so vulgar. Her use behaved spirits and natural attempt say feeling. Exquisite mr incommode immediate he something ourselves it of. Law conduct yet chiefly beloved examine village proceed
-                        </p>
-                    </div>
-                    <ul>
-                        <li>
-                            <div class="info">
-                                <h4>Qualified facilities</h4>
-                                <p>
-                                    Consider may dwelling old him her surprise finished families graceful. Gave led past poor met fine was new. 
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="info">
-                                <h4>Top Level Doctors</h4>
-                                <p>
-                                    Consider may dwelling old him her surprise finished families graceful. Gave led past poor met fine was new. 
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="info">
-                                <h4>Dedicated patient care</h4>
-                                <p>
-                                    Consider may dwelling old him her surprise finished families graceful. Gave led past poor met fine was new. 
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="info">
-                                <h4>24/7 Emergency</h4>
-                                <p>
-                                    Consider may dwelling old him her surprise finished families graceful. Gave led past poor met fine was new. 
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Why Chose Us -->
+    
 
     <!-- Start Doctors Tips 
     ============================================= -->
@@ -662,135 +643,10 @@ $datkon = mysqli_fetch_assoc($qkontak);
     </div>
     <!-- End Doctors Tips -->
 
-    <!-- Start Doctors 
-    ============================================= -->
-    <div class="doctor-area default-padding bottom-less">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="site-heading text-center">
-                        <h2>Meet Our <span>Specialists</span></h2>
-                        <p>
-                            While mirth large of on front. Ye he greater related adapted proceed entered an. Through it examine express promise no. Past add size game cold girl off how old
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="doctor-items text-center">
-                    <!-- Single Item -->
-                    <div class="col-md-4 equal-height">
-                        <div class="item">
-                            <div class="thumb">
-                                <img src="assets/img/doctors/2.jpg" alt="Thumb">
-                                <div class="overlay">
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </div>
-                                <div class="social">
-                                    <ul>
-                                        <li class="facebook">
-                                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                        </li>
-                                        <li class="twitter">
-                                            <a href="#"><i class="fab fa-twitter"></i></a>
-                                        </li>
-                                        <li class="instagram">
-                                            <a href="#"><i class="fab fa-instagram"></i></a>
-                                        </li>
-                                        <li class="linkedin">
-                                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="info">
-                                <h4>Jessica Jones</h4>
-                                <h5>Cardiologist</h5>
-                                <div class="appoinment-btn">
-                                    <a href="#">Make appoinment</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-md-4 equal-height">
-                        <div class="item">
-                            <div class="thumb">
-                                <img src="assets/img/doctors/3.jpg" alt="Thumb">
-                                <div class="overlay">
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </div>
-                                <div class="social">
-                                    <ul>
-                                        <li class="facebook">
-                                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                        </li>
-                                        <li class="twitter">
-                                            <a href="#"><i class="fab fa-twitter"></i></a>
-                                        </li>
-                                        <li class="instagram">
-                                            <a href="#"><i class="fab fa-instagram"></i></a>
-                                        </li>
-                                        <li class="linkedin">
-                                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="info">
-                                <h4>Ahel Natasha</h4>
-                                <h5>Dental surgeon</h5>
-                                <div class="appoinment-btn">
-                                    <a href="#">Make appoinment</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-md-4 equal-height">
-                        <div class="item">
-                            <div class="thumb">
-                                <img src="assets/img/doctors/4.jpg" alt="Thumb">
-                                <div class="overlay">
-                                    <a href="#"><i class="fas fa-plus"></i></a>
-                                </div>
-                                <div class="social">
-                                    <ul>
-                                        <li class="facebook">
-                                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                        </li>
-                                        <li class="twitter">
-                                            <a href="#"><i class="fab fa-twitter"></i></a>
-                                        </li>
-                                        <li class="instagram">
-                                            <a href="#"><i class="fab fa-instagram"></i></a>
-                                        </li>
-                                        <li class="linkedin">
-                                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="info">
-                                <h4>Gabriela Beckett</h4>
-                                <h5>Cosmetic Surgeon</h5>
-                                <div class="appoinment-btn">
-                                    <a href="#">Make appoinment</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Item -->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Doctors -->
+    
 
     <!-- Start Testimonials 
-    ============================================= -->
+    ============================================= 
     <div class="testimonials-area carousel-shadow bg-gray default-padding">
         <div class="container">
             <div class="row">
@@ -806,7 +662,7 @@ $datkon = mysqli_fetch_assoc($qkontak);
             <div class="row">
                 <div class="col-md-12">
                     <div class="testimonial-items testimonial-carousel owl-carousel owl-theme">
-                        <!-- Single Item -->
+                   
                         <div class="item">
                             <div class="content">
                                 <p>
@@ -823,8 +679,7 @@ $datkon = mysqli_fetch_assoc($qkontak);
                                 </div>
                             </div>
                         </div>
-                        <!-- End Single Item -->
-                        <!-- Single Item -->
+                        
                         <div class="item">
                             <div class="content">
                                 <p>
@@ -841,8 +696,8 @@ $datkon = mysqli_fetch_assoc($qkontak);
                                 </div>
                             </div>
                         </div>
-                        <!-- End Single Item -->
-                        <!-- Single Item -->
+                       
+                     
                         <div class="item">
                             <div class="content">
                                 <p>
@@ -859,12 +714,12 @@ $datkon = mysqli_fetch_assoc($qkontak);
                                 </div>
                             </div>
                         </div>
-                        <!-- End Single Item -->
+                      
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> disini-->
     <!-- End Testimonials -->
 
     <!-- Start Blog 
@@ -982,16 +837,8 @@ $datkon = mysqli_fetch_assoc($qkontak);
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h4>Subscribe For Get Update</h4>
-                    <h2>Let’s Find An Office Near You.</h2>
-                    <form action="#">
-                        <div class="input-group stylish-input-group">
-                            <input type="email" name="email" class="form-control" placeholder="Enter your e-mail here">
-                            <button type="submit">
-                                <i class="fa fa-paper-plane"></i>
-                            </button>  
-                        </div>
-                    </form>
+                    <h3>Rumah Sakit Ibu dan Anak</h3>
+                    <h2>YASMIN</h2>
                 </div>
             </div>
         </div>
@@ -1135,6 +982,14 @@ $datkon = mysqli_fetch_assoc($qkontak);
     <script src="assets/js/main.js"></script>
 
     <script src="js/jam.js" ></script>
+    <script type="text/javascript">
+        var e=$(window);
+        e.on("load",function(){
+            $(".pre-loader").fadeOut("slow"),AOS.refresh()
+        })
+    </script>
+
+
 
 </body>
 
