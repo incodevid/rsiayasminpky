@@ -190,13 +190,13 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right" data-in="#" data-out="#">
                         <li class="dropdown active">
-                            <a href="#"   >Beranda</a>
+                            <a href="index"   >Beranda</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Informasi</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Berita</a></li>
-                                <li><a href="#">Artikel</a></li>
+                                <li><a href="berita">Berita</a></li>
+                                <li><a href="artikel">Artikel</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -221,7 +221,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#"  >Dokter Kami</a>
+                            <a href="dokter_kami"  >Dokter Kami</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Galeri</a>
@@ -235,40 +235,14 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                             </ul>
                         </li>
                         <li>
-                            <a href="#">Kontak Kami</a>
+                            <a href="kontak">Kontak Kami</a>
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div>
 
             <!-- Start Side Menu -->
-            <div class="side">
-                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-                <div class="widget">
-                    <h4 class="title">About Us</h4>
-                    <p>
-                        Arrived compass prepare an on as. Reasonable particular on my it in sympathize. Size now easy eat hand how. Unwilling he departure elsewhere dejection at. Heart large seems may purse means few blind.
-                    </p>
-                </div>
-                <div class="widget">
-                    <h4 class="title">Our Department</h4>
-                    <ul>
-                        <li><a href="#">Eye Treatment</a></li>
-                        <li><a href="#">Children Chare</a></li>
-                        <li><a href="#">Traumatology</a></li>
-                        <li><a href="#">X-ray</a></li>
-                    </ul>
-                </div>
-                <div class="widget social">
-                    <h4 class="title">Connect With Us</h4>
-                    <ul class="link">
-                        <li class="facebook"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="twitter"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li class="pinterest"><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                        <li class="dribbble"><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                    </ul>
-                </div>
-            </div>
+            
             <!-- End Side Menu -->
 
         </nav>
@@ -448,86 +422,31 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
             <div class="row">
                 <div class="col-md-12">
                     <div class="services-items text-center services-carousel owl-carousel owl-theme">
+                        
                         <!-- Single Item -->
+                        <?php 
+                        $qlayan = mysqli_query($koneksi,"SELECT * FROM tb_layanan a INNER JOIN tb_kategori_layanan b ON a.id_kategori_layanan=b.id_kategori_layanan ORDER BY a.id_layanan DESC");
+                        while($dlayan=mysqli_fetch_assoc($qlayan)){
+                        $teks_layan = substr($dlayan['deskripsi_layanan'], 0, 300);
+                        ?>
                         <div class="item">
                             <div class="info">
                                 <h4>
-                                    <a href="#">Body Surgery</a>
+                                    <a href="#"><?php echo $dlayan['nama_layanan']; ?></a>
                                 </h4>
                                 <div class="overlay">
-                                    <i class="flaticon-medical"></i>
+                                    <!--<i class="flaticon-medical"></i>-->
+                                    <img src="admin/dist/img/layanan/<?php echo $dlayan['foto_layanan']; ?>" style="border-radius: 4%;border-color: white;" >
                                 </div>
                                 <p>
-                                    Attachment astonished to on appearance imprudence so collecting in excellence. Tiled way blind lived whose new. The for fully had she there leave merit enjoy forth.
+                                    <?php echo $teks_layan; ?><a style="color: #52b000;">. . .</a>
                                 </p>
                                 <a class="btn btn-theme border circle btn-md" href="#">Read More</a>
                             </div>
                         </div>
+                        <?php } ?>
                         <!-- End Single Item -->
-                        <!-- Single Item -->
-                        <div class="item">
-                            <div class="info">
-                                <h4>
-                                    <a href="#">Dental Care</a>
-                                </h4>
-                                <div class="overlay">
-                                    <i class="flaticon-anesthesia"></i>
-                                </div>
-                                <p>
-                                    Attachment astonished to on appearance imprudence so collecting in excellence. Tiled way blind lived whose new. The for fully had she there leave merit enjoy forth.
-                                </p>
-                                <a class="btn btn-theme border circle btn-md" href="#">Read More</a>
-                            </div>
-                        </div>
-                        <!-- End Single Item -->
-                        <!-- Single Item -->
-                        <div class="item">
-                            <div class="info">
-                                <h4>
-                                    <a href="#">Eye Care</a>
-                                </h4>
-                                <div class="overlay">
-                                    <i class="flaticon-anatomy"></i>
-                                </div>
-                                <p>
-                                    Attachment astonished to on appearance imprudence so collecting in excellence. Tiled way blind lived whose new. The for fully had she there leave merit enjoy forth.
-                                </p>
-                                <a class="btn btn-theme border circle btn-md" href="#">Read More</a>
-                            </div>
-                        </div>
-                        <!-- End Single Item -->
-                        <!-- Single Item -->
-                        <div class="item">
-                            <div class="info">
-                                <h4>
-                                    <a href="#">Blood Cancer</a>
-                                </h4>
-                                <div class="overlay">
-                                    <i class="flaticon-lung-cancer"></i>
-                                </div>
-                                <p>
-                                    Attachment astonished to on appearance imprudence so collecting in excellence. Tiled way blind lived whose new. The for fully had she there leave merit enjoy forth.
-                                </p>
-                                <a class="btn btn-theme border circle btn-md" href="#">Read More</a>
-                            </div>
-                        </div>
-                        <!-- End Single Item -->
-                        <!-- Single Item -->
-                        <div class="item">
-                            <div class="info">
-                                <h4>
-                                    <a href="#">Neurology Sargery</a>
-                                </h4>
-                                <div class="overlay">
-                                    <i class="flaticon-thinking"></i>
-                                </div>
-                                <p>
-                                    Attachment astonished to on appearance imprudence so collecting in excellence. Tiled way blind lived whose new. The for fully had she there leave merit enjoy forth.
-                                </p>
-                                <a class="btn btn-theme border circle btn-md" href="#">Read More</a>
-                            </div>
-                        </div>
-                        <!-- End Single Item -->
+                        
                     </div>
                 </div>
             </div>
@@ -544,7 +463,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="site-heading text-center">
-                        <h2>Health <span>Tips</span></h2>
+                        <h2>Dokter <span>Kami</span></h2>
                         <p>
                             While mirth large of on front. Ye he greater related adapted proceed entered an. Through it examine express promise no. Past add size game cold girl off how old
                         </p>
@@ -553,18 +472,23 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
             </div>
             <div class="row">
                 <div class="health-tips-items tips-carousel owl-carousel owl-theme">
+                    
                     <!-- Single Item -->
+                    <?php
+                    $qdok = mysqli_query($koneksi,"SELECT * FROM tb_dokter_kami a INNER JOIN tb_kategori_dokter b ON a.id_kategori_dokter=b.id_kategori_dokter ORDER BY a.id_dokter_kami DESC");
+                    while($datdok=mysqli_fetch_assoc($qdok)){
+                    ?>
                     <div class="single-item">
                         <div class="col-md-5">
                             <div class="thumb">
-                                <img src="assets/img/doctors/1.jpg" alt="">
+                                <img src="admin/dist/img/foto_dokter/<?php echo $datdok['foto_dokter']; ?>"  alt="">
                             </div>
                         </div>
                         <div class="col-md-7">
                             <div class="info">
                                 <div class="doctor">
-                                    <h4>Dr. Jessica Ronal</h4>
-                                    <h5>MPH, Medicine, Surgery</h5>
+                                    <h4><?php echo $datdok['nama_dokter']; ?></h4>
+                                    <h5><?php echo $datdok['nama_kategori']; ?></h5>
                                 </div>
                                 <h3>How to live a healthy lifestyle?</h3>
                                 <p>
@@ -580,63 +504,9 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
                     <!-- End Single Item -->
-                    <!-- Single Item -->
-                    <div class="single-item">
-                        <div class="col-md-5">
-                            <div class="thumb">
-                                <img src="assets/img/doctors/5.jpg" alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="info">
-                                <div class="doctor">
-                                    <h4>Dr. Jessica Ronal</h4>
-                                    <h5>MPH, Medicine, Surgery</h5>
-                                </div>
-                                <h3>How to live a healthy lifestyle?</h3>
-                                <p>
-                                    Frequently partiality possession resolution at or appearance unaffected he me. Engaged its was evident pleased husband. Ye goodness felicity do disposal dwelling no. First am plate jokes to began of cause an scale. Subjects he prospect elegance followed no overcame possible it on. 
-                                </p>
-                                <h4>Follow the instructions</h4>
-                                <ul>
-                                    <li>Dont just worry about the things you cannot help.</li>
-                                    <li>Eat Healthy, work better, do gardening.</li>
-                                    <li>Some relationships can kill you. Avoid them at the most.</li>
-                                    <li>Focus on the good things that you like</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Item -->
-                    <!-- Single Item -->
-                    <div class="single-item">
-                        <div class="col-md-5">
-                            <div class="thumb">
-                                <img src="assets/img/doctors/6.jpg" alt="">
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="info">
-                                <div class="doctor">
-                                    <h4>Dr. Jessica Ronal</h4>
-                                    <h5>MPH, Medicine, Surgery</h5>
-                                </div>
-                                <h3>How to live a healthy lifestyle?</h3>
-                                <p>
-                                    Frequently partiality possession resolution at or appearance unaffected he me. Engaged its was evident pleased husband. Ye goodness felicity do disposal dwelling no. First am plate jokes to began of cause an scale. Subjects he prospect elegance followed no overcame possible it on. 
-                                </p>
-                                <h4>Follow the instructions</h4>
-                                <ul>
-                                    <li>Dont just worry about the things you cannot help.</li>
-                                    <li>Eat Healthy, work better, do gardening.</li>
-                                    <li>Some relationships can kill you. Avoid them at the most.</li>
-                                    <li>Focus on the good things that you like</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Item -->
+                    
                 </div>
             </div>
         </div>
@@ -729,7 +599,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="site-heading text-center">
-                        <h2>Recent <span>Blog</span></h2>
+                        <h2>Berita <span>Terbaru</span></h2>
                         <p>
                             While mirth large of on front. Ye he greater related adapted proceed entered an. Through it examine express promise no. Past add size game cold girl off how old
                         </p>
