@@ -611,7 +611,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                     <div class="site-heading text-center">
                         <h2>Berita <span>Terbaru</span></h2>
                         <p>
-                            Sekilas informasi berita tentang RS kami.
+                            Sekilas informasi berita tentang RS Kami.
                         </p>
                     </div>
                 </div>
@@ -620,7 +620,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                 <div class="blog-items">
 
                     <?php
-                    $qber = mysqli_query($koneksi,"SELECT * FROM tb_berita ORDER BY id_berita DESC");
+                    $qber = mysqli_query($koneksi,"SELECT * FROM tb_berita ORDER BY id_berita DESC LIMIT 3");
                     while($dber=mysqli_fetch_assoc($qber)){
                     $teks_ber = substr($dber['isi_berita'], 0, 500);
                     $tgl = strtotime($dber['tgl_upload']);
@@ -629,7 +629,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                     <div class="col-md-4 single-item">
                         <div class="item">
                             <div class="thumb">
-                                <a href="blog-single-right-sidebar.html">
+                                <a href="#">
                                     <img src="admin/dist/img/berita/<?php echo $dber['foto_berita_cover']; ?>" alt="Thumb">
                                     <div class="post-type">
                                         <i class="fas fa-images"></i>
@@ -716,7 +716,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                             <ul>
 
                                 <?php  
-                                $qlay=mysqli_query($koneksi,"SELECT * FROM tb_kategori_layanan ORDER BY id_kategori_layanan DESC");
+                                $qlay=mysqli_query($koneksi,"SELECT * FROM tb_kategori_layanan ORDER BY id_kategori_layanan DESC LIMIT 5");
                                 while($dlay=mysqli_fetch_assoc($qlay)){
                                 ?>
                                 <li>
@@ -734,7 +734,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                             <h4>Terbaru</h4>
                             
                             <?php  
-                            $qber1=mysqli_query($koneksi,"SELECT * FROM tb_berita ORDER BY id_berita DESC");
+                            $qber1=mysqli_query($koneksi,"SELECT * FROM tb_berita ORDER BY id_berita DESC LIMIT 5");
                             while($dber1=mysqli_fetch_assoc($qber1)){
                             $tgl1 = strtotime($dber1['tgl_upload']);
                             ?>
@@ -761,7 +761,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>&copy; Copyright 2011. All Rights Reserved by <a href="#">IT-RSIA YASMIN</a></p>
+                        <p>&copy; Copyright 2011-<?php echo date('Y') ?>. All Rights Reserved by <a href="#">IT-RSIA YASMIN</a></p>
                     </div>
                     <div class="col-md-6 text-right link">
                         <ul>
