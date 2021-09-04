@@ -203,7 +203,7 @@ while($data  = mysqli_fetch_assoc($query)){
                   </div>
                   <div class="form-group">
                     <label for="">Deskripsi</label>
-                      <textarea id="summernote" name="deskripsi_layanan" >
+                      <textarea class="ckeditor" id="editor1" name="deskripsi_layanan" >
                         Tulis <em>suatu</em> <u>deskripsi</u> <strong>disini</strong>
                       </textarea>
                   </div>
@@ -302,7 +302,7 @@ while($datla=mysqli_fetch_assoc($quakun)){
                   </div>
                   <div class="form-group">
                     <label for="">Deskripsi</label>
-                      <textarea id="summernoteubah" name="deskripsi_layanan" >
+                      <textarea class="ckeditor" id="editor1" name="deskripsi_layanan" >
                         <?php echo $datla['deskripsi_layanan']; ?>
                       </textarea>
                   </div>

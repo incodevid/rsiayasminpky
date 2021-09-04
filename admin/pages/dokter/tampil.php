@@ -45,6 +45,8 @@
   
     $id_kategori_dokter      = $_POST['id_kategori_dokter'];
     $nama_dokter             = $_POST['nama_dokter'];
+    $profil_dokter           = $_POST['profil_dokter'];
+    $tips_gaya_sehat         = $_POST['tips_gaya_sehat'];
 
     $namafolder              ="dist/img/foto_dokter/";
 
@@ -65,8 +67,8 @@ if ($cek > 0){
     if (move_uploaded_file($_FILES['foto_dokter']['tmp_name'], $namafolder . $jpg)) {
 
     
-            $sql = mysqli_query($koneksi," INSERT INTO tb_dokter_kami (id_kategori_dokter,nama_dokter,foto_dokter) 
-            VALUES ('$id_kategori_dokter','$nama_dokter','$jpg')  ");
+            $sql = mysqli_query($koneksi," INSERT INTO tb_dokter_kami (id_kategori_dokter,nama_dokter,profil_dokter,tips_gaya_sehat,foto_dokter) 
+            VALUES ('$id_kategori_dokter','$nama_dokter','$profil_dokter','$tips_gaya_sehat','$jpg')  ");
 
 
             if ($sql) {
@@ -114,6 +116,8 @@ if ($cek > 0){
                     <th>No</th>
                     <th>Nama Dokter</th>
                     <th>Kategori Dokter</th>
+                    <th>Profil Dokter</th>
+                    <th>Tips Kesehatan</th>
                     <th>Foto</th>
                     <th>Aksi</th>
                   </tr>
@@ -128,6 +132,8 @@ while($data  = mysqli_fetch_assoc($query)){
                     <td><?php echo $no ?></td>
                     <td><?php echo $data['nama_dokter']; ?></td>
                     <td><?php echo $data['nama_kategori']; ?></td>
+                    <td><?php echo $data['profil_dokter']; ?></td>
+                    <td><?php echo $data['tips_gaya_sehat']; ?></td>
                     <td>
                     <center>
                       <img src="dist/img/foto_dokter/<?php echo $data['foto_dokter']; ?>" class="circular-image" data-toggle="modal" data-target="#modalUbahFoto<?php echo $data['id_dokter_kami']; ?>" ></td>
@@ -192,6 +198,14 @@ while($data  = mysqli_fetch_assoc($query)){
                     <input type="text" name="nama_dokter" class="form-control"  placeholder="Masukkan Nama Dokter" required>
                   </div>
                   <div class="form-group">
+                    <label for="">Tentang Dokter</label>
+                    <textarea class="form-control" name="profil_dokter">tuliskan tentang dokter disini.</textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Tips Gaya Sehat</label>
+                    <textarea class="form-control" name="tips_gaya_sehat">tuliskan tips disini. Berikan tanda koma di akhir kalimat jika tips lebih dari satu.</textarea>
+                  </div>
+                  <div class="form-group">
                     <label for="">Foto Dokter</label>
                     <div class="custom-file">
                     <input type="file" name="foto_dokter" class="custom-file-input" id="customFile" required>
@@ -245,8 +259,10 @@ while($datkun=mysqli_fetch_assoc($quakun)){
     $id_dokter_kami            = $_POST['id_dokter_kami'];
     $id_kategori_dokter        = $_POST['id_kategori_dokter'];
     $nama_dokter               = $_POST['nama_dokter'];
+    $profil_dokter             = $_POST['profil_dokter'];
+    $tips_gaya_sehat           = $_POST['tips_gaya_sehat'];
     
-            $sql = mysqli_query($koneksi," UPDATE tb_dokter_kami SET id_kategori_dokter='$id_kategori_dokter',nama_dokter='$nama_dokter' WHERE id_dokter_kami='$id_dokter_kami'  ");
+            $sql = mysqli_query($koneksi," UPDATE tb_dokter_kami SET id_kategori_dokter='$id_kategori_dokter',nama_dokter='$nama_dokter',profil_dokter='$profil_dokter',tips_gaya_sehat='$tips_gaya_sehat' WHERE id_dokter_kami='$id_dokter_kami'  ");
 
 
             if ($sql) {
@@ -282,6 +298,14 @@ while($datkun=mysqli_fetch_assoc($quakun)){
                     <label for="">Nama Dokter</label>
                     <input type="text" name="nama_dokter" class="form-control"  placeholder="Masukkan Nama Dokter" value="<?php echo $datkun['nama_dokter']; ?>" required>
                     <input type="hidden" name="id_dokter_kami" class="form-control"  placeholder="Masukkan Nama Dokter" value="<?php echo $datkun['id_dokter_kami']; ?>" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Tentang Dokter</label>
+                    <textarea class="form-control" name="profil_dokter"><?php echo $datkun['profil_dokter']; ?></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="">Tips Gaya Sehat</label>
+                    <textarea class="form-control" name="tips_gaya_sehat"><?php echo $datkun['tips_gaya_sehat']; ?></textarea>
                   </div>
                                     
                  

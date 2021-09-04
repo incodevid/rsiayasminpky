@@ -176,7 +176,7 @@ while($data  = mysqli_fetch_assoc($query)){
                 <div class="card-body">
                   <div class="form-group">
                     <label for="">Teks Sejarah</label>
-                      <textarea id="summernote" name="text_sejarah" >
+                      <textarea name="text_sejarah" class="ckeditor" id="editor1"  cols="35" rows="10">
                         Tulis <u>sejarah</u> <strong>disini</strong>
                       </textarea>
                   </div>
@@ -256,7 +256,7 @@ while($datsej=mysqli_fetch_assoc($qsej)){
                 <div class="card-body">
                   <div class="form-group">
                     <label for="">Teks Sejarah</label>
-                      <textarea id="summernoteubah" name="text_sejarah" >
+                      <textarea class="ckeditor" id="editor1"  name="text_sejarah" >
                         <?php echo $datsej['text_sejarah']; ?>
                       </textarea>
                       <input type="hidden" name="id_sejarah" class="form-control"  placeholder="Masukkan Nama Layanan" value="<?php echo $datsej['id_sejarah']; ?>" required>

@@ -51,6 +51,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
     <!-- ========== Google Fonts ========== -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,500,600,700,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <style type="text/css">
     .pre-loader {
@@ -183,6 +184,9 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                     <a class="navbar-brand" href="index">
                         <img src="assets/img/logo-yasmin1.png" class="logo" alt="Logo">
                     </a>
+                    <a class="navbar-brand" href="index">
+                        <img src="assets/img/logo-kars1.png" class="logo" alt="Logo">
+                    </a>
                 </div>
                 <!-- End Header Navigation -->
 
@@ -307,9 +311,9 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                     <div class="col-md-6 info">
                         <h4>RSIA YASMIN Dibangun Sejak 2007</h4>
                         <h2>Sejarah Rumah Sakit</h2>
-                        <p>
+                      
                         <?php echo $kalimat; ?> <a style="color: #52b000;" href="">-->Selanjutnya</a>
-                        </p>
+                     
                         <div class="bottom">
                             <div class="video">
                                 <a href="<?php echo $dvideo['link_video']; ?>" class="popup-youtube relative theme video-play-button item-center">
@@ -465,7 +469,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                     <div class="site-heading text-center">
                         <h2>Dokter <span>Kami</span></h2>
                         <p>
-                            While mirth large of on front. Ye he greater related adapted proceed entered an. Through it examine express promise no. Past add size game cold girl off how old
+                            Dokter Kami Siap Melayani Anda.
                         </p>
                     </div>
                 </div>
@@ -490,16 +494,22 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                     <h4><?php echo $datdok['nama_dokter']; ?></h4>
                                     <h5><?php echo $datdok['nama_kategori']; ?></h5>
                                 </div>
-                                <h3>How to live a healthy lifestyle?</h3>
+                                <h3>Tentang dokter <?php echo $datdok['nama_dokter']; ?></h3>
                                 <p>
-                                    Frequently partiality possession resolution at or appearance unaffected he me. Engaged its was evident pleased husband. Ye goodness felicity do disposal dwelling no. First am plate jokes to began of cause an scale. Subjects he prospect elegance followed no overcame possible it on. 
+                                    <?php echo $datdok['profil_dokter']; ?> 
                                 </p>
-                                <h4>Follow the instructions</h4>
+                                <h4>Tips menjalani gaya hidup sehat?</h4>
                                 <ul>
-                                    <li>Dont just worry about the things you cannot help.</li>
-                                    <li>Eat Healthy, work better, do gardening.</li>
-                                    <li>Some relationships can kill you. Avoid them at the most.</li>
-                                    <li>Focus on the good things that you like</li>
+                                    <?php
+                                    $array = explode(',', $datdok['tips_gaya_sehat']);
+                                    $total = count($array);
+                                    for ($i=0; $i < $total ; $i++) {
+                                    echo "
+                                    <li>$array[$i]</li>
+                                    ";
+                                    }
+                                    ?>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -601,19 +611,26 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                     <div class="site-heading text-center">
                         <h2>Berita <span>Terbaru</span></h2>
                         <p>
-                            While mirth large of on front. Ye he greater related adapted proceed entered an. Through it examine express promise no. Past add size game cold girl off how old
+                            Sekilas informasi berita tentang RS kami.
                         </p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="blog-items">
+
+                    <?php
+                    $qber = mysqli_query($koneksi,"SELECT * FROM tb_berita ORDER BY id_berita DESC");
+                    while($dber=mysqli_fetch_assoc($qber)){
+                    $teks_ber = substr($dber['isi_berita'], 0, 500);
+                    $tgl = strtotime($dber['tgl_upload']);
+                    ?>
                     <!-- Single Item -->
                     <div class="col-md-4 single-item">
                         <div class="item">
                             <div class="thumb">
                                 <a href="blog-single-right-sidebar.html">
-                                    <img src="assets/img/blog/1.jpg" alt="Thumb">
+                                    <img src="admin/dist/img/berita/<?php echo $dber['foto_berita_cover']; ?>" alt="Thumb">
                                     <div class="post-type">
                                         <i class="fas fa-images"></i>
                                     </div>
@@ -623,78 +640,22 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                 <div class="meta">
                                     <ul>
                                         <li><a href="#">Admin</a></li>
-                                        <li>15 June, 2019</li>
+                                        <li><?php echo date('d/m/Y | H:i:s',$tgl),' WIB'; ?></li>
                                     </ul>
                                 </div>
                                 <h4>
-                                    <a href="blog-single-right-sidebar.html">increasing in especially inquietude companions acceptance</a>
+                                    <a href="#"><?php echo $dber['judul_berita']; ?></a>
                                 </h4>
                                 <p>
-                                    General enquire picture letters garrets on offices of no on. Say one hearing between excited evening all inhabit thought you.
+                                    <?php echo $teks_ber; ?><a style="color: #52b000;">. . .</a>
                                 </p>
-                                <a class="btn btn-theme circle border btn-sm" href="blog-single-right-sidebar.html">Read More <i class="fas fa-angle-right"></i></a>
+                                <a class="btn btn-theme circle border btn-sm" href="#">Read More <i class="fas fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
                     <!-- End Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-md-4 single-item">
-                        <div class="item">
-                            <div class="thumb">
-                                <a href="blog-single-right-sidebar.html">
-                                    <img src="assets/img/blog/2.jpg" alt="Thumb">
-                                    <div class="post-type">
-                                        <i class="fas fa-video"></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="info">
-                                <div class="meta">
-                                    <ul>
-                                        <li><a href="#">Admin</a></li>
-                                        <li>17 Auguest, 2019</li>
-                                    </ul>
-                                </div>
-                                <h4>
-                                    <a href="blog-single-right-sidebar.html">Middleton as pretended listening he smallness perceived.</a>
-                                </h4>
-                                <p>
-                                    General enquire picture letters garrets on offices of no on. Say one hearing between excited evening all inhabit thought you.
-                                </p>
-                                <a class="btn btn-theme circle border btn-sm" href="blog-single-right-sidebar.html">Read More <i class="fas fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Item -->
-                    <!-- Single Item -->
-                    <div class="col-md-4 single-item">
-                        <div class="item">
-                            <div class="thumb">
-                                <a href="blog-single-right-sidebar.html">
-                                    <img src="assets/img/blog/3.jpg" alt="Thumb">
-                                    <div class="post-type">
-                                        <i class="fas fa-image"></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="info">
-                                <div class="meta">
-                                    <ul>
-                                        <li><a href="#">Admin</a></li>
-                                        <li>25 September, 2019</li>
-                                    </ul>
-                                </div>
-                                <h4>
-                                    <a href="blog-single-right-sidebar.html">Offended packages pleasant remainder recommend engrossed</a>
-                                </h4>
-                                <p>
-                                    General enquire picture letters garrets on offices of no on. Say one hearing between excited evening all inhabit thought you.
-                                </p>
-                                <a class="btn btn-theme circle border btn-sm" href="blog-single-right-sidebar.html">Read More <i class="fas fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Item -->
+                    <?php } ?>
+                    
                 </div>
             </div>
         </div>
@@ -726,23 +687,23 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                     <!-- Single Item -->
                     <div class="col-md-4 item">
                         <div class="f-item">
-                            <h4>About</h4>
+                            <h4>Kontak Kami</h4>
                             <p>
-                                Excellence decisively nay man yet impression for contrasted remarkably. There spoke happy for you are out. Fertile how old address.
+                                
                             </p>
-                            <h2><i class="fas fa-phone"></i> +123 456 7890</h2>
+                            <h3><i class="fas fa-envelope"></i> <?php echo $datkon['email']; ?></h3>
+                            <h3><i class="fas fa-phone"></i> <?php echo $datkon['fax_telp']; ?></h3>
                             <div class="opening-info">
-                                <h5>Opening Hours</h5>
+                                <h5>Jam Besuk</h5>
                                 <ul>
-                                    <li> <span> Mon - Tues :  </span>
-                                      <div class="pull-right"> 6.00 am - 10.00 pm </div>
+                                <?php
+                                $qbesuk = mysqli_query($koneksi,"SELECT * FROM tb_besuk");
+                                while($dbesuk=mysqli_fetch_assoc($qbesuk)){
+                                ?>
+                                    <li> <span> <?php echo $dbesuk['hari_besuk']; ?> : </span>
+                                      <div class="pull-right closed"> <?php echo $dbesuk['jam_besuk']; ?> </div>
                                     </li>
-                                    <li> <span> Wednes - Thurs :</span>
-                                      <div class="pull-right"> 8.00 am - 6.00 pm </div>
-                                    </li>
-                                    <li> <span> Sun : </span>
-                                      <div class="pull-right closed"> Closed </div>
-                                    </li>
+                                <?php } ?>
                                 </ul>
                             </div>
                         </div>
@@ -751,26 +712,18 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                     <!-- Single Item -->
                     <div class="col-md-4 item">
                         <div class="f-item link">
-                            <h4>Our Depeartment</h4>
+                            <h4>Layanan Kami</h4>
                             <ul>
+
+                                <?php  
+                                $qlay=mysqli_query($koneksi,"SELECT * FROM tb_kategori_layanan ORDER BY id_kategori_layanan DESC");
+                                while($dlay=mysqli_fetch_assoc($qlay)){
+                                ?>
                                 <li>
-                                    <a href="#"><i class="fas fa-arrow-right"></i> Medecine and Health</a>
+                                    <a href="#"><i class="fas fa-arrow-right"></i> <?php echo $dlay['nama_kategori']; ?></a>
                                 </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-arrow-right"></i> Dental Care and Surgery</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-arrow-right"></i> Eye Treatment</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-arrow-right"></i> Children Chare</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-arrow-right"></i> Traumatology</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fas fa-arrow-right"></i> X-ray</a>
-                                </li>
+                                <?php } ?>
+
                             </ul>
                         </div>
                     </div>
@@ -778,27 +731,25 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                     <!-- Single Item -->
                     <div class="col-md-4 item">
                         <div class="f-item twitter-widget">
-                            <h4>Latest tweets</h4>
+                            <h4>Terbaru</h4>
+                            
+                            <?php  
+                            $qber1=mysqli_query($koneksi,"SELECT * FROM tb_berita ORDER BY id_berita DESC");
+                            while($dber1=mysqli_fetch_assoc($qber1)){
+                            $tgl1 = strtotime($dber1['tgl_upload']);
+                            ?>
                             <div class="twitter-item">
                                 <div class="twitter-content">
                                     <p>
-                                        <a href="#">@Becare</a> Looking for an awesome CREATIVE WordPress Theme? Find it here: <a target="_blank" href="http://t.co/0WWEMQEQ48">http://t.co/0WWEMQEQ48</a>
+                                        <a href="#"><i class="fas fa-arrow-right"></i> <?php echo $dber1['judul_berita']; ?></a> 
                                     </p>
                                 </div>
                                 <div class="twitter-context">
-                                    <i class="fab fa-twitter"></i><span class="twitter-date"> 01 day ago</span>
+                                    <i class="fas fa-clock"></i><span class="twitter-date"> <?php echo date('d/m/Y | H:i:s',$tgl1),' WIB'; ?></span>
                                 </div>
                             </div>
-                            <div class="twitter-item">
-                                <div class="twitter-content">
-                                    <p>
-                                        <a href="#">@Jisham</a> It is a long established fact that a reader will be distracted by the readable . Find it here: <a target="_blank" href="http://t.co/0WWEMQEQ48">http://t.co/0WWEMQEQ48</a>
-                                    </p>
-                                </div>
-                                <div class="twitter-context">
-                                    <i class="fab fa-twitter"></i><span class="twitter-date"> 02 days ago</span>
-                                </div>
-                            </div>
+                            <?php } ?>
+                            
                         </div>
                     </div>
                     <!-- End Single Item -->
@@ -810,18 +761,14 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>&copy; Copyright 2019. All Rights Reserved by <a href="#">validthemes</a></p>
+                        <p>&copy; Copyright 2011. All Rights Reserved by <a href="#">IT-RSIA YASMIN</a></p>
                     </div>
                     <div class="col-md-6 text-right link">
                         <ul>
                             <li>
-                                <a href="#">Terms of user</a>
-                            </li>
-                            <li>
-                                <a href="#">License</a>
-                            </li>
-                            <li>
-                                <a href="#">Support</a>
+                                <marquee scrollamount="9" width="600">
+                                <a href="#">RSIA YASMIN "Ikhlas Melayani" Memberikan pelayanan kesehatan terbaik bagi ibu dan anak.</a>
+                                </marquee>
                             </li>
                         </ul>
                     </div>

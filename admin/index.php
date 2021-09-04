@@ -677,8 +677,16 @@ overflow-x:scroll;
 <!-- Bootstrap Switch -->
 <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
+<script type="text/javascript"> 
 
+  CKEDITOR.replace( '#editor1',
+    {
+      fullPage : true,
+    });
+
+</script>
 
 <script>
   $(function () {
