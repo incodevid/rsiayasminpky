@@ -9,6 +9,15 @@ $datkon = mysqli_fetch_assoc($qkontak);
 $qvideo=mysqli_query($koneksi,"SELECT * FROM tb_video_profil");
 $dvideo=mysqli_fetch_assoc($qvideo);
 
+$qvisi=mysqli_query($koneksi,"SELECT * FROM tb_visi");
+$dvisi=mysqli_fetch_assoc($qvisi);
+
+$qmisi=mysqli_query($koneksi,"SELECT * FROM tb_misi");
+$dmisi=mysqli_fetch_assoc($qmisi);
+
+$qstruktur=mysqli_query($koneksi,"SELECT * FROM tb_struktur");
+$dstruktur=mysqli_fetch_assoc($qstruktur);
+
 $qsejarah=mysqli_query($koneksi,"SELECT * FROM tb_sejarah");
 $dsejarah=mysqli_fetch_assoc($qsejarah);
 $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
@@ -28,7 +37,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
     <meta name="description" content="MediHub - Medical & Health Template">
 
     <!-- ========== Page Title ========== -->
-    <title>RSIA Yasmin - Berita</title>
+    <title>RSIA Yasmin - Struktur Organisasi</title>
 
     <!-- ========== Favicon Icon ========== -->
     <link rel="shortcut icon" href="assets/img/logo-yasmin.jpg" type="image/x-icon">
@@ -232,26 +241,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
     <!-- End PreLoader Section-->
 
 
-<?php
 
-
-$q = $_GET[cari];
-
-if ($_GET[cari]) {
-    $dataperpage = mysqli_query($koneksi,"SELECT * FROM tb_berita where judul_berita like '%$q%'");
-} else {
-    $dataperpage = mysqli_query($koneksi,"SELECT * FROM tb_berita");
-}
-$page = "berita";
-$numpage = mysqli_num_rows($dataperpage);
-$start = $_GET['start'];
-$eu = $start - 0;
-$limit = 5;
-$thisp = $eu + $limit;
-$back = $eu - $limit;
-$next = $eu + $limit;
-
- ?>
 
 
     <!-- Start Header Top 
@@ -337,14 +327,14 @@ $next = $eu + $limit;
                         <li class="dropdown ">
                             <a href="index"   >Beranda</a>
                         </li>
-                        <li class="dropdown active">
+                        <li class="dropdown ">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Informasi</a>
                             <ul class="dropdown-menu">
                                 <li><a href="berita">Berita</a></li>
                                 <li><a href="artikel">Artikel</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Profil</a>
                             <ul class="dropdown-menu">
                                 <li><a href="visi_misi">Visi Dan Misi</a></li>
@@ -402,13 +392,13 @@ $next = $eu + $limit;
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>Berita</h1>
+                    <h1>Struktur Organisasi</h1>
                 </div>
                 <div class="col-md-6 text-right">
                     <ul class="breadcrumb">
                         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-                        <li><a href="#">Informasi</a></li>
-                        <li class="active">Berita</li>
+                        <li><a href="#">Profil</a></li>
+                        <li class="active">Struktur Organisasi</li>
                     </ul>
                 </div>
             </div>
@@ -424,83 +414,27 @@ $next = $eu + $limit;
                 <div class="blog-items">
                     <div class="blog-content col-md-8">
 
-                        <?php
-                    if ($_GET[cari]) {
-                        $link = mysqli_query($koneksi,"SELECT * FROM tb_berita WHERE judul_berita like '%$q%' AND tgl_upload BETWEEN '2012-01-01' AND CURDATE() order by tgl_upload DESC limit $eu, $limit");
-                    } else {
-                        $link = mysqli_query($koneksi,"SELECT * FROM tb_berita WHERE tgl_upload BETWEEN '2012-01-01' AND CURDATE() order by tgl_upload DESC limit $eu, $limit");
-                    }
-
-                    while ($datab1 = mysqli_fetch_assoc($link)) {
-                        $num_char = 400;
-                        $text = $datab1['isi_berita'];
-                        $tgl = strtotime($datab1['tgl_upload']);
-                        ?>
+                       
                         <!-- Single Item -->
                         <div class="single-item item">
-                            <div class="thumb">
-                                <a href="blog-single-right-sidebar.html">
-                                    <img src="admin/dist/img/berita/<?php echo $datab1['foto_berita_cover']; ?>" alt="Thumb">
-                                    <div class="post-type">
-                                        <i class="fas fa-images"></i>
-                                    </div>
-                                </a>
-                            </div>
                             <div class="info">
                                 <div class="meta">
                                     <ul>
-                                        <li><a href="#">Admin</a></li>
-                                        <li><?php echo date('d/m/Y | H:i:s',$tgl),' WIB'; ?></li>
+                                        <li><center><h2><a href="#">STRUKTUR ORGANISASI</a></h2></center></li>
                                     </ul>
                                 </div>
-                                <h3>
-                                    <a href="#"><?php echo $datab1['judul_berita']; ?></a>
-                                </h3>
-                            
-                                    <?php echo substr($text, 0, $num_char) . '...'; ?>
-                                <br>
-                                <br>
-                                <br>
-                                <a class="btn btn-theme circle border btn-sm" href="#">Read More <i class="fas fa-angle-right"></i></a>
+                                                            
+                                    <center><img src="admin/dist/img/struktur_organisasi/<?php echo $dstruktur['foto_struktur'];?>" style="width: 500px;"></center>
+                              
                             </div>
                      
                          
                         </div>
                         <!-- End Single Item -->
-                        <?php } ?>
+                   
 
                         
-                        <!-- Pagination -->
-                        <div class="row">
-                            <div class="col-md-12 pagi-area">
-                                <nav aria-label="navigation">
-                                    <ul class="pagination">
-                                        <?php
-                                        if ($back >= 0) {
-                                            echo "
-                                                <li><a href=$page?start=$back><i class='fas fa-long-arrow-alt-left'></i></a></li>
-                                                ";
-                                        }
-                                        $l = 1;
-
-                                        for ($i = 0; $i < $numpage; $i = $i + $limit) {
-                                            if ($i <> $eu) {
-                                                echo "<li><a href=$page?start=$i >$l</a></li>";
-                                            } else {
-                                                echo "<li ><a class='active'>$l</a></li>";
-                                            }
-                                            $l = $l + 1;
-                                        }
-                                        if ($thisp < $numpage) {
-                                            echo "<li><a href=$page?start=$next ><i class='fa fa-caret-right'></i></a></li>
-                                            <li><a href=$page?start=$next><i class='fas fa-long-arrow-alt-right'></i></a></li>
-                                            ";
-                                        }
-                                        ?>  
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
+                        
 
                        
 
@@ -535,6 +469,35 @@ $next = $eu + $limit;
                                         <?php } ?>
                                     </ul>
                                 </div>
+                            </div>
+                            <div class="sidebar-item recent-post">
+                                <div class="title">
+                                    <h4>Berita Terbaru</h4>
+                                </div>
+                                <ul>
+
+                                    <?php
+                                    $qberita=mysqli_query($koneksi,"SELECT * FROM tb_berita ORDER BY id_berita DESC");
+                                    while($dberita=mysqli_fetch_assoc($qberita)){
+                                    $tglar = strtotime($dberita['tgl_upload']);
+                                    ?>
+                                    <li>
+                                        <div class="thumb">
+                                            <a href="#">
+                                                <img src="admin/dist/img/berita/<?php echo $dberita['foto_berita_cover']; ?>" alt="Thumb">
+                                            </a>
+                                        </div>
+                                        <div class="info">
+                                            <a href="#"><?php echo $dberita['judul_berita']; ?></a>
+                                            <div class="meta-title">
+                                                <span class="post-date"><?php echo date('d/m/Y | H:i:s',$tglar),' WIB'; ?></span> - By <a href="#">Admin</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <?php } ?>
+
+
+                                </ul>
                             </div>
                             <div class="sidebar-item recent-post">
                                 <div class="title">
@@ -775,5 +738,5 @@ $next = $eu + $limit;
 
 </body>
 
-<!-- Mirrored from webhunt.store/themeforest/medihub/blog-right-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 28 Jun 2021 05:05:04 GMT -->
+
 </html>

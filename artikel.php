@@ -28,7 +28,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
     <meta name="description" content="MediHub - Medical & Health Template">
 
     <!-- ========== Page Title ========== -->
-    <title>RSIA Yasmin - Berita</title>
+    <title>RSIA Yasmin - Artikel</title>
 
     <!-- ========== Favicon Icon ========== -->
     <link rel="shortcut icon" href="assets/img/logo-yasmin.jpg" type="image/x-icon">
@@ -238,11 +238,11 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
 $q = $_GET[cari];
 
 if ($_GET[cari]) {
-    $dataperpage = mysqli_query($koneksi,"SELECT * FROM tb_berita where judul_berita like '%$q%'");
+    $dataperpage = mysqli_query($koneksi,"SELECT * FROM tb_artikel where judul_artikel like '%$q%'");
 } else {
-    $dataperpage = mysqli_query($koneksi,"SELECT * FROM tb_berita");
+    $dataperpage = mysqli_query($koneksi,"SELECT * FROM tb_artikel");
 }
-$page = "berita";
+$page = "artikel";
 $numpage = mysqli_num_rows($dataperpage);
 $start = $_GET['start'];
 $eu = $start - 0;
@@ -402,13 +402,13 @@ $next = $eu + $limit;
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>Berita</h1>
+                    <h1>Artikel</h1>
                 </div>
                 <div class="col-md-6 text-right">
                     <ul class="breadcrumb">
                         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
                         <li><a href="#">Informasi</a></li>
-                        <li class="active">Berita</li>
+                        <li class="active">Artikel</li>
                     </ul>
                 </div>
             </div>
@@ -426,21 +426,21 @@ $next = $eu + $limit;
 
                         <?php
                     if ($_GET[cari]) {
-                        $link = mysqli_query($koneksi,"SELECT * FROM tb_berita WHERE judul_berita like '%$q%' AND tgl_upload BETWEEN '2012-01-01' AND CURDATE() order by tgl_upload DESC limit $eu, $limit");
+                        $link = mysqli_query($koneksi,"SELECT * FROM tb_artikel WHERE judul_artikel like '%$q%' AND tgl_upload BETWEEN '2012-01-01' AND CURDATE() order by tgl_upload DESC limit $eu, $limit");
                     } else {
-                        $link = mysqli_query($koneksi,"SELECT * FROM tb_berita WHERE tgl_upload BETWEEN '2012-01-01' AND CURDATE() order by tgl_upload DESC limit $eu, $limit");
+                        $link = mysqli_query($koneksi,"SELECT * FROM tb_artikel WHERE tgl_upload BETWEEN '2012-01-01' AND CURDATE() order by tgl_upload DESC limit $eu, $limit");
                     }
 
                     while ($datab1 = mysqli_fetch_assoc($link)) {
                         $num_char = 400;
-                        $text = $datab1['isi_berita'];
+                        $text = $datab1['isi_artikel'];
                         $tgl = strtotime($datab1['tgl_upload']);
                         ?>
                         <!-- Single Item -->
                         <div class="single-item item">
                             <div class="thumb">
                                 <a href="blog-single-right-sidebar.html">
-                                    <img src="admin/dist/img/berita/<?php echo $datab1['foto_berita_cover']; ?>" alt="Thumb">
+                                    <img src="admin/dist/img/artikel/<?php echo $datab1['foto_artikel_cover']; ?>" alt="Thumb">
                                     <div class="post-type">
                                         <i class="fas fa-images"></i>
                                     </div>
@@ -454,7 +454,7 @@ $next = $eu + $limit;
                                     </ul>
                                 </div>
                                 <h3>
-                                    <a href="#"><?php echo $datab1['judul_berita']; ?></a>
+                                    <a href="#"><?php echo $datab1['judul_artikel']; ?></a>
                                 </h3>
                             
                                     <?php echo substr($text, 0, $num_char) . '...'; ?>
@@ -538,23 +538,23 @@ $next = $eu + $limit;
                             </div>
                             <div class="sidebar-item recent-post">
                                 <div class="title">
-                                    <h4>Artikel</h4>
+                                    <h4>Berita Terbaru</h4>
                                 </div>
                                 <ul>
 
                                     <?php
-                                    $qartikel=mysqli_query($koneksi,"SELECT * FROM tb_artikel ORDER BY id_artikel DESC");
-                                    while($dartikel=mysqli_fetch_assoc($qartikel)){
-                                    $tglar = strtotime($dartikel['tgl_upload']);
+                                    $qberita=mysqli_query($koneksi,"SELECT * FROM tb_berita ORDER BY id_berita DESC");
+                                    while($dberita=mysqli_fetch_assoc($qberita)){
+                                    $tglar = strtotime($dberita['tgl_upload']);
                                     ?>
                                     <li>
                                         <div class="thumb">
                                             <a href="#">
-                                                <img src="admin/dist/img/artikel/<?php echo $dartikel['foto_artikel_cover']; ?>" alt="Thumb">
+                                                <img src="admin/dist/img/berita/<?php echo $dberita['foto_berita_cover']; ?>" alt="Thumb">
                                             </a>
                                         </div>
                                         <div class="info">
-                                            <a href="#"><?php echo $dartikel['judul_artikel']; ?></a>
+                                            <a href="#"><?php echo $dberita['judul_berita']; ?></a>
                                             <div class="meta-title">
                                                 <span class="post-date"><?php echo date('d/m/Y | H:i:s',$tglar),' WIB'; ?></span> - By <a href="#">Admin</a>
                                             </div>

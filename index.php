@@ -98,7 +98,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
   }
 }
 
-.gradient-color{background:#000428;background:-webkit-linear-gradient(315deg, #000428, #0074da);background:linear-gradient(135deg, #000428, #52b000)}
+.gradient-color{background:#ffffff;background:-webkit-linear-gradient(315deg, #ffffff, #0074da);background:linear-gradient(135deg, #ffffff, #52b000)}
     </style>
 
 </head>
@@ -206,8 +206,8 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Profil</a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Visi Dan Misi</a></li>
-                                <li><a href="#">Struktur Organisasi</a></li>
+                                <li><a href="visi_misi">Visi Dan Misi</a></li>
+                                <li><a href="struktur_organisasi">Struktur Organisasi</a></li>
                                 <li><a href="#">Sejarah</a></li>
                                 <li><a href="#">Profil RS</a></li>
                                 <li><a href="#">Kerjasama</a></li>

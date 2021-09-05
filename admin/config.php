@@ -25,7 +25,7 @@ function write_log($log){
  @fclose($fp);
 }
 
-$timeout = 30; // Set timeout menit
+$timeout = 60; // Set timeout menit
 $logout_redirect_url = "login.php"; // Set logout URL
 $timeout = $timeout * 60; // Ubah menit ke detik
 if (isset($_SESSION['start_time'])) {
