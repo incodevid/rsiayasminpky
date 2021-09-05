@@ -361,7 +361,7 @@ $next = $eu + $limit;
                                 $qukat = mysqli_query($koneksi, "SELECT * FROM tb_kategori_layanan ORDER BY id_kategori_layanan DESC");
                                 while($datkat=mysqli_fetch_assoc($qukat)){
                                 ?>
-                                <li><a href="#"><?php echo $datkat['nama_kategori']; ?></a></li>
+                                <li><a href="layanan?nm=<?php echo $datkat['nama_kategori']; ?>"><?php echo $datkat['nama_kategori']; ?></a></li>
                                 <?php } ?>
                             </ul>
                         </li>
@@ -369,15 +369,7 @@ $next = $eu + $limit;
                             <a href="dokter_kami"  >Dokter Kami</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Galeri</a>
-                            <ul class="dropdown-menu">
-                                <?php
-                                $qukat = mysqli_query($koneksi, "SELECT * FROM tb_album ORDER BY id_album DESC");
-                                while($datkat=mysqli_fetch_assoc($qukat)){
-                                ?>
-                                <li><a href="#"><?php echo $datkat['nama_album']; ?></a></li>
-                                <?php } ?>
-                            </ul>
+                            <a href="galeri"  >Galeri</a>
                         </li>
                         <li>
                             <a href="kontak">Kontak Kami</a>
@@ -661,7 +653,7 @@ $next = $eu + $limit;
                                 while($dlay=mysqli_fetch_assoc($qlay)){
                                 ?>
                                 <li>
-                                    <a href="#"><i class="fas fa-arrow-right"></i> <?php echo $dlay['nama_kategori']; ?></a>
+                                    <a href="layanan?nm=<?php echo $dlay['nama_kategori']; ?>"><i class="fas fa-arrow-right"></i> <?php echo $dlay['nama_kategori']; ?></a>
                                 </li>
                                 <?php } ?>
 

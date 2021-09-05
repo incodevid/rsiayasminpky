@@ -20,7 +20,14 @@ $dstruktur=mysqli_fetch_assoc($qstruktur);
 
 $qsejarah=mysqli_query($koneksi,"SELECT * FROM tb_sejarah");
 $dsejarah=mysqli_fetch_assoc($qsejarah);
-$kalimat = substr($dsejarah['text_sejarah'], 0, 700);
+
+$qprofilrs=mysqli_query($koneksi,"SELECT * FROM tb_profil_rs");
+$dprofilrs=mysqli_fetch_assoc($qprofilrs);
+
+$qkerjasama=mysqli_query($koneksi,"SELECT * FROM tb_kerjasama");
+$dkerjasama=mysqli_fetch_assoc($qkerjasama);
+
+
 
 ?>
 
@@ -37,7 +44,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
     <meta name="description" content="MediHub - Medical & Health Template">
 
     <!-- ========== Page Title ========== -->
-    <title>RSIA Yasmin - Struktur Organisasi</title>
+    <title>RSIA Yasmin - Dokter Kami</title>
 
     <!-- ========== Favicon Icon ========== -->
     <link rel="shortcut icon" href="assets/img/logo-yasmin.jpg" type="image/x-icon">
@@ -334,7 +341,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                 <li><a href="artikel">Artikel</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown active">
+                        <li class="dropdown ">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Profil</a>
                             <ul class="dropdown-menu">
                                 <li><a href="visi_misi">Visi Dan Misi</a></li>
@@ -344,7 +351,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                 <li><a href="kerjasama">Kerjasama</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown ">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Layanan</a>
                             <ul class="dropdown-menu">
                                 <?php
@@ -355,7 +362,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                 <?php } ?>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a href="dokter_kami"  >Dokter Kami</a>
                         </li>
                         <li class="dropdown">
@@ -384,13 +391,12 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>Struktur Organisasi</h1>
+                    <h1>Dokter Kami</h1>
                 </div>
                 <div class="col-md-6 text-right">
                     <ul class="breadcrumb">
                         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-                        <li><a href="#">Profil</a></li>
-                        <li class="active">Struktur Organisasi</li>
+                        <li class="active">Dokter Kami</li>
                     </ul>
                 </div>
             </div>
@@ -398,182 +404,60 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
     </div>
     <!-- End Breadcrumb -->
 
-    <!-- Start Blog
+    <!-- Start Gallery
     ============================================= -->
-    <div class="blog-area full-blog right-sidebar default-padding">
+    <div class="gallery-area default-padding">
         <div class="container">
-            <div class="row">
-                <div class="blog-items">
-                    <div class="blog-content col-md-8">
-
-                       
-                        <!-- Single Item -->
-                        <div class="single-item item">
-                            <div class="info">
-                                <div class="meta">
-                                    <ul>
-                                        <li><center><h2><a href="#">STRUKTUR ORGANISASI</a></h2></center></li>
-                                    </ul>
-                                </div>
-                                                            
-                                    <center><img src="admin/dist/img/struktur_organisasi/<?php echo $dstruktur['foto_struktur'];?>" style="width: 500px;"></center>
-                              
-                            </div>
-                     
-                         
+            <div class="gallery-items-area text-center">
+                <div class="row">
+                    <div class="col-md-12 gallery-content">
+                        
+                        <div class="mix-item-menu text-center">
+                            <button class="active" data-filter="*">All</button>
+                            <?php 
+                            $qkdokter=mysqli_query($koneksi,"SELECT * FROM tb_kategori_dokter ORDER BY id_kategori_dokter DESC");
+                            while($dkdokter=mysqli_fetch_assoc($qkdokter)){
+                            ?>
+                            <button data-filter=".<?php echo $dkdokter['id_kategori_dokter']; ?>"><?php echo $dkdokter['nama_kategori']; ?></button>
+                        <?php } ?>
                         </div>
-                        <!-- End Single Item -->
-                   
+                         <!-- End Mixitup Nav-->
 
-                        
-                        
+                        <div class="row magnific-mix-gallery text-center masonary">
+                            <div id="portfolio-grid" class="gallery-items col-3">
 
-                       
 
-                    </div>
-                    <!-- Start Sidebar -->
-                    <div class="sidebar col-md-4">
-                        <aside>
-                            <div class="sidebar-item search">
-                                <div class="title">
-                                    <h4>Pencarian</h4>
-                                </div>
-                                <div class="sidebar-info">
-                                    <form>
-                                        <input type="text" class="form-control">
-                                        <input type="submit" value="search">
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="sidebar-item category">
-                                <div class="title">
-                                    <h4>Album Galeri</h4>
-                                </div>
-                                <div class="sidebar-info">
-                                    <ul>
-                                        <?php 
-                                        $qalbum = mysqli_query($koneksi,"SELECT *,COUNT(a.id_galeri) AS jml_galeri FROM tb_galeri a RIGHT JOIN tb_album b ON a.id_album=b.id_album GROUP BY b.`id_album` ORDER BY b.id_album  DESC;");
-                                        while($dalbum=mysqli_fetch_assoc($qalbum)){
-                                        ?>
-                                        <li>
-                                            <a href="#"><?php echo $dalbum['nama_album']; ?> <span><?php echo $dalbum['jml_galeri']; ?></span></a>
-                                        </li>
-                                        <?php } ?>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="sidebar-item recent-post">
-                                <div class="title">
-                                    <h4>Berita Terbaru</h4>
-                                </div>
-                                <ul>
+                                <?php 
+                                $qdokter = mysqli_query($koneksi,"SELECT *,COUNT(a.id_dokter_kami) AS jml_dok FROM tb_dokter_kami a INNER JOIN tb_kategori_dokter b ON a.id_kategori_dokter=b.id_kategori_dokter GROUP BY a.id_dokter_kami DESC");
+                                while($ddok=mysqli_fetch_assoc($qdokter)){
+                                if($ddok['jml_dok']=='0'){
+                                ?>
 
-                                    <?php
-                                    $qberita=mysqli_query($koneksi,"SELECT * FROM tb_berita ORDER BY id_berita DESC");
-                                    while($dberita=mysqli_fetch_assoc($qberita)){
-                                    $tglar = strtotime($dberita['tgl_upload']);
-                                    ?>
-                                    <li>
-                                        <div class="thumb">
-                                            <a href="#">
-                                                <img src="admin/dist/img/berita/<?php echo $dberita['foto_berita_cover']; ?>" alt="Thumb">
-                                            </a>
-                                        </div>
+                                <center><h3><a href="#">Data Belum Ada</a></h3></center>
+
+                                <?php }else{ ?>
+                                <!-- Single Item -->
+                                <div class="pf-item <?php echo $ddok['id_kategori_dokter']; ?> capital">
+                                    <div class="effect-box">
+                                        <img src="admin/dist/img/foto_dokter/<?php echo $ddok['foto_dokter']; ?>" alt="thumb">
                                         <div class="info">
-                                            <a href="#"><?php echo $dberita['judul_berita']; ?></a>
-                                            <div class="meta-title">
-                                                <span class="post-date"><?php echo date('d/m/Y | H:i:s',$tglar),' WIB'; ?></span> - By <a href="#">Admin</a>
-                                            </div>
+                                          <h4><a href="#"><?php echo $ddok['nama_dokter']; ?></a></h4>
+                                          <a href="admin/dist/img/foto_dokter/<?php echo $ddok['foto_dokter']; ?>" class="item popup-link"><i class="fa fa-eye"></i></a>
                                         </div>
-                                    </li>
-                                    <?php } ?>
+                                    </div>
+                                </div>
+                                <!-- End Single Item -->
+                                <?php }} ?>
 
 
-                                </ul>
                             </div>
-                            <div class="sidebar-item recent-post">
-                                <div class="title">
-                                    <h4>Artikel</h4>
-                                </div>
-                                <ul>
-
-                                    <?php
-                                    $qartikel=mysqli_query($koneksi,"SELECT * FROM tb_artikel ORDER BY id_artikel DESC");
-                                    while($dartikel=mysqli_fetch_assoc($qartikel)){
-                                    $tglar = strtotime($dartikel['tgl_upload']);
-                                    ?>
-                                    <li>
-                                        <div class="thumb">
-                                            <a href="#">
-                                                <img src="admin/dist/img/artikel/<?php echo $dartikel['foto_artikel_cover']; ?>" alt="Thumb">
-                                            </a>
-                                        </div>
-                                        <div class="info">
-                                            <a href="#"><?php echo $dartikel['judul_artikel']; ?></a>
-                                            <div class="meta-title">
-                                                <span class="post-date"><?php echo date('d/m/Y | H:i:s',$tglar),' WIB'; ?></span> - By <a href="#">Admin</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <?php } ?>
-
-
-                                </ul>
-                            </div>
-                            <div class="sidebar-item gallery">
-                                <div class="title">
-                                    <h4>Galleri</h4>
-                                </div>
-                                <div class="sidebar-info">
-                                    <ul>
-
-                                        <!--LIMIT 6-->
-                                        <?php 
-                                        $qgal = mysqli_query($koneksi,"SELECT * FROM tb_galeri ORDER BY id_galeri DESC LIMIT 6");
-                                        while($dgal=mysqli_fetch_assoc($qgal)){
-                                        ?>
-                                        <li>
-                                            <a href="#">
-                                                <img src="admin/dist/img/galeri/<?php echo $dgal['file_foto']; ?>" alt="thumb">
-                                            </a>
-                                        </li>
-                                        <?php } ?>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="sidebar-item social-sidebar">
-                                <div class="title">
-                                    <h4>Ikuti Media Sosial Kami</h4>
-                                </div>
-                                <div class="sidebar-info">
-                                    <ul>
-
-                                        <?php 
-                                        $qmedsos=mysqli_query($koneksi,"SELECT * FROM tb_medsos");
-                                        while($dmedsos=mysqli_fetch_assoc($qmedsos)){
-                                        ?>
-                                        <center>
-                                        <li class="pinterest" >
-                                            <a href="<?php echo $dmedsos['link_medsos']; ?>" target="_blank">
-                                            <img src="admin/dist/img/medsos/<?php echo $dmedsos['icon_medsos'];?>" style="width: 90px;" >
-                                            </a>
-                                        </li>
-                                        </center>
-                                        <?php } ?>
-
-                                    </ul>
-                                </div>
-                            </div>
-                            
-
-                        </aside>
+                        </div>
                     </div>
-                    <!-- End Start Sidebar -->
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Blog -->
+    <!-- End Gallery -->
 
     <!-- Start Footer 
     ============================================= -->

@@ -20,7 +20,14 @@ $dstruktur=mysqli_fetch_assoc($qstruktur);
 
 $qsejarah=mysqli_query($koneksi,"SELECT * FROM tb_sejarah");
 $dsejarah=mysqli_fetch_assoc($qsejarah);
-$kalimat = substr($dsejarah['text_sejarah'], 0, 700);
+
+$qprofilrs=mysqli_query($koneksi,"SELECT * FROM tb_profil_rs");
+$dprofilrs=mysqli_fetch_assoc($qprofilrs);
+
+$qkerjasama=mysqli_query($koneksi,"SELECT * FROM tb_kerjasama");
+$dkerjasama=mysqli_fetch_assoc($qkerjasama);
+
+
 
 ?>
 
@@ -37,7 +44,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
     <meta name="description" content="MediHub - Medical & Health Template">
 
     <!-- ========== Page Title ========== -->
-    <title>RSIA Yasmin - Struktur Organisasi</title>
+    <title>RSIA Yasmin - Layanan</title>
 
     <!-- ========== Favicon Icon ========== -->
     <link rel="shortcut icon" href="assets/img/logo-yasmin.jpg" type="image/x-icon">
@@ -334,7 +341,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                 <li><a href="artikel">Artikel</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown active">
+                        <li class="dropdown ">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Profil</a>
                             <ul class="dropdown-menu">
                                 <li><a href="visi_misi">Visi Dan Misi</a></li>
@@ -344,7 +351,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                 <li><a href="kerjasama">Kerjasama</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Layanan</a>
                             <ul class="dropdown-menu">
                                 <?php
@@ -384,13 +391,13 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>Struktur Organisasi</h1>
+                    <h1>Layanan <?php echo $_GET[nm]; ?></h1>
                 </div>
                 <div class="col-md-6 text-right">
                     <ul class="breadcrumb">
                         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-                        <li><a href="#">Profil</a></li>
-                        <li class="active">Struktur Organisasi</li>
+                        <li><a href="#">Layanan</a></li>
+                        <li class="active">Layanan <?php echo $_GET[nm]; ?></li>
                     </ul>
                 </div>
             </div>
@@ -412,15 +419,67 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                             <div class="info">
                                 <div class="meta">
                                     <ul>
-                                        <li><center><h2><a href="#">STRUKTUR ORGANISASI</a></h2></center></li>
+                                        <li><center><h2><a href="#">LAYANAN <?php echo $_GET[nm]; ?></a></h2></center></li>
                                     </ul>
                                 </div>
                                                             
-                                    <center><img src="admin/dist/img/struktur_organisasi/<?php echo $dstruktur['foto_struktur'];?>" style="width: 500px;"></center>
+                                    <!-- Start Gallery
+    ============================================= -->
+    <div class="gallery-area default-padding">
+        <div class="container">
+            <div class="gallery-items-area text-center">
+                <div class="row">
+                    <div class="col-md-8 gallery-content">
+                        <!--
+                        <div class="mix-item-menu text-center">
+                            <button class="active" data-filter="*">All</button>
+                            <button data-filter=".development">Development</button>
+                            <button data-filter=".consulting">Consulting</button>
+                            <button data-filter=".finance">Finance</button>
+                            <button data-filter=".branding">Branding</button>
+                            <button data-filter=".capital">Capital</button>
+                        </div>
+                         End Mixitup Nav-->
+
+                        <div class="row magnific-mix-gallery text-center masonary">
+                            <div id="portfolio-grid" class="gallery-items col-3">
+
+
+                                <?php
+                                $katlay = $_GET[nm];  
+                                $qlayan = mysqli_query($koneksi,"SELECT *,COUNT(a.id_layanan) AS jml_layan FROM tb_layanan a INNER JOIN tb_kategori_layanan b ON a.id_kategori_layanan=b.id_kategori_layanan WHERE nama_kategori='$katlay' ORDER BY a.id_layanan DESC");
+                                while($dlayan=mysqli_fetch_assoc($qlayan)){
+                                if($dlayan['jml_layan']=='0'){
+                                ?>
+
+                                <center><h3><a href="#">Data Belum Ada</a></h3></center>
+
+                                <?php }else{ ?>
+                                <!-- Single Item -->
+                                <div class="pf-item development capital">
+                                    <div class="effect-box">
+                                        <img src="admin/dist/img/layanan/<?php echo $dlayan['foto_layanan']; ?>" alt="thumb">
+                                        <div class="info">
+                                          <h4><a href="#"><?php echo $dlayan['nama_layanan']; ?></a></h4>
+                                          <a href="admin/dist/img/layanan/<?php echo $dlayan['foto_layanan']; ?>" class="item popup-link"><i class="fa fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Single Item -->
+                                <?php }} ?>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Gallery -->
                               
                             </div>
-                     
-                         
+
                         </div>
                         <!-- End Single Item -->
                    
