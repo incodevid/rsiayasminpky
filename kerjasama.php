@@ -15,9 +15,17 @@ $dvisi=mysqli_fetch_assoc($qvisi);
 $qmisi=mysqli_query($koneksi,"SELECT * FROM tb_misi");
 $dmisi=mysqli_fetch_assoc($qmisi);
 
+$qstruktur=mysqli_query($koneksi,"SELECT * FROM tb_struktur");
+$dstruktur=mysqli_fetch_assoc($qstruktur);
+
 $qsejarah=mysqli_query($koneksi,"SELECT * FROM tb_sejarah");
 $dsejarah=mysqli_fetch_assoc($qsejarah);
-$kalimat = substr($dsejarah['text_sejarah'], 0, 700);
+
+$qprofilrs=mysqli_query($koneksi,"SELECT * FROM tb_profil_rs");
+$dprofilrs=mysqli_fetch_assoc($qprofilrs);
+
+$qkerjasama=mysqli_query($koneksi,"SELECT * FROM tb_kerjasama");
+$dkerjasama=mysqli_fetch_assoc($qkerjasama);
 
 ?>
 
@@ -34,7 +42,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
     <meta name="description" content="MediHub - Medical & Health Template">
 
     <!-- ========== Page Title ========== -->
-    <title>RSIA Yasmin - Visi Dan Misi</title>
+    <title>RSIA Yasmin - Kerjasama</title>
 
     <!-- ========== Favicon Icon ========== -->
     <link rel="shortcut icon" href="assets/img/logo-yasmin.jpg" type="image/x-icon">
@@ -389,13 +397,13 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>Visi Dan Misi</h1>
+                    <h1>Kerjasama</h1>
                 </div>
                 <div class="col-md-6 text-right">
                     <ul class="breadcrumb">
                         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
                         <li><a href="#">Profil</a></li>
-                        <li class="active">Visi Dan Misi</li>
+                        <li class="active">Kerjasama</li>
                     </ul>
                 </div>
             </div>
@@ -414,26 +422,23 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                        
                         <!-- Single Item -->
                         <div class="single-item item">
+                            <div class="thumb">
+                                <a href="#">
+                                    <img src="admin/dist/img/kerjasama/<?php echo $dkerjasama['foto_cover']; ?>" alt="Thumb">
+                                    <div class="post-type">
+                                        <i class="fas fa-images"></i>
+                                    </div>
+                                </a>
+                            </div>
                             <div class="info">
                                 <div class="meta">
                                     <ul>
-                                        <li><center><h2><a href="#">VISI DAN MISI</a></h2></center></li>
+                                        <li><center><h2><a href="#">MITRA KERJASAMA</a></h2></center></li>
                                     </ul>
                                 </div>
-                                <h3>
-                                    <center><a href="#">VISI</a></center>
-                                </h3>
-                            
-                                    <center><?php echo $dvisi['text_visi'];?></center>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                <h3>
-                                    <center><a href="#">MISI</a></center>
-                                </h3>
-                            
-                                    <center><?php echo $dmisi['text_misi'];?></center>
+                                                            
+                                    <?php echo $dkerjasama['text_kerjasama'];?>
+                              
                             </div>
                      
                          

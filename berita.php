@@ -349,9 +349,9 @@ $next = $eu + $limit;
                             <ul class="dropdown-menu">
                                 <li><a href="visi_misi">Visi Dan Misi</a></li>
                                 <li><a href="struktur_organisasi">Struktur Organisasi</a></li>
-                                <li><a href="#">Sejarah</a></li>
-                                <li><a href="#">Profil RS</a></li>
-                                <li><a href="#">Kerjasama</a></li>
+                                <li><a href="sejarah">Sejarah</a></li>
+                                <li><a href="profil_rs">Profil RS</a></li>
+                                <li><a href="kerjasama">Kerjasama</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -439,7 +439,7 @@ $next = $eu + $limit;
                         <!-- Single Item -->
                         <div class="single-item item">
                             <div class="thumb">
-                                <a href="blog-single-right-sidebar.html">
+                                <a href="#">
                                     <img src="admin/dist/img/berita/<?php echo $datab1['foto_berita_cover']; ?>" alt="Thumb">
                                     <div class="post-type">
                                         <i class="fas fa-images"></i>
@@ -574,7 +574,7 @@ $next = $eu + $limit;
 
                                         <!--LIMIT 6-->
                                         <?php 
-                                        $qgal = mysqli_query($koneksi,"SELECT * FROM tb_galeri ORDER BY id_galeri DESC");
+                                        $qgal = mysqli_query($koneksi,"SELECT * FROM tb_galeri ORDER BY id_galeri DESC LIMIT 6");
                                         while($dgal=mysqli_fetch_assoc($qgal)){
                                         ?>
                                         <li>
@@ -632,7 +632,7 @@ $next = $eu + $limit;
                         <div class="f-item">
                             <h4>Jam Besuk</h4>
                             <p>
-                                Excellence decisively nay man yet impression for contrasted remarkably. There spoke happy for you are out. Fertile how old address.
+                                Jam besuk pengunjung dapat berubah sewaktu-waktu sesuai dengan kebijakan RSIA Yasmin.
                             </p>
                             <div class="opening-info">
                                 <h5>Opening Hours</h5>

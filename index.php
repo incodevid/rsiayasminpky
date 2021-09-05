@@ -208,9 +208,9 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                             <ul class="dropdown-menu">
                                 <li><a href="visi_misi">Visi Dan Misi</a></li>
                                 <li><a href="struktur_organisasi">Struktur Organisasi</a></li>
-                                <li><a href="#">Sejarah</a></li>
-                                <li><a href="#">Profil RS</a></li>
-                                <li><a href="#">Kerjasama</a></li>
+                                <li><a href="sejarah">Sejarah</a></li>
+                                <li><a href="profil_rs">Profil RS</a></li>
+                                <li><a href="kerjasama">Kerjasama</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
