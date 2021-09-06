@@ -582,7 +582,7 @@ $dkerjasama=mysqli_fetch_assoc($qkerjasama);
                             <div class="twitter-item">
                                 <div class="twitter-content">
                                     <p>
-                                        <a href="#"><i class="fas fa-arrow-right"></i> <?php echo $dber1['judul_berita']; ?></a> 
+                                        <a href="detail_berita?det=<?php echo $dber1['judul_berita']; ?>"><i class="fas fa-arrow-right"></i> <?php echo $dber1['judul_berita']; ?></a> 
                                     </p>
                                 </div>
                                 <div class="twitter-context">

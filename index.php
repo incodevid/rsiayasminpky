@@ -304,7 +304,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                         <h4>RSIA YASMIN Dibangun Sejak 2007</h4>
                         <h2>Sejarah Rumah Sakit</h2>
                       
-                        <?php echo $kalimat; ?> <a style="color: #52b000;" href="">-->Selanjutnya</a>
+                        <?php echo $kalimat; ?> <a style="color: #52b000;" href="sejarah">-->Selanjutnya</a>
                      
                         <div class="bottom">
                             <div class="video">
@@ -641,7 +641,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                 <p>
                                     <?php echo $teks_ber; ?><a style="color: #52b000;">. . .</a>
                                 </p>
-                                <a class="btn btn-theme circle border btn-sm" href="#">Read More <i class="fas fa-angle-right"></i></a>
+                                <a class="btn btn-theme circle border btn-sm" href="detail_berita?det=<?php echo $dber['judul_berita']; ?>">Read More <i class="fas fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -733,7 +733,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                             <div class="twitter-item">
                                 <div class="twitter-content">
                                     <p>
-                                        <a href="#"><i class="fas fa-arrow-right"></i> <?php echo $dber1['judul_berita']; ?></a> 
+                                        <a href="detail_berita?det=<?php echo $dber1['judul_berita']; ?>"><i class="fas fa-arrow-right"></i> <?php echo $dber1['judul_berita']; ?></a> 
                                     </p>
                                 </div>
                                 <div class="twitter-context">

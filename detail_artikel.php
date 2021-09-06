@@ -27,7 +27,15 @@ $dprofilrs=mysqli_fetch_assoc($qprofilrs);
 $qkerjasama=mysqli_query($koneksi,"SELECT * FROM tb_kerjasama");
 $dkerjasama=mysqli_fetch_assoc($qkerjasama);
 
+$getdet=$_GET[det];
+$qdetber=mysqli_query($koneksi,"SELECT * FROM tb_berita WHERE judul_berita='$getdet' ");
+$ddetber=mysqli_fetch_assoc($qdetber);
+$tglber = strtotime($ddetber['tgl_upload']);
 
+$getdet1=$_GET[detail];
+$qdetar=mysqli_query($koneksi,"SELECT * FROM tb_artikel WHERE judul_artikel='$getdet1' ");
+$ddetar=mysqli_fetch_assoc($qdetar);
+$tglar = strtotime($ddetar['tgl_upload']);
 
 ?>
 
@@ -44,7 +52,7 @@ $dkerjasama=mysqli_fetch_assoc($qkerjasama);
     <meta name="description" content="MediHub - Medical & Health Template">
 
     <!-- ========== Page Title ========== -->
-    <title>RSIA Yasmin - Dokter Kami</title>
+    <title>RSIA Yasmin - Detail Berita</title>
 
     <!-- ========== Favicon Icon ========== -->
     <link rel="shortcut icon" href="assets/img/logo-yasmin.jpg" type="image/x-icon">
@@ -351,7 +359,7 @@ $dkerjasama=mysqli_fetch_assoc($qkerjasama);
                                 <li><a href="kerjasama">Kerjasama</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown ">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" >Layanan</a>
                             <ul class="dropdown-menu">
                                 <?php
@@ -362,7 +370,7 @@ $dkerjasama=mysqli_fetch_assoc($qkerjasama);
                                 <?php } ?>
                             </ul>
                         </li>
-                        <li class="dropdown active">
+                        <li class="dropdown">
                             <a href="dokter_kami"  >Dokter Kami</a>
                         </li>
                         <li class="dropdown">
@@ -391,12 +399,14 @@ $dkerjasama=mysqli_fetch_assoc($qkerjasama);
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>Dokter Kami</h1>
+                    <h1>Detail Artikel <br>
+                        "<?php echo $_GET[detail]; ?>"                        
+                    </h1>
                 </div>
                 <div class="col-md-6 text-right">
                     <ul class="breadcrumb">
                         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-                        <li class="active">Dokter Kami</li>
+                        <li class="active">Detail Artikel</li>
                     </ul>
                 </div>
             </div>
@@ -404,60 +414,289 @@ $dkerjasama=mysqli_fetch_assoc($qkerjasama);
     </div>
     <!-- End Breadcrumb -->
 
-    <!-- Start Gallery
+    <!-- Start Blog
     ============================================= -->
-    <div class="gallery-area default-padding">
+    <div class="blog-area single full-blog right-sidebar default-padding">
         <div class="container">
-            <div class="gallery-items-area text-center">
-                <div class="row">
-                    <div class="col-md-12 gallery-content">
-                        
-                        <div class="mix-item-menu text-center">
-                            <button class="active" data-filter="*">All</button>
-                            <?php 
-                            $qkdokter=mysqli_query($koneksi,"SELECT * FROM tb_kategori_dokter ORDER BY id_kategori_dokter DESC");
-                            while($dkdokter=mysqli_fetch_assoc($qkdokter)){
-                            ?>
-                            <button data-filter=".<?php echo $dkdokter['id_kategori_dokter']; ?>"><?php echo $dkdokter['nama_kategori']; ?></button>
-                        <?php } ?>
-                        </div>
-                         <!-- End Mixitup Nav-->
+            <div class="row">
+                <div class="blog-items">
+                    <div class="blog-content col-md-8">
+                        <div class="item">
 
-                        <div class="row magnific-mix-gallery text-center masonary">
-                            <div id="portfolio-grid" class="gallery-items col-3">
+                            <!-- Start Post Thumb -->
+                            <div class="thumb">
+                                <img src="admin/dist/img/artikel/<?php echo $ddetar['foto_artikel_cover']; ?>" alt="Thumb">
+                                <div class="post-type">
+                                    <i class="fas fa-images"></i>
+                                </div>
+                            </div>
+                            <!-- Start Post Thumb -->
 
+                            <div class="info">
+                                <div class="meta">
+                                    <ul>
+                                        <li><a href="#">Admin</a></li>
+                                        <li><?php echo date('d/m/Y | H:i:s',$tglar),' WIB'; ?></li>
+                                    </ul>
+                                </div>
+                                <h3><?php echo $ddetar['judul_artikel']; ?></h3>
+                                <!--DETAIL BERITA DISINI-->
+                                    <?php echo $ddetar['isi_artikel']; ?> 
 
-                                <?php 
-                                $qdokter = mysqli_query($koneksi,"SELECT *,COUNT(a.id_dokter_kami) AS jml_dok FROM tb_dokter_kami a INNER JOIN tb_kategori_dokter b ON a.id_kategori_dokter=b.id_kategori_dokter GROUP BY a.id_dokter_kami DESC");
-                                while($ddok=mysqli_fetch_assoc($qdokter)){
-                                if($ddok['jml_dok']=='0'){
-                                ?>
+                                <!-- Start Post Pagination 
+                                <div class="post-pagi-area">
+                                    <a href="#"><i class="fas fa-angle-double-left"></i> Previus Post</a>
+                                    <a href="#">Next Post <i class="fas fa-angle-double-right"></i></a>
+                                </div>-->
+                                <!-- End Post Pagination -->
 
-                                <center><h3><a href="#">Data Belum Ada</a></h3></center>
+                                <!-- Start Post Tag s
+                                <div class="post-tags share">
+                                    <div class="tags">
+                                        <span>Tags: </span>
+                                        <a href="#">Consulting</a>
+                                        <a href="#">Planing</a>
+                                        <a href="#">Business</a>
+                                        <a href="#">Fashion</a>
+                                    </div>
+                                </div>-->
+                                <!-- End Post Tags -->
 
-                                <?php }else{ ?>
-                                <!-- Single Item -->
-                                <div class="pf-item <?php echo $ddok['id_kategori_dokter']; ?> capital">
-                                    <div class="effect-box">
-                                        <img src="admin/dist/img/foto_dokter/<?php echo $ddok['foto_dokter']; ?>" alt="thumb">
-                                        <div class="info">
-                                          <h4><a href="#"><?php echo $ddok['nama_dokter']; ?></a></h4>
-                                          <a href="admin/dist/img/foto_dokter/<?php echo $ddok['foto_dokter']; ?>" class="item popup-link"><i class="fa fa-eye"></i></a>
+                                <!-- Start Author Post 
+                                <div class="author-bio">
+                                    <div class="avatar">
+                                        <img src="assets/img/team/6.jpg" alt="Author">
+                                    </div>
+                                    <div class="content">
+                                        <p>
+                                            Supply as so period it enough income he genius. Themselves acceptance bed sympathize get dissimilar way admiration son. Design for are edward regret met lovers. This are calm case roof and. 
+
+                                        </p>
+                                        <h4> - Jonkey Rotham</h4>
+                                    </div>
+                                </div>-->
+                                <!-- End Author Post -->
+
+                                <!-- Start Comments Form 
+                                <div class="comments-area">
+                                    <div class="comments-title">
+                                        <h4>
+                                            5 comments
+                                        </h4>
+                                        <div class="comments-list">
+                                            <div class="commen-item">
+                                                <div class="avatar">
+                                                    <img src="assets/img/team/1.jpg" alt="Author">
+                                                </div>
+                                                <div class="content">
+                                                    <h5>Jonathom Doe</h5>
+                                                    <div class="comments-info">
+                                                        <p>July 15, 2018</p> <a href="#"><i class="fa fa-reply"></i>Reply</a>
+                                                    </div>
+                                                    <p>
+                                                        Delivered ye sportsmen zealously arranging frankness estimable as. Nay any article enabled musical shyness yet sixteen yet blushes. Entire its the did figure wonder off. 
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="commen-item reply">
+                                                <div class="avatar">
+                                                    <img src="assets/img/team/2.jpg" alt="Author">
+                                                </div>
+                                                <div class="content">
+                                                    <h5>Spark Lee</h5>
+                                                    <div class="comments-info">
+                                                        <p>July 15, 2018</p> <a href="#"><i class="fa fa-reply"></i>Reply</a>
+                                                    </div>
+                                                    <p>
+                                                        Delivered ye sportsmen zealously arranging frankness estimable as. Nay any article enabled musical shyness yet sixteen yet blushes. Entire its the did figure wonder off. 
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- End Single Item -->
-                                <?php }} ?>
-
-
+                                    <div class="comments-form">
+                                        <div class="title">
+                                            <h4>Leave a comments</h4>
+                                        </div>
+                                        <form action="#" class="contact-comments">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    
+                                                        <input name="name" class="form-control" placeholder="Name *" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                       
+                                                        <input name="email" class="form-control" placeholder="Email *" type="email">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group comments">
+                                                 
+                                                        <textarea class="form-control" placeholder="Comment"></textarea>
+                                                    </div>
+                                                    <div class="form-group full-width submit">
+                                                        <button type="submit">
+                                                            Post Comments
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>-->
+                                <!-- End Comments Form -->
                             </div>
                         </div>
                     </div>
+
+
+
+                    <!-- Start Sidebar -->
+                    <div class="sidebar col-md-4">
+                        <aside>
+                            <div class="sidebar-item search">
+                                <div class="title">
+                                    <h4>Pencarian</h4>
+                                </div>
+                                <div class="sidebar-info">
+                                    <form>
+                                        <input type="text" class="form-control">
+                                        <input type="submit" value="search">
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="sidebar-item category">
+                                <div class="title">
+                                    <h4>Album Galeri</h4>
+                                </div>
+                                <div class="sidebar-info">
+                                    <ul>
+                                        <?php 
+                                        $qalbum = mysqli_query($koneksi,"SELECT *,COUNT(a.id_galeri) AS jml_galeri FROM tb_galeri a RIGHT JOIN tb_album b ON a.id_album=b.id_album GROUP BY b.`id_album` ORDER BY b.id_album  DESC;");
+                                        while($dalbum=mysqli_fetch_assoc($qalbum)){
+                                        ?>
+                                        <li>
+                                            <a href="#"><?php echo $dalbum['nama_album']; ?> <span><?php echo $dalbum['jml_galeri']; ?></span></a>
+                                        </li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sidebar-item recent-post">
+                                <div class="title">
+                                    <h4>Berita Terbaru</h4>
+                                </div>
+                                <ul>
+
+                                    <?php
+                                    $qberita=mysqli_query($koneksi,"SELECT * FROM tb_berita ORDER BY id_berita DESC");
+                                    while($dberita=mysqli_fetch_assoc($qberita)){
+                                    $tglar = strtotime($dberita['tgl_upload']);
+                                    ?>
+                                    <li>
+                                        <div class="thumb">
+                                            <a href="#">
+                                                <img src="admin/dist/img/berita/<?php echo $dberita['foto_berita_cover']; ?>" alt="Thumb">
+                                            </a>
+                                        </div>
+                                        <div class="info">
+                                            <a href="detail_berita?det=<?php echo $dberita['judul_berita']; ?>"><?php echo $dberita['judul_berita']; ?></a>
+                                            <div class="meta-title">
+                                                <span class="post-date"><?php echo date('d/m/Y | H:i:s',$tglar),' WIB'; ?></span> - By <a href="#">Admin</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <?php } ?>
+
+
+                                </ul>
+                            </div>
+                            <div class="sidebar-item recent-post">
+                                <div class="title">
+                                    <h4>Artikel</h4>
+                                </div>
+                                <ul>
+
+                                    <?php
+                                    $qartikel=mysqli_query($koneksi,"SELECT * FROM tb_artikel ORDER BY id_artikel DESC");
+                                    while($dartikel=mysqli_fetch_assoc($qartikel)){
+                                    $tglar = strtotime($dartikel['tgl_upload']);
+                                    ?>
+                                    <li>
+                                        <div class="thumb">
+                                            <a href="#">
+                                                <img src="admin/dist/img/artikel/<?php echo $dartikel['foto_artikel_cover']; ?>" alt="Thumb">
+                                            </a>
+                                        </div>
+                                        <div class="info">
+                                            <a href="detail_artikel?detail=<?php echo $dartikel['judul_artikel']; ?>"><?php echo $dartikel['judul_artikel']; ?></a>
+                                            <div class="meta-title">
+                                                <span class="post-date"><?php echo date('d/m/Y | H:i:s',$tglar),' WIB'; ?></span> - By <a href="#">Admin</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <?php } ?>
+
+
+                                </ul>
+                            </div>
+                            <div class="sidebar-item gallery">
+                                <div class="title">
+                                    <h4>Galleri</h4>
+                                </div>
+                                <div class="sidebar-info">
+                                    <ul>
+
+                                        <!--LIMIT 6-->
+                                        <?php 
+                                        $qgal = mysqli_query($koneksi,"SELECT * FROM tb_galeri ORDER BY id_galeri DESC LIMIT 6");
+                                        while($dgal=mysqli_fetch_assoc($qgal)){
+                                        ?>
+                                        <li>
+                                            <a href="#">
+                                                <img src="admin/dist/img/galeri/<?php echo $dgal['file_foto']; ?>" alt="thumb">
+                                            </a>
+                                        </li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="sidebar-item social-sidebar">
+                                <div class="title">
+                                    <h4>Ikuti Media Sosial Kami</h4>
+                                </div>
+                                <div class="sidebar-info">
+                                    <ul>
+
+                                        <?php 
+                                        $qmedsos=mysqli_query($koneksi,"SELECT * FROM tb_medsos");
+                                        while($dmedsos=mysqli_fetch_assoc($qmedsos)){
+                                        ?>
+                                        <center>
+                                        <li class="pinterest" >
+                                            <a href="<?php echo $dmedsos['link_medsos']; ?>" target="_blank">
+                                            <img src="admin/dist/img/medsos/<?php echo $dmedsos['icon_medsos'];?>" style="width: 90px;" >
+                                            </a>
+                                        </li>
+                                        </center>
+                                        <?php } ?>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            
+
+                        </aside>
+                    </div>
+                    <!-- End Start Sidebar -->
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Gallery -->
+    <!-- End Blog -->
 
     <!-- Start Footer 
     ============================================= -->

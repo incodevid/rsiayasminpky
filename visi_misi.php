@@ -488,7 +488,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                             </a>
                                         </div>
                                         <div class="info">
-                                            <a href="#"><?php echo $dberita['judul_berita']; ?></a>
+                                            <a href="detail_berita?det=<?php echo $dberita['judul_berita']; ?>"><?php echo $dberita['judul_berita']; ?></a>
                                             <div class="meta-title">
                                                 <span class="post-date"><?php echo date('d/m/Y | H:i:s',$tglar),' WIB'; ?></span> - By <a href="#">Admin</a>
                                             </div>
@@ -517,7 +517,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                             </a>
                                         </div>
                                         <div class="info">
-                                            <a href="#"><?php echo $dartikel['judul_artikel']; ?></a>
+                                            <a href="detail_artikel?detail=<?php echo $dartikel['judul_artikel']; ?>"><?php echo $dartikel['judul_artikel']; ?></a>
                                             <div class="meta-title">
                                                 <span class="post-date"><?php echo date('d/m/Y | H:i:s',$tglar),' WIB'; ?></span> - By <a href="#">Admin</a>
                                             </div>
@@ -645,7 +645,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                             <div class="twitter-item">
                                 <div class="twitter-content">
                                     <p>
-                                        <a href="#"><i class="fas fa-arrow-right"></i> <?php echo $dber1['judul_berita']; ?></a> 
+                                        <a href="detail_berita?det=<?php echo $dber1['judul_berita']; ?>"><i class="fas fa-arrow-right"></i> <?php echo $dber1['judul_berita']; ?></a> 
                                     </p>
                                 </div>
                                 <div class="twitter-context">

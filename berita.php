@@ -453,7 +453,7 @@ $next = $eu + $limit;
                                 <br>
                                 <br>
                                 <br>
-                                <a class="btn btn-theme circle border btn-sm" href="#">Read More <i class="fas fa-angle-right"></i></a>
+                                <a class="btn btn-theme circle border btn-sm" href="detail_berita?det=<?php echo $datab1['judul_berita']; ?>">Read More <i class="fas fa-angle-right"></i></a>
                             </div>
                      
                          
@@ -546,7 +546,7 @@ $next = $eu + $limit;
                                             </a>
                                         </div>
                                         <div class="info">
-                                            <a href="#"><?php echo $dartikel['judul_artikel']; ?></a>
+                                            <a href="detail_artikel?detail=<?php echo $dartikel['judul_artikel']; ?>"><?php echo $dartikel['judul_artikel']; ?></a>
                                             <div class="meta-title">
                                                 <span class="post-date"><?php echo date('d/m/Y | H:i:s',$tglar),' WIB'; ?></span> - By <a href="#">Admin</a>
                                             </div>
@@ -674,7 +674,7 @@ $next = $eu + $limit;
                             <div class="twitter-item">
                                 <div class="twitter-content">
                                     <p>
-                                        <a href="#"><i class="fas fa-arrow-right"></i> <?php echo $dber1['judul_berita']; ?></a> 
+                                        <a href="detail_berita?det=<?php echo $dber1['judul_berita']; ?>"><i class="fas fa-arrow-right"></i> <?php echo $dber1['judul_berita']; ?></a> 
                                     </p>
                                 </div>
                                 <div class="twitter-context">
