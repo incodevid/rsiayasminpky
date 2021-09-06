@@ -258,7 +258,7 @@ while($data  = mysqli_fetch_assoc($query)){
                 <div class="card-body">
                   <div class="form-group">
                     <label for="">Teks Visi</label>
-                    <textarea id="summernotevisi" name="text_visi" >
+                    <textarea class="ckeditor" id="editor1" name="text_visi" >
                         Tulis <u>visi</u> <strong>disini</strong>
                     </textarea>
                   </div>
@@ -297,7 +297,7 @@ while($data  = mysqli_fetch_assoc($query)){
                 <div class="card-body">
                   <div class="form-group">
                     <label for="">Teks Misi</label>
-                    <textarea id="summernotemisi" name="text_misi" >
+                    <textarea class="ckeditor" id="editor1" name="text_misi" >
                         Tulis <u>misi</u> <strong>disini</strong>
                     </textarea>
                   </div>
@@ -370,7 +370,7 @@ while($datvis=mysqli_fetch_assoc($quakun)){
                 <div class="card-body">
                   <div class="form-group">
                     <label for="">Teks Visi</label>
-                    <textarea id="summernote" name="text_visi" >
+                    <textarea class="ckeditor" id="editor1" name="text_visi" >
                         <?php echo $datvis['text_visi']; ?>
                     </textarea>
                     <input type="hidden" name="id_visi" class="form-control"  value="<?php echo $datvis['id_visi']; ?>" required>
@@ -446,7 +446,7 @@ while($datmis=mysqli_fetch_assoc($quakun)){
                 <div class="card-body">
                   <div class="form-group">
                     <label for="">Teks Misi</label>
-                    <textarea id="summernotemisi2" name="text_misi" >
+                    <textarea class="ckeditor" id="editor1" name="text_misi" >
                         <?php echo $datmis['text_misi']; ?>
                     </textarea>
                     <input type="hidden" name="id_misi" class="form-control"  value="<?php echo $datmis['id_misi']; ?>" required>

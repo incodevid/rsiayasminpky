@@ -186,7 +186,7 @@ while($data  = mysqli_fetch_assoc($query)){
                   </div>
                   <div class="form-group">
                     <label for="">Isi Artikel</label>
-                      <textarea id="summernote" name="isi_artikel" >
+                      <textarea class="ckeditor" id="editor1" name="isi_artikel" >
                         Tulis <em>suatu</em> <u>artikel</u> <strong>disini</strong>
                       </textarea>
                   </div>
@@ -284,7 +284,7 @@ while($datar=mysqli_fetch_assoc($qudat)){
                   </div>
                   <div class="form-group">
                     <label for="">Isi Berita</label>
-                      <textarea id="summernoteubah" name="isi_artikel" >
+                      <textarea class="ckeditor" id="editor1" name="isi_artikel" >
                         <?php echo $datar['isi_artikel']; ?>
                       </textarea>
                   </div>

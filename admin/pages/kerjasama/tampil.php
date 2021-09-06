@@ -182,7 +182,7 @@ while($data  = mysqli_fetch_assoc($query)){
                 <div class="card-body">
                   <div class="form-group">
                     <label for="">Teks Kerjasama</label>
-                      <textarea id="summernote" name="text_kerjasama" >
+                      <textarea class="ckeditor" id="editor1" name="text_kerjasama" >
                         Tulis <u>kerjasama</u> <strong>disini</strong>
                       </textarea>
                   </div>
@@ -263,7 +263,7 @@ while($datker=mysqli_fetch_assoc($quker)){
                   <input type="hidden" name="id_kerjasama" value="<?php echo $datker['id_kerjasama']; ?>">
                   <div class="form-group">
                     <label for="">Teks Kerjasama</label>
-                      <textarea id="summernoteubah" name="text_kerjasama" >
+                      <textarea class="ckeditor" id="editor1" name="text_kerjasama" >
                         <?php echo $datker['text_kerjasama']; ?>
                       </textarea>
                   </div>
