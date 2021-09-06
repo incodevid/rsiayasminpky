@@ -437,7 +437,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                 <p>
                                     <?php echo $teks_layan; ?><a style="color: #52b000;">. . .</a>
                                 </p>
-                                <a class="btn btn-theme border circle btn-md" href="#">Read More</a>
+                                <a class="btn btn-theme border circle btn-md" href="detail_layanan?det=<?php echo $dlayan['nama_layanan']; ?>">Read More</a>
                             </div>
                         </div>
                         <?php } ?>
