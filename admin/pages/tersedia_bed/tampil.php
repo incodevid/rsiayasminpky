@@ -43,31 +43,31 @@
     if (isset($_POST['BtnSmpanKamar'])) {
     
   
-    $id_poli            = $_POST['id_poli'];
-    $id_dokter_kami     = $_POST['id_dokter_kami'];
-    $pelayanan          = $_POST['pelayanan'];
-    $tanggal            = $_POST['tanggal'];
-    $jam_kerja          = $_POST['jam_kerja'];
+    $id_kelas_bed        = $_POST['id_kelas_bed'];
+    $id_usia_bed         = $_POST['id_usia_bed'];
+    $nama_kamar          = $_POST['nama_kamar'];
+    $jenis_kelamin_bed   = $_POST['jenis_kelamin_bed'];
+    $status_tersedia     = $_POST['status_tersedia'];
 
 
 
 
-$sql = mysqli_query($koneksi,"SELECT * FROM tb_jadwal_dokter WHERE  id_poli='$id_poli' AND id_dokter_kami='$id_dokter_kami' AND pelayanan='$pelayanan' AND tanggal='$tanggal' AND jam_kerja='$jam_kerja'  ") or die(mysql_error());
+$sql = mysqli_query($koneksi,"SELECT * FROM tb_tersedia_bed WHERE  nama_kamar='$nama_kamar'   ") or die(mysql_error());
 $cek=mysqli_num_rows($sql);
 
 if ($cek > 0){
-   echo "<script> alert ('Tambah jadwal gagal, data sudah ada!');window.location.href='?p=jadwal_dokter' </script>" ;
+   echo "<script> alert ('Tambah kamar gagal, data sudah ada!');window.location.href='?p=tersedia_bed' </script>" ;
 } else {
 
     
-            $sql = mysqli_query($koneksi," INSERT INTO tb_jadwal_dokter (id_poli,id_dokter_kami,pelayanan,tanggal,jam_kerja) 
-            VALUES ('$id_poli','$id_dokter_kami','$pelayanan','$tanggal','$jam_kerja')  ");
+            $sql = mysqli_query($koneksi," INSERT INTO tb_tersedia_bed (id_kelas_bed,id_usia_bed,nama_kamar,jenis_kelamin_bed,status_tersedia) 
+            VALUES ('$id_kelas_bed','$id_usia_bed','$nama_kamar','$jenis_kelamin_bed','$status_tersedia')  ");
 
 
             if ($sql) {
-               echo "<script> alert ('Tambah Data Jadwal Berhasil!');window.location.href='?p=jadwal_dokter' </script>" ;
+               echo "<script> alert ('Tambah Data Kamar Berhasil!');window.location.href='?p=tersedia_bed' </script>" ;
              } else {
-              echo "<script> alert ('Tambah Data Jadwal Gagal!');window.location.href='?p=jadwal_dokter' </script>" ;
+              echo "<script> alert ('Tambah Data Kamar Gagal!');window.location.href='?p=tersedia_bed' </script>" ;
              }
 
            }
@@ -105,7 +105,7 @@ if ($cek > 0){
                   <tbody>
                     <?php 
                   $no = 1;
-$query = mysqli_query($koneksi,"SELECT * FROM tb_tersedia_bed a INNER JOIN tb_kelas_bed b ON a.id_kelas_bed=b.id_kelas_bed INNER JOIN tb_usia_bed c ON a.id_usia_bed=c.id_usia_bed ORDER BY a.id_tersedia_bed DESC");
+$query = mysqli_query($koneksi,"SELECT * FROM tb_tersedia_bed a INNER JOIN tb_kelas_bed b ON a.id_kelas_bed=b.id_kelas_bed INNER JOIN tb_usia_bed c ON a.id_usia_bed=c.id_usia_bed  ORDER BY a.id_tersedia_bed DESC");
 while($data  = mysqli_fetch_assoc($query)){
 ?>
                   <tr>
@@ -113,9 +113,15 @@ while($data  = mysqli_fetch_assoc($query)){
                     <td><?php echo $data['nama_kelas_bed']; ?></td>
                     <td><?php echo $data['nama_usia_bed']; ?></td>
                     <td><?php echo $data['nama_kamar']; ?></td>
-                    <td><?php echo $data['jeni_kelamin_bed']; ?></td>
+                    <td><?php echo $data['jenis_kelamin_bed']; ?></td>
                     <td>
-                      <a data-toggle="modal" data-target="#modalUbahStatus<?php echo $data['id_tersedia_bed']; ?>" class="btn btn-block btn-info" ><i class="fas fa-pen" style="color:white;"></i> <?php echo $data['status_tersedia']; ?></a>                      
+                      <?php
+                      if($data['status_tersedia']=='Kosong'){
+                      ?>
+                      <a data-toggle="modal" data-target="#modalUbahStatus<?php echo $data['id_tersedia_bed']; ?>" class="btn btn-block btn-info" ><i class="fas fa-bed" style="color:white;"></i> <?php echo $data['status_tersedia']; ?></a> 
+                      <?php }else{ ?>
+                      <a data-toggle="modal" data-target="#modalUbahStatus<?php echo $data['id_tersedia_bed']; ?>" class="btn btn-block btn-success" ><i class="fas fa-bed" style="color:white;"></i> <?php echo $data['status_tersedia']; ?></a>  
+                      <?php } ?>
                     </td>
                     <td>
                   
@@ -203,10 +209,11 @@ while($data  = mysqli_fetch_assoc($query)){
                     <label for="">Jenis Kelamin Bed</label>
                     <!-- select -->
                       <div class="form-group">
-                        <select class="custom-select" name="jeni_kelamin_bed" required>
+                        <select class="custom-select" name="jenis_kelamin_bed" required>
                           <option value="">-- PILIH JENIS --</option>
                           <option value="Laki-Laki">Laki - Laki</option>
                           <option value="Perempuan">Perempuan</option>
+                          <option value="Semua">Semua</option>
                         </select>
                       </div>
                   </div>
@@ -248,15 +255,15 @@ while($data  = mysqli_fetch_assoc($query)){
 
 <?php
 
-$quakun = mysqli_query($koneksi,"SELECT * FROM tb_jadwal_dokter a INNER JOIN tb_poli b ON a.id_poli=b.id_poli INNER JOIN tb_dokter_kami c ON a.id_dokter_kami=c.id_dokter_kami ORDER BY a.id_jadwal_dokter DESC");
+$quakun = mysqli_query($koneksi,"SELECT * FROM tb_tersedia_bed a INNER JOIN tb_kelas_bed b ON a.id_kelas_bed=b.id_kelas_bed INNER JOIN tb_usia_bed c ON a.id_usia_bed=c.id_usia_bed ORDER BY a.id_tersedia_bed DESC");
 while($datkun=mysqli_fetch_assoc($quakun)){
 
 ?>
-<div class="modal fade" id="modalUbah<?php echo $datkun['id_jadwal_dokter']; ?>">
+<div class="modal fade" id="modalUbah<?php echo $datkun['id_tersedia_bed']; ?>">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Ubah Akun Pengguna</h4>
+              <h4 class="modal-title">Ubah Data Kamar</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -266,22 +273,21 @@ while($datkun=mysqli_fetch_assoc($quakun)){
             <?php
       
        
-    if (isset($_POST['BtnUbahJadwal'])) {
+    if (isset($_POST['BtnUbahKamar'])) {
     
-    $id_jadwal_dokter   = $_POST['id_jadwal_dokter'];
-    $id_poli            = $_POST['id_poli'];
-    $id_dokter_kami     = $_POST['id_dokter_kami'];
-    $pelayanan          = $_POST['pelayanan'];
-    $tanggal            = $_POST['tanggal'];
-    $jam_kerja          = $_POST['jam_kerja'];
+    $id_tersedia_bed     = $_POST['id_tersedia_bed'];
+    $id_kelas_bed        = $_POST['id_kelas_bed'];
+    $id_usia_bed         = $_POST['id_usia_bed'];
+    $nama_kamar          = $_POST['nama_kamar'];
+    $jenis_kelamin_bed   = $_POST['jenis_kelamin_bed'];
     
-            $sql = mysqli_query($koneksi," UPDATE tb_jadwal_dokter SET id_poli='$id_poli',id_dokter_kami='$id_dokter_kami',pelayanan='$pelayanan',tanggal='$tanggal',jam_kerja='$jam_kerja' WHERE id_jadwal_dokter='$id_jadwal_dokter'  ");
+            $sql = mysqli_query($koneksi," UPDATE tb_tersedia_bed SET id_kelas_bed='$id_kelas_bed',id_usia_bed='$id_usia_bed',nama_kamar='$nama_kamar',jenis_kelamin_bed='$jenis_kelamin_bed' WHERE id_tersedia_bed='$id_tersedia_bed'  ");
 
 
             if ($sql) {
-               echo '<script> alert ("Ubah Data Jadwal Berhasil!");window.location.href="?p=jadwal_dokter" </script>' ;
+               echo '<script> alert ("Ubah Data Kamar Berhasil!");window.location.href="?p=tersedia_bed" </script>' ;
              } else {
-              echo '<script> alert ("Ubah Data Jadwal Gagal!");window.location.href="?p=jadwal_dokter" </script>' ;
+              echo '<script> alert ("Ubah Data Kamar Gagal!");window.location.href="?p=tersedia_bed" </script>' ;
              }
       
 
@@ -296,65 +302,142 @@ while($datkun=mysqli_fetch_assoc($quakun)){
               <form role="form" method="POST" enctype="multipart/form-data" >
                 <div class="card-body">
                   
-                  <input type="hidden" name="id_jadwal_dokter" value="<?php echo $datkun['id_jadwal_dokter']; ?>">
+                  <input type="hidden" name="id_tersedia_bed" value="<?php echo $datkun['id_tersedia_bed']; ?>">
                   <div class="form-group">
-                    <label for="">Poliklinik</label>
+                    <label for="">Kelas Bed</label>
                     <!-- select -->
                       <div class="form-group">
-                        <select class="custom-select select2" name="id_poli" required>
-                          <option value="<?php echo $datkun['id_poli']; ?>"><?php echo $datkun['nama_poli']; ?></option>
+                        <select class="custom-select select2" name="id_kelas_bed" required>
+                          <option value="<?php echo $datkun['id_kelas_bed']; ?>"><?php echo $datkun['nama_kelas_bed']; ?></option>
                           <?php
-                            $qpol=mysqli_query($koneksi,"SELECT * FROM tb_poli ");
+                            $qpol=mysqli_query($koneksi,"SELECT * FROM tb_kelas_bed ");
                             while($dpol=mysqli_fetch_assoc($qpol)){
                             ?>
-                          <option value="<?php echo $dpol['id_poli']; ?>"><?php echo $dpol['nama_poli']; ?></option>
+                          <option value="<?php echo $dpol['id_kelas_bed']; ?>"><?php echo $dpol['nama_kelas_bed']; ?></option>
                             <?php } ?>
                         </select>
                       </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="">Dokter</label>
+                    <label for="">Usia Bed</label>
                     <!-- select -->
                       <div class="form-group">
-                        <select class="custom-select select2" name="id_dokter_kami" required>
-                          <option value="<?php echo $datkun['id_dokter_kami']; ?>"><?php echo $datkun['nama_dokter']; ?></option>
+                        <select class="custom-select select2" name="id_usia_bed" required>
+                          <option value="<?php echo $datkun['id_usia_bed']; ?>"><?php echo $datkun['nama_usia_bed']; ?></option>
                           <?php
-                            $qdok=mysqli_query($koneksi,"SELECT * FROM tb_dokter_kami ");
+                            $qdok=mysqli_query($koneksi,"SELECT * FROM tb_usia_bed ");
                             while($ddok=mysqli_fetch_assoc($qdok)){
                             ?>
-                          <option value="<?php echo $ddok['id_dokter_kami']; ?>"><?php echo $ddok['nama_dokter']; ?></option>
+                          <option value="<?php echo $ddok['id_usia_bed']; ?>"><?php echo $ddok['nama_usia_bed']; ?></option>
                             <?php } ?>
                         </select>
                       </div>
                   </div>
                 
+                  <div class="form-group">
+                    <label for="">Nama Kamar</label>
+                    <input type="text" name="nama_kamar" class="form-control"  placeholder="Masukkan Nama Kamar" value="<?php echo $datkun['nama_kamar']; ?>" required>
+                  </div>
 
                   <div class="form-group">
-                    <label for="">Jenis Pelayanan</label>
+                    <label for="">Jenis Kelamin Bed</label>
                     <!-- select -->
                       <div class="form-group">
-                        <select class="custom-select" name="pelayanan" required>
-                          <option value="<?php echo $datkun['pelayanan']; ?>"><?php echo $datkun['pelayanan']; ?></option>
-                          <option value="Reguler">Reguler</option>
-                          <option value="Tekon">TEKON / Telemedicine</option>
+                        <select class="custom-select" name="jenis_kelamin_bed" required>
+                          <option value="<?php echo $datkun['jenis_kelamin_bed']; ?>"><?php echo $datkun['jenis_kelamin_bed']; ?></option>
+                          <option value="Laki-Laki">Laki - Laki</option>
+                          <option value="Perempuan">Perempuan</option>
+                          <option value="Semua">Semua</option>
                         </select>
                       </div>
                   </div>
-                  <!-- Date -->
+
+                 
+
+                  
+                 
+                </div>
+                <!-- /.card-body -->
+
+                
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                  <button type="submit" name="BtnUbahKamar" class="btn btn-primary">Simpan</button>
+                </div>
+              </form>
+            </div>
+            
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+      <?php } ?>
+
+
+
+      <?php
+
+$quakun = mysqli_query($koneksi,"SELECT * FROM tb_tersedia_bed a INNER JOIN tb_kelas_bed b ON a.id_kelas_bed=b.id_kelas_bed INNER JOIN tb_usia_bed c ON a.id_usia_bed=c.id_usia_bed ORDER BY a.id_tersedia_bed DESC");
+while($datkun=mysqli_fetch_assoc($quakun)){
+
+?>
+<div class="modal fade" id="modalUbahStatus<?php echo $datkun['id_tersedia_bed']; ?>">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Ubah Status Ketersediaan Kamar <br>"Kamar <?php echo $datkun['nama_kamar']; ?>"</h4>
+              <h4 class="modal-title"></h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+            <?php
+      
+       
+    if (isset($_POST['BtnUbahStatus'])) {
+    
+    $id_tersedia_bed     = $_POST['id_tersedia_bed'];
+    $status_tersedia     = $_POST['status_tersedia'];
+    
+            $sql = mysqli_query($koneksi," UPDATE tb_tersedia_bed SET status_tersedia='$status_tersedia' WHERE id_tersedia_bed='$id_tersedia_bed'  ");
+
+
+            if ($sql) {
+               echo '<script> alert ("Ubah Status Kamar Berhasil!");window.location.href="?p=tersedia_bed" </script>' ;
+             } else {
+              echo '<script> alert ("Ubah Status Kamar Gagal!");window.location.href="?p=tersedia_bed" </script>' ;
+             }
+      
+
+  
+
+  }
+  
+       
+  ?>
+
+              <!-- form start -->
+              <form role="form" method="POST" enctype="multipart/form-data" >
+                <div class="card-body">
+                  
+                  <input type="hidden" name="id_tersedia_bed" value="<?php echo $datkun['id_tersedia_bed']; ?>">
+                  
+
                   <div class="form-group">
-                    <label for="">Tanggal</label>
-                      <div class="input-group date " id="reservationdate1" data-target-input="nearest">
-                          <input type="text" name="tanggal" class="form-control datetimepicker-input" data-target="#reservationdate1" placeholder="Tanggal Jadwal Dokter" value="<?php echo $datkun['tanggal']; ?>" required/>
-                          <div class="input-group-append" data-target="#reservationdate1" data-toggle="datetimepicker">
-                              <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                          </div>
+                    <label for="">Pilih Status Kamar</label>
+                    <!-- select -->
+                      <div class="form-group">
+                        <select class="custom-select" name="status_tersedia" required>
+                          <option value="">--PILIH STATUS--</option>
+                          <option value="Kosong">Kosong</option>
+                          <option value="Terpakai">Terpakai</option>
+                        </select>
                       </div>
-                  </div>
-                  <!-- Date -->
-                  <div class="form-group">
-                    <label for="">Jam Kerja</label>
-                    <input type="text" name="jam_kerja" class="form-control"  placeholder="Masukkan Jam Kerja, contoh: 12.00 - 13.00 WIB" maxlength="11" value="<?php echo $datkun['jam_kerja']; ?>" required>
                   </div>
 
                   
@@ -365,7 +448,7 @@ while($datkun=mysqli_fetch_assoc($quakun)){
                 
                 <div class="modal-footer justify-content-between">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                  <button type="submit" name="BtnUbahJadwal" class="btn btn-primary">Simpan</button>
+                  <button type="submit" name="BtnUbahStatus" class="btn btn-primary">Simpan</button>
                 </div>
               </form>
             </div>
