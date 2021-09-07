@@ -198,6 +198,18 @@ overflow-x:scroll;
                   <p>Data Dokter</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="?p=poli" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kelola Poliklinik</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?p=jadwal_dokter" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Jadwal Dokter</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
@@ -219,6 +231,35 @@ overflow-x:scroll;
                 <a href="?p=layanan" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Layanan</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-bed"></i>
+              <p>
+                Ketersediaan Bed
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="?p=kelas_bed" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kelas bed</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?p=usia_bed" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Usia Bed</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="?p=tersedia_bed" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ketersediaan Bed</p>
                 </a>
               </li>
             </ul>
@@ -573,7 +614,43 @@ overflow-x:scroll;
         break;
 
 
+        case "poli";
+        include "pages/poli/tampil.php";
+        break;
+        case "hpoli";
+        include "pages/poli/hapus.php";
+        break;
+
+        case "jadwal_dokter";
+        include "pages/jadwal_dokter/tampil.php";
+        break;
+        case "hjadwal_dokter";
+        include "pages/jadwal_dokter/hapus.php";
+        break;
+
+
+        case "kelas_bed";
+        include "pages/kelas_bed/tampil.php";
+        break;
+        case "hkelas_bed";
+        include "pages/kelas_bed/hapus.php";
+        break;
+
         
+        case "usia_bed";
+        include "pages/usia_bed/tampil.php";
+        break;
+        case "husia_bed";
+        include "pages/usia_bed/hapus.php";
+        break;
+
+
+        case "tersedia_bed";
+        include "pages/tersedia_bed/tampil.php";
+        break;
+        case "htersedia_bed";
+        include "pages/tersedia_bed/hapus.php";
+        break;
 
 
        
@@ -763,6 +840,9 @@ overflow-x:scroll;
 
     //Date range picker
     $('#reservationdate').datetimepicker({
+        format: 'YYYY-MM-DD'
+    });
+    $('#reservationdate1').datetimepicker({
         format: 'YYYY-MM-DD'
     });
     //Date and time picker

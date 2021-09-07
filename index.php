@@ -201,6 +201,8 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                             <ul class="dropdown-menu">
                                 <li><a href="berita">Berita</a></li>
                                 <li><a href="artikel">Artikel</a></li>
+                                <li><a href="jadwal_dokter">Jadwal Dokter</a></li>
+                                <li><a href="ketersediaan_bed">Ketersediaan Bed</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -383,8 +385,9 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                         $qbesuk = mysqli_query($koneksi,"SELECT * FROM tb_besuk");
                                         while($dbesuk=mysqli_fetch_assoc($qbesuk)){
                                         ?>
-                                        <li> <span><?php echo $dbesuk['hari_besuk']; ?></span>
-                                          <div class="pull-right"><?php echo $dbesuk['jam_besuk']; ?></div>
+                                        <li> <span><?php echo $dbesuk['hari_besuk']; ?>
+                                        <div class="pull-right"><a style="font-size: 12px;"><?php echo $dbesuk['jam_besuk']; ?></a></span>
+                                        </div>
                                         </li>
                                         <?php } ?>
                                     </ul>
