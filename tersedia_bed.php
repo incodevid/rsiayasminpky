@@ -588,8 +588,19 @@ table {
 
     
     <?php
-    $query1=mysqli_query($koneksi,"SELECT *,COUNT(a.id_tersedia_bed) AS jml_data FROM tb_tersedia_bed a INNER JOIN tb_kelas_bed b ON a.id_kelas_bed=b.id_kelas_bed INNER JOIN tb_usia_bed c ON a.id_usia_bed=c.id_usia_bed GROUP BY a.id_kelas_bed");
+    if (isset($_POST['tampil_bed'])) {
 
+$kelas        =$_POST['kelas']; 
+$usia         =$_POST['usia']; 
+
+
+$query1 = mysqli_query($koneksi,"SELECT * FROM tb_tersedia_bed a INNER JOIN tb_kelas_bed b ON a.id_kelas_bed=b.id_kelas_bed INNER JOIN tb_usia_bed c ON a.id_usia_bed=c.id_usia_bed WHERE a.id_kelas_bed LIKE '%$kelas%' AND a.id_usia_bed LIKE '%$usia%' GROUP BY a.id_kelas_bed ");
+
+}else{
+
+
+    $query1=mysqli_query($koneksi,"SELECT *,COUNT(a.id_tersedia_bed) AS jml_data FROM tb_tersedia_bed a INNER JOIN tb_kelas_bed b ON a.id_kelas_bed=b.id_kelas_bed INNER JOIN tb_usia_bed c ON a.id_usia_bed=c.id_usia_bed GROUP BY a.id_kelas_bed");
+}
 
     while($data=mysqli_fetch_assoc($query1)){
 
@@ -604,14 +615,25 @@ table {
     
 
     <?php
+if (isset($_POST['tampil_bed'])) {
+
+$kelas        =$_POST['kelas']; 
+$usia         =$_POST['usia']; 
+
+
+$query2 = mysqli_query($koneksi,"SELECT * FROM tb_tersedia_bed a INNER JOIN tb_kelas_bed b ON a.id_kelas_bed=b.id_kelas_bed INNER JOIN tb_usia_bed c ON a.id_usia_bed=c.id_usia_bed WHERE a.id_kelas_bed='$kelas' AND a.id_usia_bed='$usia'   ");
+
+}else{
+
     $query2=mysqli_query($koneksi,"SELECT * FROM tb_tersedia_bed a LEFT JOIN tb_kelas_bed b ON a.id_kelas_bed=b.id_kelas_bed INNER JOIN tb_usia_bed c ON a.id_usia_bed=c.id_usia_bed WHERE a.id_kelas_bed='$data[id_kelas_bed]' ");
 
+}
 
     while($data2=mysqli_fetch_assoc($query2)){
 
     ?>
     <tr>
-        <td></td>
+        <td><?php echo $data2['nama_kamar']; ?></td>
         <td><?php echo $data2['nama_usia_bed']; ?></td>
         <td><?php echo $data2['jenis_kelamin_bed']; ?></td>
         <td ><?php echo $data2['status_tersedia']; ?></td>
