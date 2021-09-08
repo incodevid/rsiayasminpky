@@ -347,6 +347,8 @@ $tglar = strtotime($ddetar['tgl_upload']);
                             <ul class="dropdown-menu">
                                 <li><a href="berita">Berita</a></li>
                                 <li><a href="artikel">Artikel</a></li>
+                                <li><a href="jadwal_dokter">Jadwal Dokter</a></li>
+                                <li><a href="tersedia_bed">Ketersediaan Bed</a></li>
                             </ul>
                         </li>
                         <li class="dropdown ">
