@@ -202,7 +202,7 @@ $kalimat = substr($dsejarah['text_sejarah'], 0, 700);
                                 <li><a href="berita">Berita</a></li>
                                 <li><a href="artikel">Artikel</a></li>
                                 <li><a href="jadwal_dokter">Jadwal Dokter</a></li>
-                                <li><a href="ketersediaan_bed">Ketersediaan Bed</a></li>
+                                <li><a href="tersedia_bed">Ketersediaan Bed</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

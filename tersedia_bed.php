@@ -27,7 +27,14 @@ $dprofilrs=mysqli_fetch_assoc($qprofilrs);
 $qkerjasama=mysqli_query($koneksi,"SELECT * FROM tb_kerjasama");
 $dkerjasama=mysqli_fetch_assoc($qkerjasama);
 
+$qtotpakai=mysqli_query($koneksi,"SELECT *,COUNT(id_tersedia_bed) AS jml_terpakai FROM tb_tersedia_bed WHERE status_tersedia='Terpakai' ");
+$dpakai=mysqli_fetch_assoc($qtotpakai);
 
+$qtotkosong=mysqli_query($koneksi,"SELECT *,COUNT(id_tersedia_bed) AS jml_kosong FROM tb_tersedia_bed WHERE status_tersedia='Kosong' ");
+$dkosong=mysqli_fetch_assoc($qtotkosong);
+
+$qtotbed=mysqli_query($koneksi,"SELECT *,COUNT(id_tersedia_bed) AS jml_bed FROM tb_tersedia_bed ");
+$dbed=mysqli_fetch_assoc($qtotbed);
 
 ?>
 
@@ -44,7 +51,7 @@ $dkerjasama=mysqli_fetch_assoc($qkerjasama);
     <meta name="description" content="MediHub - Medical & Health Template">
 
     <!-- ========== Page Title ========== -->
-    <title>RSIA Yasmin - Jadwal Dokter</title>
+    <title>RSIA Yasmin - Ketersediaan Bed</title>
 
     <!-- ========== Favicon Icon ========== -->
     <link rel="shortcut icon" href="assets/img/logo-yasmin.jpg" type="image/x-icon">
@@ -254,8 +261,13 @@ td, th {
   height: 60px;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
+
+
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(200, 200, 200);
+    letter-spacing: 1px;
+    font-size: 15px;
 }
 </style>
 
@@ -424,13 +436,13 @@ tr:nth-child(even) {
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>Jadwal Dokter</h1>
+                    <h1>Ketersediaan Bed</h1>
                 </div>
                 <div class="col-md-6 text-right">
                     <ul class="breadcrumb">
                         <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
                         <li><a href="#">Informasi</a></li>
-                        <li class="active">Jadwal Dokter</li>
+                        <li class="active">Ketersediaan Bed</li>
                     </ul>
                 </div>
             </div>
@@ -452,66 +464,88 @@ tr:nth-child(even) {
                             <div class="info">
                                 <div class="meta">
                                     <ul>
-                                        <li><center><h2><a href="#">JADWAL DOKTER</a></h2></center></li>
+                                        <li><center><h2><a href="#">INFORMASI KETERSEDIAAN TEMPAT TIDUR <br>RSIA YASMIN PALANGKA RAYA</a></h2></center></li>
                                     </ul>
                                 </div>
                             <a style="color: black;font-size: 10px;"><i>*) Untuk sementara sistem pencarian jadwal dokter masih dalam tahap pengembangan. Jadwal detil dapat dilihat pada leaflet/gambar di bawah</i></a>
-                            <h4>Filter Pencarian Jadwal</h4>
                             <div class="contact-area">
                             <div class="contact-items">
                             <div class="contact-form">
                             <form method="POST" class="contact-form" action="<?php echo $_SERVER["PHP_SELF"];?>">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="form-group">
-                                        <select class="form-control " id="poli" name="poli" required>
-                                            <option value="">--PILIH POLIKLINIK--</option>
-                                            <?php  
-                                            $qpoli=mysqli_query($koneksi,"SELECT * FROM tb_poli ORDER BY id_poli DESC");
-                                            while($dpoli=mysqli_fetch_assoc($qpoli)){
-                                            ?>
-                                            <option value="<?php echo $dpoli['id_poli']; ?>"><?php echo $dpoli['nama_poli']; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="form-group">
-                                        <select class="form-control " id="dokter" name="dokter" required>
-                                            <option>--PILIH DOKTER--</option>                                        
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="form-group">
-                                        <select class="form-control" name="pelayanan" required>
-                                            <option value="">--PILIH PELAYANAN--</option>
-                                            <option value="Reguler">Reguler</option>
-                                            <option value="Tekon">TEKON / Telemedicine</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                      <input type='text' name="date1" class="form-control" id='datetimepicker1' placeholder="Pilih Tanggal" autocomplete="off" required readonly />
-                                </div>&nbsp;&nbsp;&nbsp;
-                                <div class="col-md-6">
-                                      <input type='text' name="date2" class="form-control" id='datetimepicker2'  placeholder="s/d Tanggal" autocomplete="off" required readonly />
+                                      <table>
+                                          <tr>
+                                            <td style="text-align: left;">
+                                                <h3>INFORMASI</h3>
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                <div class="pull-left closed"><i class="fa fa-bed" style="color: red;"></i> Tempat Tidur Terpakai</div>
+                                                <div class="pull-right closed"><a><?php echo $dpakai['jml_terpakai']; ?></a></div>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                <div class="pull-left closed"><i class="fa fa-bed" style="color: green;"></i> Tempat Tidur Kosong</div>
+                                                <div class="pull-right closed"><a><?php echo $dkosong['jml_kosong']; ?></a></div>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                <div class="pull-left closed"><i class="fa fa-bed" style="color: black;"></i> Total Tempat Tidur</div>
+                                                <div class="pull-right closed"><a><?php echo $dbed['jml_bed']; ?></a></div>
+                                              </td>
+                                          </tr>
+                                      </table>
                                 </div>
-                            </div>
+                                <div class="col-md-6">
+                                    <table>
+                                    <tr>
+                                        <td style="text-align: left;">
+                                            <h3>FILTER PENCARIAN</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        <div class="form-group">
+                                            <select class="form-control " id="kelas" name="kelas" required>
+                                                <option value="">--PILIH KELAS--</option>
+                                                <?php  
+                                                $qpoli=mysqli_query($koneksi,"SELECT * FROM tb_kelas_bed ORDER BY id_kelas_bed DESC");
+                                                while($dpoli=mysqli_fetch_assoc($qpoli)){
+                                                ?>
+                                                <option value="<?php echo $dpoli['id_kelas_bed']; ?>"><?php echo $dpoli['nama_kelas_bed']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        <div class="form-group">
+                                            <select class="form-control " id="usia" name="usia" required>
+                                                <option>--PILIH USIA--</option>
+
+                                            </select>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                    </table>
+                                </div>
+                            </div>     
+                            <br>
+                            
+                            
                             <div class="row">
                                 <div class="col-md-6">
-                                    <button type="submit" name="tampil_jadwal" >
+                                    <button type="submit" name="tampil_bed" >
                                         Tampil <i class="fa fa-eye"></i>
                                     </button>
                                 </div>
                                 <div class="col-md-6">
-                                    <button onClick="window.location.href='jadwal_dokter'">
+                                    <button onClick="window.location.href='tersedia_bed'">
                                         Refresh <i class="fa fa-sync-alt"></i>
                                     </button>
                                 </div>
@@ -534,42 +568,58 @@ tr:nth-child(even) {
                      <!-- Start Jadwal
     ============================================= -->
 <table>
-  <tr>
-    <th colspan="5" style="text-align: center;">INFROMASI JADWAL DOKTER</th>
+  <tr style="background-color: #dddddd;">
+    <th colspan="5" style="text-align: center;">INFROMASI KETERSEDIAAN KAMAR TIDUR</th>
+  </tr>
+  <tr style="background-color: #dddddd;">
+    <th style="text-align: center;" >Kelas</th>
+    <th style="text-align: center;" >Usia</th>
+    <th style="text-align: center;" >Jenis Kelamin</th>
+    <th style="text-align: center;" >Status Kamar</th>
   </tr>
   <tr>
-    <th style="text-align: center;">Nama Dokter</th>
-    <th style="text-align: center;">Poliklinik</th>
-    <th style="text-align: center;">Pelayanan</th>
-    <th style="text-align: center;">Tanggal</th>
-    <th style="text-align: center;">Jam Kerja</th>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
   </tr>
-  <?php
-if (isset($_POST['tampil_jadwal'])) {
 
-$poli           =$_POST['poli']; 
-$dokter         =$_POST['dokter']; 
-$pelayanan      =$_POST['pelayanan']; 
-$date1          =$_POST['date1']; 
-$date2          =$_POST['date2']; 
+    
 
-$query = mysqli_query($koneksi,"SELECT * FROM tb_jadwal_dokter a INNER JOIN tb_poli b ON a.id_poli=b.id_poli INNER JOIN tb_dokter_kami c ON a.id_dokter_kami=c.id_dokter_kami WHERE a.id_poli='$poli' AND a.id_dokter_kami='$dokter' AND a.pelayanan='$pelayanan' AND a.tanggal BETWEEN '$date1' and '$date2' ");
-}else{
+    
+    <?php
+    $query1=mysqli_query($koneksi,"SELECT *,COUNT(a.id_tersedia_bed) AS jml_data FROM tb_tersedia_bed a INNER JOIN tb_kelas_bed b ON a.id_kelas_bed=b.id_kelas_bed INNER JOIN tb_usia_bed c ON a.id_usia_bed=c.id_usia_bed GROUP BY a.id_kelas_bed");
 
-$query = mysqli_query($koneksi,"SELECT * FROM tb_jadwal_dokter a INNER JOIN tb_poli b ON a.id_poli=b.id_poli INNER JOIN tb_dokter_kami c ON a.id_dokter_kami=c.id_dokter_kami ORDER BY a.id_jadwal_dokter DESC");
-}
 
-while($data  = mysqli_fetch_assoc($query)){
-?>
-  <tr>
-    <td><?php echo $data['nama_dokter']; ?></td>
-    <td><?php echo $data['nama_poli']; ?></td>
-    <td><?php echo $data['pelayanan']; ?></td>
-    <td><?php echo tgl_indo($data['tanggal']); ?></td>
-    <td><?php echo $data['jam_kerja']; ?></td>
-  </tr>
-  <?php } ?>
+    while($data=mysqli_fetch_assoc($query1)){
+
+  
+    ?>
+    <tr style="background-color: #dddddd;">
+        <th ><?php echo $data['nama_kelas_bed']; ?></th>
+        <th ></th>
+        <th ></th>
+        <th ></th>
+    </tr>
+    
+
+    <?php
+    $query2=mysqli_query($koneksi,"SELECT * FROM tb_tersedia_bed a LEFT JOIN tb_kelas_bed b ON a.id_kelas_bed=b.id_kelas_bed INNER JOIN tb_usia_bed c ON a.id_usia_bed=c.id_usia_bed WHERE a.id_kelas_bed='$data[id_kelas_bed]' ");
+
+
+    while($data2=mysqli_fetch_assoc($query2)){
+
+    ?>
+    <tr>
+        <td></td>
+        <td><?php echo $data2['nama_usia_bed']; ?></td>
+        <td><?php echo $data2['jenis_kelamin_bed']; ?></td>
+        <td ><?php echo $data2['status_tersedia']; ?></td>
+    </tr>
+    <?php } ?>
+    <?php } ?>
 </table>
+
     <!-- End Jadwal -->
 
                         
@@ -905,18 +955,18 @@ $('#datetimepicker2').datepicker({
 
 <script>
 
-        $("#poli").change(function(){
+        $("#kelas").change(function(){
             // variabel dari nilai combo box kendaraan
-            var id_poli = $("#poli").val();
+            var id_kelas = $("#kelas").val();
 
             // Menggunakan ajax untuk mengirim dan dan menerima data dari server
             $.ajax({
                 type: "POST",
                 dataType: "html",
-                url: "json_jadwal.php",
-                data: "poli="+id_poli,
+                url: "json_bed.php",
+                data: "kelas="+id_kelas,
                 success: function(data){
-                   $("#dokter").html(data);
+                   $("#usia").html(data);
                 }
             });
         });
