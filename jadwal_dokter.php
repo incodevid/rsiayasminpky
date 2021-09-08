@@ -498,10 +498,10 @@ tr:nth-child(even) {
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                      <input type='text' name="date1" class="form-control" id='datetimepicker1' placeholder="Pilih Tanggal" autocomplete="off" required readonly />
+                                      <input type='text' name="date1" class="form-control" id='datetimepicker1' placeholder="Pilih Tanggal" autocomplete="off" required  />
                                 </div>&nbsp;&nbsp;&nbsp;
                                 <div class="col-md-6">
-                                      <input type='text' name="date2" class="form-control" id='datetimepicker2'  placeholder="s/d Tanggal" autocomplete="off" required readonly />
+                                      <input type='text' name="date2" class="form-control" id='datetimepicker2'  placeholder="s/d Tanggal" autocomplete="off" required  />
                                 </div>
                             </div>
                             <div class="row">

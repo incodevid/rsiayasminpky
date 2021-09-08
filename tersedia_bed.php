@@ -467,7 +467,7 @@ table {
                                         <li><center><h2><a href="#">INFORMASI KETERSEDIAAN TEMPAT TIDUR <br>RSIA YASMIN PALANGKA RAYA</a></h2></center></li>
                                     </ul>
                                 </div>
-                            <a style="color: black;font-size: 10px;"><i>*) Untuk sementara sistem pencarian jadwal dokter masih dalam tahap pengembangan. Jadwal detil dapat dilihat pada leaflet/gambar di bawah</i></a>
+                            <a style="color: black;font-size: 10px;"><i>*) Sistem pencarian ketersediaan kamar tidur. Ketersediaan detil dapat dilihat pada leaflet/gambar di bawah</i></a>
                             <div class="contact-area">
                             <div class="contact-items">
                             <div class="contact-form">
