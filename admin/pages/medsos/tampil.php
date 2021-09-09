@@ -105,7 +105,7 @@ if ($cek > 0){
                   <?php
                     $qmed = mysqli_query($koneksi, "SELECT *,COUNT(id_medsos) AS jml_medsos FROM tb_medsos ");
                     while($datmed=mysqli_fetch_assoc($qmed)){
-                    if($datmed['jml_medsos']=='3'){
+                    if($datmed['jml_medsos']=='4'){
                     ?>
                     
                     <?php }else{ ?>
