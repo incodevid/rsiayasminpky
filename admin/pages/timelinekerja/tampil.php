@@ -45,262 +45,120 @@
 
 
 <!-- Main content -->
-
-    <section class="content">
-
+<section class="content">
       <div class="container-fluid">
 
+        <!-- Timelime example  -->
         <div class="row">
-
-          <div class="col-12">
-
-            <div class="card">
-
-              <div class="card-header">
-
-                <h3 class="card-title">Daftar Akun Pengguna</h3>
-
-                <div class="card-tools">
-
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-
-                    <i class="fas fa-minus"></i></button>
-
-                  <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-
-                    <i class="fas fa-times"></i></button>
-
-                </div>
-
+          <div class="col-md-12">
+            <!-- The time line -->
+            <div class="timeline">
+              <!-- timeline time label -->
+              <div class="time-label">
+                <span class="bg-red">10 Feb. 2014</span>
               </div>
-
-
-
-              <?php
-
-      
-
-       
-
-    if (isset($_POST['BtnSmpanAkun'])) {
-
-    
-
-  
-
-    $nama_akun      = $_POST['nama_akun'];
-
-    $jenis_kelamin  = $_POST['jenis_kelamin'];
-
-    $email          = $_POST['email'];
-
-    $nik            = $_POST['nik'];
-
-    $departemen     = $_POST['departemen'];
-
-    $username       = $_POST['username']; 
-
-    $password       = $_POST['password']; 
-
-    $level_akses    = $_POST['level_akses']; 
-
-
-
-
-
-
-
-
-
-      $sql = mysqli_query($koneksi,"SELECT * FROM tb_akun WHERE  username='$username'  ") or die(mysql_error());
-
-$cek=mysqli_num_rows($sql);
-
-
-
-if ($cek > 0){
-
-   echo "<script> alert ('Tambah akun gagal, Username ".$username." sudah ada!');window.location.href='?p=akun' </script>" ;
-
-} else {
-
-
-
-    
-
-            $sql = mysqli_query($koneksi," INSERT INTO tb_akun (nama_akun,jenis_kelamin,email,nik,departemen,username,password,level_akses) 
-
-            VALUES ('$nama_akun','$jenis_kelamin','$email','$nik','$departemen','$username','$password','$level_akses')  ");
-
-
-
-
-
-            if ($sql) {
-
-               echo "<script> alert ('Tambah Data Akun Pengguna Berhasil!');window.location.href='?p=akun' </script>" ;
-
-             } else {
-
-              echo "<script> alert ('Tambah Data Akun Pengguna Gagal!');window.location.href='?p=akun' </script>" ;
-
-             }
-
-
-
-           }
-
-      
-
-
-
- 
-
-
-
-  }
-
-  
-
-       
-
-  ?>
-
-              <!-- /.card-header -->
-
-              <div class="card-body">
-
-                <div class="row mb-2">
-
-                    <div class="col-sm-2">
-
-                    <a type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#modal-default" style="color:white;"><i class="fas fa-plus"></i> Tambah</a>
-
-                    </div>
-
-                    <div class="col-sm-2">
-
-                    <a href="?p=dashboard" class="btn btn-block btn-warning" style="color:white;">Kembali</a>
-
-                    </div>
-
+              <!-- /.timeline-label -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-envelope bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 12:05</span>
+                  <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+
+                  <div class="timeline-body">
+                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                    quora plaxo ideeli hulu weebly balihoo...
+                  </div>
+                  <div class="timeline-footer">
+                    <a class="btn btn-primary btn-sm">Read more</a>
+                    <a class="btn btn-danger btn-sm">Delete</a>
+                  </div>
                 </div>
-
-            
-
-                <table id="example1" width="1900px" class="table table-bordered table-striped ">
-
-                  <thead>
-
-                  <tr>
-
-                    <th>No</th>
-
-                    <th>Nama Pengguna</th>
-
-                    <th >Jenis Kelamin</th>
-
-                    <th>Email</th>
-
-                    <th>NIK</th>
-
-                    <th>Departemen</th>
-
-                    <th>Username</th>
-
-                    <th>Password</th>
-
-                    <th>Level</th>
-
-                    <th>Aksi</th>
-
-                  </tr>
-
-                  </thead>
-
-                  <tbody>
-
-                    <?php 
-
-                  $no = 1;
-
-$query = mysqli_query($koneksi,"SELECT * FROM tb_akun WHERE level_akses NOT LIKE '%super%' GROUP BY id_akun DESC");
-
-while($data  = mysqli_fetch_assoc($query)){
-
-?>
-
-                  <tr>
-
-                    <td><?php echo $no ?></td>
-
-                    <td><?php echo $data['nama_akun']; ?></td>
-
-                    <td ><?php echo substr($data['jenis_kelamin'],0,1) ?></td>
-
-                    <td><?php echo $data['email']; ?></td>
-
-                    <td><?php echo $data['nik']; ?></td>
-
-                    <td><?php echo $data['departemen']; ?></td>
-
-                    <td><?php echo $data['username']; ?></td>
-
-                    <td><?php echo $data['password']; ?></td>
-
-                    <td><?php echo $data['level_akses']; ?></td>
-
-                    <td>
-
-                  
-
-                      <a data-toggle="modal" data-target="#modalUbah<?php echo $data['id_akun']; ?>" class="btn btn-block btn-info" ><i class="fas fa-pen" style="color:white;"></i></a>
-
-                 
-
-                  
-
-                      <a href="?p=hakun&akn=<?php echo $data['id_akun']; ?>" onclick="return confirm('Yakin mau di hapus?');" class="btn btn-block btn-danger" ><i class="fas fa-trash" style="color:white;"></i></a>
-
-                
-
-                    </td>
-
-                  </tr>
-
-                <?php $no++; } ?>
-
-                  </tbody>
-
-                </table>
-
-          
-
-
-
               </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-user bg-green"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
+                  <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-comments bg-yellow"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
+                  <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+                  <div class="timeline-body">
+                    Take me to your leader!
+                    Switzerland is small and neutral!
+                    We are more like Germany, ambitious and misunderstood!
+                  </div>
+                  <div class="timeline-footer">
+                    <a class="btn btn-warning btn-sm">View comment</a>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline time label -->
+              <div class="time-label">
+                <span class="bg-green">3 Jan. 2014</span>
+              </div>
+              <!-- /.timeline-label -->
+              <!-- timeline item -->
+              <div>
+                <i class="fa fa-camera bg-purple"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
+                  <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+                  <div class="timeline-body">
+                    <img src="https://placehold.it/150x100" alt="...">
+                    <img src="https://placehold.it/150x100" alt="...">
+                    <img src="https://placehold.it/150x100" alt="...">
+                    <img src="https://placehold.it/150x100" alt="...">
+                    <img src="https://placehold.it/150x100" alt="...">
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-video bg-maroon"></i>
 
-              <!-- /.card-body -->
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 5 days ago</span>
 
+                  <h3 class="timeline-header"><a href="#">Mr. Doe</a> shared a video</h3>
+
+                  <div class="timeline-body">
+                    <div class="embed-responsive embed-responsive-16by9">
+                      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tMWkeBIohBs" allowfullscreen></iframe>
+                    </div>
+                  </div>
+                  <div class="timeline-footer">
+                    <a href="#" class="btn btn-sm bg-maroon">See comments</a>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <div>
+                <i class="fas fa-clock bg-gray"></i>
+              </div>
             </div>
-
-            <!-- /.card -->
-
           </div>
-
           <!-- /.col -->
-
         </div>
-
-        <!-- /.row -->
-
       </div>
-
-      <!-- /.container-fluid -->
+      <!-- /.timeline -->
 
     </section>
-
     <!-- /.content -->
+    
+
 
 
 
@@ -419,7 +277,6 @@ while($data  = mysqli_fetch_assoc($query)){
                           <option value="">-- PILIH Level --</option>
 
                           <option value="admin">Admin</option>
-                          <option value="karyawan">Karyawan</option>
 
                         </select>
 
