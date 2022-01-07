@@ -14,7 +14,7 @@
 
           <div class="col-sm-6">
 
-            <h1 class="m-0 ">Kelola Akun Pengguna</h1>
+            <h1 class="m-0 ">Kelola Timeline Karyawan</h1>
 
           </div><!-- /.col -->
 
@@ -24,7 +24,7 @@
 
               <li class="breadcrumb-item"><a href="?p=dashboard" style="color:black;">Beranda</a></li>
 
-              <li class="breadcrumb-item active">Kelola Akun Pengguna</li>
+              <li class="breadcrumb-item active">Kelola Timeline Karyawan</li>
 
             </ol>
 
