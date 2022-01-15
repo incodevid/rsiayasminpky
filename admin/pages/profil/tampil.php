@@ -113,7 +113,7 @@
     $email          = $_POST['email'];
 
     $nik            = $_POST['nik'];
-
+    
     $username       = $_POST['username']; 
 
     $password       = $_POST['password']; 
@@ -235,6 +235,7 @@
                         <input type="text" name="nik" class="form-control" placeholder="Tempat Lahir" value="<?php echo $t['nik']; ?>" required>
 
                       </div>
+
 
                       <div class="form-group">
 

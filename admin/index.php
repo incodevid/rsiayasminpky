@@ -125,7 +125,6 @@ else {
 
 
 
-
  <style>
 
 .myScrollTable {
@@ -198,7 +197,13 @@ overflow-x:scroll;
 
       <li class="nav-item d-none d-sm-inline-block">
 
+        <?php
+        if($_SESSION['level_akses']=='admin'){
+        ?>
         <a href="#" class="nav-link">Selamat Datang di Sistem Administrator Wesite RSIA YASMIN, <?php echo $t['nama_akun']; ?></a>
+        <?php }else{ ?>
+        <a href="#" class="nav-link">Selamat Datang di Sistem Wesite RSIA YASMIN, <?php echo $t['nama_akun']; ?></a>
+        <?php } ?>
 
       </li>
 
@@ -1365,6 +1370,21 @@ overflow-x:scroll;
         include "pages/timelinekerja/tampil.php";
 
         break;
+        case "shiftpagi";
+
+        include "pages/timelinekerja/shift_pagi.php";
+
+        break;
+        case "shiftsore";
+
+        include "pages/timelinekerja/shift_sore.php";
+
+        break;
+        case "shiftmalam";
+
+        include "pages/timelinekerja/shift_malam.php";
+
+        break;
 
 
 
@@ -1566,6 +1586,9 @@ overflow-x:scroll;
 
 
 
+
+
+
 <!-- Bootstrap Switch -->
 
 <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
@@ -1573,6 +1596,10 @@ overflow-x:scroll;
 
 
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+
+
+
+
 
 
 
@@ -1704,6 +1731,17 @@ overflow-x:scroll;
 
 </script>
 
+<script type="text/javascript">
+  $(function () {
+    var current = moment();
+                $('#tglambil').datetimepicker({
+                  format: 'YYYY-MM-DD',
+                  startDate:current,
+                  maxDate:current
+                });
+            });
+</script>
+
 
 
 <script>
@@ -1741,6 +1779,8 @@ overflow-x:scroll;
 
 
     //Date range picker
+    
+
 
     $('#reservationdate').datetimepicker({
 

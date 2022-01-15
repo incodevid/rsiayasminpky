@@ -39,124 +39,141 @@
     <!-- /.content-header -->
 
 
+<!-- Main content -->
+
+    <section class="content">
+
+      <div class="container-fluid">
+
+        <div class="row">
+
+          <div class="col-12">
+
+            <div class="card">
+
+              <div class="card-header">
+
+                <h3 class="card-title">Daftar Data Time Line</h3>
+
+                <div class="card-tools">
+
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+
+                    <i class="fas fa-minus"></i></button>
+
+                  <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+
+                    <i class="fas fa-times"></i></button>
+
+                </div>
+
+              </div>
+
+
+
+
+              <!-- /.card-header -->
+
+              <div class="card-body">
+
+                <div class="row mb-2">
+
+                    <div class="col-sm-2">
+
+                    <a type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#modal-default" style="color:white;"><i class="fas fa-plus"></i> Tambah</a>
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+                    <a href="?p=dashboard" class="btn btn-block btn-warning" style="color:white;">Kembali</a>
+
+                    </div>
+
+                </div>
+
+            
+
+                <table id="example1" width="1900px" class="table table-bordered table-striped ">
+
+                  <thead>
+
+                  <tr>
+                    <th >Waktu</th>
+                    <th >Waktu Shift</th>
+                    <th >Tanggal</th>
+                    <th >Kegiatan</th>
+                    <th >Aksi</th>
+                  </tr>
+
+                  </thead>
+
+                  <tbody>
+
+                   
+
+                  <tr>
+
+                    <td>17.00-18.00</td>
+
+                    <td>MALAM</td>
+
+                    <td>Tgl Input</td>
+
+                    <td>
+
+                        Isi Kegiatan (200Char)
+
+                    </td>
+
+                    <td>
+
+                      <a data-toggle="modal" data-target="#modalUbah<?php echo $data['id_berita']; ?>" class="btn btn-block btn-info " ><i class="fas fa-pen" style="color:white;"></i></a>
+                                       
+                    </td>
+
+                  </tr>
+
+           
+
+                  </tbody>
+
+                </table>
+
+          
+
+
+
+              </div>
+
+              <!-- /.card-body -->
+
+            </div>
+
+            <!-- /.card -->
+
+          </div>
+
+          <!-- /.col -->
+
+        </div>
+
+        <!-- /.row -->
+
+      </div>
+
+      <!-- /.container-fluid -->
+
+    </section>
+
+    <!-- /.content -->
+
+
 
     
 
 
 
-<!-- Main content -->
-<section class="content">
-      <div class="container-fluid">
-
-        <!-- Timelime example  -->
-        <div class="row">
-          <div class="col-md-12">
-            <!-- The time line -->
-            <div class="timeline">
-              <!-- timeline time label -->
-              <div class="time-label">
-                <span class="bg-red">10 Feb. 2014</span>
-              </div>
-              <!-- /.timeline-label -->
-              <!-- timeline item -->
-              <div>
-                <i class="fas fa-envelope bg-blue"></i>
-                <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                  <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                  <div class="timeline-body">
-                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                    quora plaxo ideeli hulu weebly balihoo...
-                  </div>
-                  <div class="timeline-footer">
-                    <a class="btn btn-primary btn-sm">Read more</a>
-                    <a class="btn btn-danger btn-sm">Delete</a>
-                  </div>
-                </div>
-              </div>
-              <!-- END timeline item -->
-              <!-- timeline item -->
-              <div>
-                <i class="fas fa-user bg-green"></i>
-                <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                  <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
-                </div>
-              </div>
-              <!-- END timeline item -->
-              <!-- timeline item -->
-              <div>
-                <i class="fas fa-comments bg-yellow"></i>
-                <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 27 mins ago</span>
-                  <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-                  <div class="timeline-body">
-                    Take me to your leader!
-                    Switzerland is small and neutral!
-                    We are more like Germany, ambitious and misunderstood!
-                  </div>
-                  <div class="timeline-footer">
-                    <a class="btn btn-warning btn-sm">View comment</a>
-                  </div>
-                </div>
-              </div>
-              <!-- END timeline item -->
-              <!-- timeline time label -->
-              <div class="time-label">
-                <span class="bg-green">3 Jan. 2014</span>
-              </div>
-              <!-- /.timeline-label -->
-              <!-- timeline item -->
-              <div>
-                <i class="fa fa-camera bg-purple"></i>
-                <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 2 days ago</span>
-                  <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-                  <div class="timeline-body">
-                    <img src="https://placehold.it/150x100" alt="...">
-                    <img src="https://placehold.it/150x100" alt="...">
-                    <img src="https://placehold.it/150x100" alt="...">
-                    <img src="https://placehold.it/150x100" alt="...">
-                    <img src="https://placehold.it/150x100" alt="...">
-                  </div>
-                </div>
-              </div>
-              <!-- END timeline item -->
-              <!-- timeline item -->
-              <div>
-                <i class="fas fa-video bg-maroon"></i>
-
-                <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 5 days ago</span>
-
-                  <h3 class="timeline-header"><a href="#">Mr. Doe</a> shared a video</h3>
-
-                  <div class="timeline-body">
-                    <div class="embed-responsive embed-responsive-16by9">
-                      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tMWkeBIohBs" allowfullscreen></iframe>
-                    </div>
-                  </div>
-                  <div class="timeline-footer">
-                    <a href="#" class="btn btn-sm bg-maroon">See comments</a>
-                  </div>
-                </div>
-              </div>
-              <!-- END timeline item -->
-              <div>
-                <i class="fas fa-clock bg-gray"></i>
-              </div>
-            </div>
-          </div>
-          <!-- /.col -->
-        </div>
-      </div>
-      <!-- /.timeline -->
-
-    </section>
-    <!-- /.content -->
     
 
 
@@ -176,7 +193,7 @@
 
             <div class="modal-header">
 
-              <h4 class="modal-title">Tambah Akun Pengguna</h4>
+              <h4 class="modal-title">Tambah Data Time Line</h4>
 
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 
@@ -188,121 +205,11 @@
 
             <div class="modal-body">
 
-              <!-- form start -->
-
-              <form role="form" method="POST" enctype="multipart/form-data" >
-
-                <div class="card-body">
-
-                  <div class="form-group">
-
-                    <label for="">Nama Akun</label>
-
-                    <input type="text" name="nama_akun" class="form-control"  placeholder="Masukkan Nama Lengkap" required>
-
-                  </div>
-
-                  <div class="form-group">
-
-                    <label for="">Jenis Kelamin</label>
-
-                    <!-- select -->
-
-                      <div class="form-group">
-
-                        <select class="custom-select" name="jenis_kelamin" required>
-
-                          <option value="">-- PILIH JENIS KELAMIN --</option>
-
-                          <option value="Laki-Laki">Laki - Laki</option>
-
-                          <option value="Perempuan">Perempuan</option>
-
-                        </select>
-
-                      </div>
-
-                  </div>
-
-                  <div class="form-group">
-
-                    <label for="">Email</label>
-
-                    <input type="email" name="email" class="form-control"  placeholder="Masukkan Alamat Email" required>
-
-                  </div>
-
-                  <div class="form-group">
-
-                    <label for="">NIK</label>
-
-                    <input type="text" name="nik" class="form-control"  placeholder="Masukkan Nomor NIK(Nomor Induk Karyawan)" required>
-
-                  </div>
-
-                  <div class="form-group">
-
-                    <label for="">Departemen Unit</label>
-
-                    <input type="text" name="departemen" class="form-control"  placeholder="Masukkan Departemen Unit Karyawan" required>
-
-                  </div>
-
-                  <div class="form-group">
-
-                    <label for="">Username</label>
-
-                    <input type="text" name="username" class="form-control"  placeholder="Username" required>
-
-                  </div>
-
-                  <div class="form-group">
-
-                    <label for="">Password</label>
-
-                    <input type="password" name="password" class="form-control"  placeholder="Password" required>
-
-                  </div>
-
-                  <div class="form-group">
-
-                    <label for="">Pilih Level Akses</label>
-
-                      <!-- select -->
-
-                      <div class="form-group">
-
-                        <select class="custom-select" name="level_akses" required>
-
-                          <option value="">-- PILIH Level --</option>
-
-                          <option value="admin">Admin</option>
-
-                        </select>
-
-                      </div>
-
-                  </div>
-
-                 
-
-                </div>
-
-                <!-- /.card-body -->
-
-
-
-                
-
-                <div class="modal-footer justify-content-between">
-
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-
-                  <button type="submit" name="BtnSmpanAkun" class="btn btn-primary">Simpan</button>
-
-                </div>
-
-              </form>
+              <center>
+              <span><button class="btn btn-success" onclick="window.location.href='?p=shiftpagi'">SHIFT PAGI</button></span>
+              <span><button class="btn btn-warning" onclick="window.location.href='?p=shiftsore'">SHIFT SORE</button></span>
+              <span><button class="btn btn-secondary" onclick="window.location.href='?p=shiftmalam'">SHIFT MALAM</button></span>
+              </center>
 
             </div>
 
