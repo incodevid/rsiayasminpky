@@ -80,12 +80,85 @@
                   <span class="time"><i class="fas fa-clock"></i> 14.00 - 14.30</span>
                   <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
                   <div class="timeline-body">
+                   <?php
+
+    if (isset($_POST['Btn14001430'])) {
+
+    $id_akun           = $_SESSION['id_akun'];
+    $tglsekarang       = date("Y-m-d");
+    $waktu             = "14.00-14.30";
+    $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='SORE' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+    $dkeg = mysqli_fetch_assoc($qkeg);
+
+    $id_timelineunit   = $dkeg['id_timelineunit'];
+    $shift_waktu       = $_POST['shift_waktu'];
+    $waktu             = $_POST['waktu'];
+    $tgl_timeline      = $_POST['tgl_timeline'];
+    $isi_kegiatan      = $_POST['isi_kegiatan'];
+    $id_akun           = $_SESSION['id_akun'];
+
+    $tglsekarang       = date("Y-m-d");
+    $waktu             = "14.00-14.30";
+
+
+      $id_akun=$_SESSION['id_akun'];
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='SORE' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+      while($data = mysqli_fetch_assoc($sql1)){
+
+      if($data['jumlah']=="0"){ 
+
+
+            $sql = mysqli_query($koneksi," INSERT INTO tb_timelineunit (id_akun,shift_waktu,waktu,tgl_timeline,isi_kegiatan) 
+
+            VALUES ('$id_akun','$shift_waktu','$waktu','$tglsekarang','$isi_kegiatan')  ");
+
+          } else {
+
+            $sql = mysqli_query($koneksi,"UPDATE tb_timelineunit SET isi_kegiatan='$isi_kegiatan' WHERE id_timelineunit='$id_timelineunit' ");
+
+
+          }}
+
+
+            if ($sql) {
+
+               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+
+             } else {
+
+              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+
+             }
+
+
+  }
+  ?>
                   <form method="post" enctype="multipart/form-data">
+                    <?php
+                    $id_akun           = $_SESSION['id_akun'];
+                    $tglsekarang       = date("Y-m-d");
+                    $waktu             = "14.00-14.30";
+                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='SORE' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+                    while($dform=mysqli_fetch_assoc($qform)){
+
+                    if($dform['jlh_id']=="0"){ 
+                    ?>
                     <div class="form-group">
-                      <textarea class="form-control" name="" required></textarea>
+                      <textarea class="form-control" name="isi_kegiatan" required></textarea>
+                      <input type="hidden" class="form-control" name="shift_waktu" value="SORE">
+                      <input type="hidden" class="form-control" name="waktu" value="14.00-14.30">
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
                     </div>
+                    <?php }else{ ?>
+                    <div class="form-group">
+                      <textarea class="form-control" name="isi_kegiatan" required><?php echo $dform['isi_kegiatan']; ?></textarea>
+                      <input type="hidden" class="form-control" name="shift_waktu" value="SORE">
+                      <input type="hidden" class="form-control" name="waktu" value="14.00-14.30">
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                    </div>
+                    <?php }} ?>
                     <div class="timeline-footer">
-                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                      <button class="btn btn-primary btn-sm" type="submit" name="Btn14001430">Simpan/Update</button>
                     </div>
                   </form>
                   </div>
