@@ -86,7 +86,7 @@
               <div>
                 <i class="fas fa-paste bg-blue"></i>
                 <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 07.00 - 07.30</span>
+                  <span class="time"><i class="fas fa-clock"></i> 21.00 - 21.30</span>
                   <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
                   <div class="timeline-body">
                   <form method="post" enctype="multipart/form-data">
@@ -105,7 +105,7 @@
               <div>
                 <i class="fas fa-paste bg-blue"></i>
                 <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 07.30 - 08.00</span>
+                  <span class="time"><i class="fas fa-clock"></i> 21.30 - 22.00</span>
                   <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
                   <div class="timeline-body">
                   <form method="post" enctype="multipart/form-data">
@@ -124,7 +124,7 @@
               <div>
                 <i class="fas fa-paste bg-blue"></i>
                 <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 08.00 - 08.30</span>
+                  <span class="time"><i class="fas fa-clock"></i> 22.00 - 22.30</span>
                   <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
                   <div class="timeline-body">
                   <form method="post" enctype="multipart/form-data">
@@ -143,7 +143,7 @@
               <div>
                 <i class="fas fa-paste bg-blue"></i>
                 <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 08.30 - 09.00</span>
+                  <span class="time"><i class="fas fa-clock"></i> 22.30 - 23.00</span>
                   <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
                   <div class="timeline-body">
                   <form method="post" enctype="multipart/form-data">
@@ -162,7 +162,7 @@
               <div>
                 <i class="fas fa-paste bg-blue"></i>
                 <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 09.00 - 09.30</span>
+                  <span class="time"><i class="fas fa-clock"></i> 23.00 - 23.30</span>
                   <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
                   <div class="timeline-body">
                   <form method="post" enctype="multipart/form-data">
@@ -181,7 +181,7 @@
               <div>
                 <i class="fas fa-paste bg-blue"></i>
                 <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 09.30 - 10.00</span>
+                  <span class="time"><i class="fas fa-clock"></i> 23.30 - 00.00</span>
                   <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
                   <div class="timeline-body">
                   <form method="post" enctype="multipart/form-data">
@@ -200,7 +200,254 @@
               <div>
                 <i class="fas fa-paste bg-blue"></i>
                 <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 07.30 - 08.00</span>
+                  <span class="time"><i class="fas fa-clock"></i> 00.00 - 00.30</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 00.30 - 01.00</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 01.00 - 01.30</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 01.30 - 02.00</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 02.00 - 02.30</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 02.30 - 03.00</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 03.00 - 03.30</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 03.30 - 04.00</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 04.00 - 04.30</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 04.30 - 05.00</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 05.00 - 05.30</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 05.30 - 06.00</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 06.00 - 06.30</span>
+                  <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
+                  <div class="timeline-body">
+                  <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <textarea class="form-control" name="" required></textarea>
+                    </div>
+                    <div class="timeline-footer">
+                      <button class="btn btn-primary btn-sm" type="submit">Simpan/Update</button>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <div>
+                <i class="fas fa-paste bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fas fa-clock"></i> 06.30 - 07.00</span>
                   <h3 class="timeline-header"><a href="#">TIME LINE </a> UNIT <?php echo $t['departemen']; ?> RSIA YASMIN PALANGKA RAYA</h3>
                   <div class="timeline-body">
                   <form method="post" enctype="multipart/form-data">
