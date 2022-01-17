@@ -103,7 +103,6 @@
                     <th >Waktu Shift</th>
                     <th >Tanggal</th>
                     <th >Kegiatan</th>
-                    <th >Aksi</th>
                   </tr>
 
                   </thead>
@@ -111,28 +110,28 @@
                   <tbody>
 
                    
-
+                  <?php
+                  $id_akun = $_SESSION['id_akun'];
+                  $qtimeline = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun'  ");
+                  while($dtimeline = mysqli_fetch_assoc($qtimeline)){
+                  ?>
                   <tr>
 
-                    <td>17.00-18.00</td>
+                    <td><?php echo $dtimeline['waktu'] ?></td>
 
-                    <td>MALAM</td>
+                    <td><?php echo $dtimeline['shift_waktu']; ?></td>
 
-                    <td>Tgl Input</td>
-
-                    <td>
-
-                        Isi Kegiatan (200Char)
-
-                    </td>
+                    <td><?php echo $dtimeline['tgl_timeline']; ?></td>
 
                     <td>
 
-                      <a data-toggle="modal" data-target="#modalUbah<?php echo $data['id_berita']; ?>" class="btn btn-block btn-info " ><i class="fas fa-pen" style="color:white;"></i></a>
-                                       
+                        <?php echo $dtimeline['isi_kegiatan']; ?>
+
                     </td>
+
 
                   </tr>
+                <?php } ?>
 
            
 
