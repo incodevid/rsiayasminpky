@@ -96,8 +96,24 @@
     $id_akun           = $_SESSION['id_akun'];
     $tglsekarang       = date("Y-m-d");
     $waktu             = "21.00-21.30";
+
+    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+    $jm_skrg           = date("H:i");
+    $jm_1              = "21:00";
+    $jm_2              = "24:00";
+
+
+    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
     $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
     $dkeg = mysqli_fetch_assoc($qkeg);
+
+    } else {
+
+    $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglkemarin' ");
+    $dkeg = mysqli_fetch_assoc($qkeg);
+
+    }
 
     $id_timelineunit   = $dkeg['id_timelineunit'];
     $shift_waktu       = $_POST['shift_waktu'];
@@ -109,9 +125,27 @@
     $tglsekarang       = date("Y-m-d");
     $waktu             = "21.00-21.30";
 
+    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+    $jm_skrg           = date("H:i");
+    $jm_1              = "21:00";
+    $jm_2              = "24:00";
+
+
+    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
 
       $id_akun=$_SESSION['id_akun'];
-      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang'  ");
+
+    } else {
+
+      $id_akun=$_SESSION['id_akun'];
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglkemarin'  ");
+
+
+    }
+
+
       while($data = mysqli_fetch_assoc($sql1)){
 
       if($data['jumlah']=="0"){ 
@@ -119,7 +153,7 @@
 
             $sql = mysqli_query($koneksi," INSERT INTO tb_timelineunit (id_akun,shift_waktu,waktu,tgl_timeline,isi_kegiatan) 
 
-            VALUES ('$id_akun','$shift_waktu','$waktu','$tglsekarang','$isi_kegiatan')  ");
+            VALUES ('$id_akun','$shift_waktu','$waktu','$tgl_timeline','$isi_kegiatan')  ");
 
           } else {
 
@@ -131,11 +165,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -147,7 +181,23 @@
                     $id_akun           = $_SESSION['id_akun'];
                     $tglsekarang       = date("Y-m-d");
                     $waktu             = "21.00-21.30";
-                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+                    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                    $jm_skrg           = date("H:i");
+                    $jm_1              = "21:00";
+                    $jm_2              = "24:00";
+
+
+                    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
+                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang'  ");
+
+                    } else {
+
+                      $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE tgl_timeline BETWEEN '$tglkemarin' AND '$tglsekarang' AND id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu'    ");
+
+                    }
+
+
                     while($dform=mysqli_fetch_assoc($qform)){
 
                     if($dform['jlh_id']=="0"){ 
@@ -156,14 +206,34 @@
                       <textarea class="form-control" name="isi_kegiatan" required></textarea>
                       <input type="hidden" class="form-control" name="shift_waktu" value="MALAM">
                       <input type="hidden" class="form-control" name="waktu" value="21.00-21.30">
+                      <?php
+                      $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                      $jm_skrg           = date("H:i");
+                      $jm_1              = "21:00";
+                      $jm_2              = "24:00";  
+                      if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+                      ?>
                       <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                      <?php }else{?>
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo $tglkemarin ?>">
+                      <?php } ?>
                     </div>
                     <?php }else{ ?>
                     <div class="form-group">
                       <textarea class="form-control" name="isi_kegiatan" required><?php echo $dform['isi_kegiatan']; ?></textarea>
                       <input type="hidden" class="form-control" name="shift_waktu" value="MALAM">
                       <input type="hidden" class="form-control" name="waktu" value="21.00-21.30">
+                      <?php
+                      $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                      $jm_skrg           = date("H:i");
+                      $jm_1              = "21:00";
+                      $jm_2              = "24:00";  
+                      if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+                      ?>
                       <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                      <?php }else{?>
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo $tglkemarin ?>">
+                      <?php } ?>
                     </div>
                     <?php }} ?>
                     <div class="timeline-footer">
@@ -188,8 +258,26 @@
     $id_akun           = $_SESSION['id_akun'];
     $tglsekarang       = date("Y-m-d");
     $waktu             = "21.30-22.00";
+
+    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+    $jm_skrg           = date("H:i");
+    $jm_1              = "21:00";
+    $jm_2              = "24:00";
+
+
+    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
     $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
     $dkeg = mysqli_fetch_assoc($qkeg);
+
+    } else {
+
+    $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglkemarin' ");
+    $dkeg = mysqli_fetch_assoc($qkeg);
+
+    }
+
+
 
     $id_timelineunit   = $dkeg['id_timelineunit'];
     $shift_waktu       = $_POST['shift_waktu'];
@@ -202,8 +290,27 @@
     $waktu             = "21.30-22.00";
 
 
+    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+    $jm_skrg           = date("H:i");
+    $jm_1              = "21:00";
+    $jm_2              = "24:00";
+
+
+    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
+
       $id_akun=$_SESSION['id_akun'];
-      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang'  ");
+
+    } else {
+
+      $id_akun=$_SESSION['id_akun'];
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglkemarin'  ");
+
+
+    }
+
+
       while($data = mysqli_fetch_assoc($sql1)){
 
       if($data['jumlah']=="0"){ 
@@ -211,7 +318,7 @@
 
             $sql = mysqli_query($koneksi," INSERT INTO tb_timelineunit (id_akun,shift_waktu,waktu,tgl_timeline,isi_kegiatan) 
 
-            VALUES ('$id_akun','$shift_waktu','$waktu','$tglsekarang','$isi_kegiatan')  ");
+            VALUES ('$id_akun','$shift_waktu','$waktu','$tgl_timeline','$isi_kegiatan')  ");
 
           } else {
 
@@ -223,11 +330,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -239,7 +346,23 @@
                     $id_akun           = $_SESSION['id_akun'];
                     $tglsekarang       = date("Y-m-d");
                     $waktu             = "21.30-22.00";
-                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+                    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                    $jm_skrg           = date("H:i");
+                    $jm_1              = "21:00";
+                    $jm_2              = "24:00";
+
+
+                    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
+                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang'  ");
+
+                    } else {
+
+                      $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE tgl_timeline BETWEEN '$tglkemarin' AND '$tglsekarang' AND id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu'    ");
+
+                    }
+
+
                     while($dform=mysqli_fetch_assoc($qform)){
 
                     if($dform['jlh_id']=="0"){ 
@@ -248,14 +371,34 @@
                       <textarea class="form-control" name="isi_kegiatan" required></textarea>
                       <input type="hidden" class="form-control" name="shift_waktu" value="MALAM">
                       <input type="hidden" class="form-control" name="waktu" value="21.30-22.00">
+                      <?php
+                      $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                      $jm_skrg           = date("H:i");
+                      $jm_1              = "21:00";
+                      $jm_2              = "24:00";  
+                      if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+                      ?>
                       <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                      <?php }else{?>
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo $tglkemarin ?>">
+                      <?php } ?>
                     </div>
                     <?php }else{ ?>
                     <div class="form-group">
                       <textarea class="form-control" name="isi_kegiatan" required><?php echo $dform['isi_kegiatan']; ?></textarea>
                       <input type="hidden" class="form-control" name="shift_waktu" value="MALAM">
                       <input type="hidden" class="form-control" name="waktu" value="21.30-22.00">
+                      <?php
+                      $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                      $jm_skrg           = date("H:i");
+                      $jm_1              = "21:00";
+                      $jm_2              = "24:00";  
+                      if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+                      ?>
                       <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                      <?php }else{?>
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo $tglkemarin ?>">
+                      <?php } ?>
                     </div>
                     <?php }} ?>
                     <div class="timeline-footer">
@@ -280,8 +423,24 @@
     $id_akun           = $_SESSION['id_akun'];
     $tglsekarang       = date("Y-m-d");
     $waktu             = "22.00-22.30";
+
+    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+    $jm_skrg           = date("H:i");
+    $jm_1              = "21:00";
+    $jm_2              = "24:00";
+
+
+    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
     $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
     $dkeg = mysqli_fetch_assoc($qkeg);
+
+    } else {
+
+    $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglkemarin' ");
+    $dkeg = mysqli_fetch_assoc($qkeg);
+
+    }
 
     $id_timelineunit   = $dkeg['id_timelineunit'];
     $shift_waktu       = $_POST['shift_waktu'];
@@ -294,8 +453,26 @@
     $waktu             = "22.00-22.30";
 
 
+    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+    $jm_skrg           = date("H:i");
+    $jm_1              = "21:00";
+    $jm_2              = "24:00";
+
+
+    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
+
       $id_akun=$_SESSION['id_akun'];
-      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang'  ");
+
+    } else {
+
+      $id_akun=$_SESSION['id_akun'];
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglkemarin'  ");
+
+
+    }
+
       while($data = mysqli_fetch_assoc($sql1)){
 
       if($data['jumlah']=="0"){ 
@@ -303,7 +480,7 @@
 
             $sql = mysqli_query($koneksi," INSERT INTO tb_timelineunit (id_akun,shift_waktu,waktu,tgl_timeline,isi_kegiatan) 
 
-            VALUES ('$id_akun','$shift_waktu','$waktu','$tglsekarang','$isi_kegiatan')  ");
+            VALUES ('$id_akun','$shift_waktu','$waktu','$tgl_timeline','$isi_kegiatan')  ");
 
           } else {
 
@@ -315,11 +492,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -331,7 +508,22 @@
                     $id_akun           = $_SESSION['id_akun'];
                     $tglsekarang       = date("Y-m-d");
                     $waktu             = "22.00-22.30";
-                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+                    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                    $jm_skrg           = date("H:i");
+                    $jm_1              = "21:00";
+                    $jm_2              = "24:00";
+
+
+                    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
+                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang'  ");
+
+                    } else {
+
+                      $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE tgl_timeline BETWEEN '$tglkemarin' AND '$tglsekarang' AND id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu'    ");
+
+                    }
+
                     while($dform=mysqli_fetch_assoc($qform)){
 
                     if($dform['jlh_id']=="0"){ 
@@ -340,14 +532,34 @@
                       <textarea class="form-control" name="isi_kegiatan" required></textarea>
                       <input type="hidden" class="form-control" name="shift_waktu" value="MALAM">
                       <input type="hidden" class="form-control" name="waktu" value="22.00-22.30">
+                      <?php
+                      $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                      $jm_skrg           = date("H:i");
+                      $jm_1              = "21:00";
+                      $jm_2              = "24:00";  
+                      if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+                      ?>
                       <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                      <?php }else{?>
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo $tglkemarin ?>">
+                      <?php } ?>
                     </div>
                     <?php }else{ ?>
                     <div class="form-group">
                       <textarea class="form-control" name="isi_kegiatan" required><?php echo $dform['isi_kegiatan']; ?></textarea>
                       <input type="hidden" class="form-control" name="shift_waktu" value="MALAM">
                       <input type="hidden" class="form-control" name="waktu" value="22.00-22.30">
+                      <?php
+                      $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                      $jm_skrg           = date("H:i");
+                      $jm_1              = "21:00";
+                      $jm_2              = "24:00";  
+                      if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+                      ?>
                       <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                      <?php }else{?>
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo $tglkemarin ?>">
+                      <?php } ?>
                     </div>
                     <?php }} ?>
                     <div class="timeline-footer">
@@ -372,8 +584,24 @@
     $id_akun           = $_SESSION['id_akun'];
     $tglsekarang       = date("Y-m-d");
     $waktu             = "22.30-23.00";
+
+    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+    $jm_skrg           = date("H:i");
+    $jm_1              = "21:00";
+    $jm_2              = "24:00";
+
+
+    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
     $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
     $dkeg = mysqli_fetch_assoc($qkeg);
+
+    } else {
+
+    $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglkemarin' ");
+    $dkeg = mysqli_fetch_assoc($qkeg);
+
+    }
 
     $id_timelineunit   = $dkeg['id_timelineunit'];
     $shift_waktu       = $_POST['shift_waktu'];
@@ -386,8 +614,26 @@
     $waktu             = "22.30-23.00";
 
 
+    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+    $jm_skrg           = date("H:i");
+    $jm_1              = "21:00";
+    $jm_2              = "24:00";
+
+
+    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
+
       $id_akun=$_SESSION['id_akun'];
-      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang'  ");
+
+    } else {
+
+      $id_akun=$_SESSION['id_akun'];
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglkemarin'  ");
+
+
+    }
+
       while($data = mysqli_fetch_assoc($sql1)){
 
       if($data['jumlah']=="0"){ 
@@ -395,7 +641,7 @@
 
             $sql = mysqli_query($koneksi," INSERT INTO tb_timelineunit (id_akun,shift_waktu,waktu,tgl_timeline,isi_kegiatan) 
 
-            VALUES ('$id_akun','$shift_waktu','$waktu','$tglsekarang','$isi_kegiatan')  ");
+            VALUES ('$id_akun','$shift_waktu','$waktu','$tgl_timeline','$isi_kegiatan')  ");
 
           } else {
 
@@ -407,11 +653,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -423,7 +669,22 @@
                     $id_akun           = $_SESSION['id_akun'];
                     $tglsekarang       = date("Y-m-d");
                     $waktu             = "22.30-23.00";
-                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+                    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                    $jm_skrg           = date("H:i");
+                    $jm_1              = "21:00";
+                    $jm_2              = "24:00";
+
+
+                    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
+                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang'  ");
+
+                    } else {
+
+                      $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE tgl_timeline BETWEEN '$tglkemarin' AND '$tglsekarang' AND id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu'    ");
+
+                    }
+
                     while($dform=mysqli_fetch_assoc($qform)){
 
                     if($dform['jlh_id']=="0"){ 
@@ -432,14 +693,34 @@
                       <textarea class="form-control" name="isi_kegiatan" required></textarea>
                       <input type="hidden" class="form-control" name="shift_waktu" value="MALAM">
                       <input type="hidden" class="form-control" name="waktu" value="22.30-23.00">
+                      <?php
+                      $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                      $jm_skrg           = date("H:i");
+                      $jm_1              = "21:00";
+                      $jm_2              = "24:00";  
+                      if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+                      ?>
                       <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                      <?php }else{?>
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo $tglkemarin ?>">
+                      <?php } ?>
                     </div>
                     <?php }else{ ?>
                     <div class="form-group">
                       <textarea class="form-control" name="isi_kegiatan" required><?php echo $dform['isi_kegiatan']; ?></textarea>
                       <input type="hidden" class="form-control" name="shift_waktu" value="MALAM">
                       <input type="hidden" class="form-control" name="waktu" value="22.30-23.00">
+                      <?php
+                      $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                      $jm_skrg           = date("H:i");
+                      $jm_1              = "21:00";
+                      $jm_2              = "24:00";  
+                      if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+                      ?>
                       <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                      <?php }else{?>
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo $tglkemarin ?>">
+                      <?php } ?>
                     </div>
                     <?php }} ?>
                     <div class="timeline-footer">
@@ -464,8 +745,24 @@
     $id_akun           = $_SESSION['id_akun'];
     $tglsekarang       = date("Y-m-d");
     $waktu             = "23.00-23.30";
+
+    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+    $jm_skrg           = date("H:i");
+    $jm_1              = "21:00";
+    $jm_2              = "24:00";
+
+
+    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
     $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
     $dkeg = mysqli_fetch_assoc($qkeg);
+
+    } else {
+
+    $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglkemarin' ");
+    $dkeg = mysqli_fetch_assoc($qkeg);
+
+    }
 
     $id_timelineunit   = $dkeg['id_timelineunit'];
     $shift_waktu       = $_POST['shift_waktu'];
@@ -478,8 +775,26 @@
     $waktu             = "23.00-23.30";
 
 
+    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+    $jm_skrg           = date("H:i");
+    $jm_1              = "21:00";
+    $jm_2              = "24:00";
+
+
+    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
+
       $id_akun=$_SESSION['id_akun'];
-      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang'  ");
+
+    } else {
+
+      $id_akun=$_SESSION['id_akun'];
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglkemarin'  ");
+
+
+    }
+
       while($data = mysqli_fetch_assoc($sql1)){
 
       if($data['jumlah']=="0"){ 
@@ -487,7 +802,7 @@
 
             $sql = mysqli_query($koneksi," INSERT INTO tb_timelineunit (id_akun,shift_waktu,waktu,tgl_timeline,isi_kegiatan) 
 
-            VALUES ('$id_akun','$shift_waktu','$waktu','$tglsekarang','$isi_kegiatan')  ");
+            VALUES ('$id_akun','$shift_waktu','$waktu','$tgl_timeline','$isi_kegiatan')  ");
 
           } else {
 
@@ -499,11 +814,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -515,7 +830,22 @@
                     $id_akun           = $_SESSION['id_akun'];
                     $tglsekarang       = date("Y-m-d");
                     $waktu             = "23.00-23.30";
-                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+                    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                    $jm_skrg           = date("H:i");
+                    $jm_1              = "21:00";
+                    $jm_2              = "24:00";
+
+
+                    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
+                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang'  ");
+
+                    } else {
+
+                      $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE tgl_timeline BETWEEN '$tglkemarin' AND '$tglsekarang' AND id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu'    ");
+
+                    }
+
                     while($dform=mysqli_fetch_assoc($qform)){
 
                     if($dform['jlh_id']=="0"){ 
@@ -524,14 +854,34 @@
                       <textarea class="form-control" name="isi_kegiatan" required></textarea>
                       <input type="hidden" class="form-control" name="shift_waktu" value="MALAM">
                       <input type="hidden" class="form-control" name="waktu" value="23.00-23.30">
+                      <?php
+                      $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                      $jm_skrg           = date("H:i");
+                      $jm_1              = "21:00";
+                      $jm_2              = "24:00";  
+                      if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+                      ?>
                       <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                      <?php }else{?>
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo $tglkemarin ?>">
+                      <?php } ?>
                     </div>
                     <?php }else{ ?>
                     <div class="form-group">
                       <textarea class="form-control" name="isi_kegiatan" required><?php echo $dform['isi_kegiatan']; ?></textarea>
                       <input type="hidden" class="form-control" name="shift_waktu" value="MALAM">
                       <input type="hidden" class="form-control" name="waktu" value="23.00-23.30">
+                      <?php
+                      $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                      $jm_skrg           = date("H:i");
+                      $jm_1              = "21:00";
+                      $jm_2              = "24:00";  
+                      if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+                      ?>
                       <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                      <?php }else{?>
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo $tglkemarin ?>">
+                      <?php } ?>
                     </div>
                     <?php }} ?>
                     <div class="timeline-footer">
@@ -556,8 +906,24 @@
     $id_akun           = $_SESSION['id_akun'];
     $tglsekarang       = date("Y-m-d");
     $waktu             = "23.30-00.00";
+
+    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+    $jm_skrg           = date("H:i");
+    $jm_1              = "21:00";
+    $jm_2              = "24:00";
+
+
+    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
     $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
     $dkeg = mysqli_fetch_assoc($qkeg);
+
+    } else {
+
+    $qkeg = mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglkemarin' ");
+    $dkeg = mysqli_fetch_assoc($qkeg);
+
+    }
 
     $id_timelineunit   = $dkeg['id_timelineunit'];
     $shift_waktu       = $_POST['shift_waktu'];
@@ -570,8 +936,26 @@
     $waktu             = "23.30-00.00";
 
 
+    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+    $jm_skrg           = date("H:i");
+    $jm_1              = "21:00";
+    $jm_2              = "24:00";
+
+
+    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
+
       $id_akun=$_SESSION['id_akun'];
-      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang'  ");
+
+    } else {
+
+      $id_akun=$_SESSION['id_akun'];
+      $sql1 = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jumlah FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglkemarin'  ");
+
+
+    }
+
       while($data = mysqli_fetch_assoc($sql1)){
 
       if($data['jumlah']=="0"){ 
@@ -579,7 +963,7 @@
 
             $sql = mysqli_query($koneksi," INSERT INTO tb_timelineunit (id_akun,shift_waktu,waktu,tgl_timeline,isi_kegiatan) 
 
-            VALUES ('$id_akun','$shift_waktu','$waktu','$tglsekarang','$isi_kegiatan')  ");
+            VALUES ('$id_akun','$shift_waktu','$waktu','$tgl_timeline','$isi_kegiatan')  ");
 
           } else {
 
@@ -591,11 +975,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -607,7 +991,22 @@
                     $id_akun           = $_SESSION['id_akun'];
                     $tglsekarang       = date("Y-m-d");
                     $waktu             = "23.30-00.00";
-                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang' ");
+                    $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                    $jm_skrg           = date("H:i");
+                    $jm_1              = "21:00";
+                    $jm_2              = "24:00";
+
+
+                    if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+
+                    $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu' AND tgl_timeline='$tglsekarang'  ");
+
+                    } else {
+
+                      $qform = mysqli_query($koneksi,"SELECT *, COUNT(id_timelineunit) AS jlh_id FROM tb_timelineunit WHERE tgl_timeline BETWEEN '$tglkemarin' AND '$tglsekarang' AND id_akun='$id_akun' AND shift_waktu='MALAM' AND waktu='$waktu'    ");
+
+                    }
+
                     while($dform=mysqli_fetch_assoc($qform)){
 
                     if($dform['jlh_id']=="0"){ 
@@ -616,14 +1015,34 @@
                       <textarea class="form-control" name="isi_kegiatan" required></textarea>
                       <input type="hidden" class="form-control" name="shift_waktu" value="MALAM">
                       <input type="hidden" class="form-control" name="waktu" value="23.30-00.00">
+                      <?php
+                      $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                      $jm_skrg           = date("H:i");
+                      $jm_1              = "21:00";
+                      $jm_2              = "24:00";  
+                      if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+                      ?>
                       <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                      <?php }else{?>
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo $tglkemarin ?>">
+                      <?php } ?>
                     </div>
                     <?php }else{ ?>
                     <div class="form-group">
                       <textarea class="form-control" name="isi_kegiatan" required><?php echo $dform['isi_kegiatan']; ?></textarea>
                       <input type="hidden" class="form-control" name="shift_waktu" value="MALAM">
                       <input type="hidden" class="form-control" name="waktu" value="23.30-00.00">
+                      <?php
+                      $tglkemarin        = date('Y-m-d', strtotime('previous day'));
+                      $jm_skrg           = date("H:i");
+                      $jm_1              = "21:00";
+                      $jm_2              = "24:00";  
+                      if($jm_skrg >= $jm_1 && $jm_skrg <= $jm_2){
+                      ?>
                       <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo date("Y-m-d") ?>">
+                      <?php }else{?>
+                      <input type="hidden" class="form-control" name="tgl_timeline" value="<?php echo $tglkemarin ?>">
+                      <?php } ?>
                     </div>
                     <?php }} ?>
                     <div class="timeline-footer">
@@ -683,11 +1102,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -775,11 +1194,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -867,11 +1286,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -959,11 +1378,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -1051,11 +1470,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -1143,11 +1562,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -1235,11 +1654,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -1327,11 +1746,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -1419,11 +1838,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -1511,11 +1930,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -1603,11 +2022,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -1695,11 +2114,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -1787,11 +2206,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 
@@ -1879,11 +2298,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftmalam' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftmalam' </script>" ;
 
              }
 

@@ -122,11 +122,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -214,11 +214,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -306,11 +306,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -398,11 +398,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -490,11 +490,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -582,11 +582,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -674,11 +674,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -766,11 +766,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -858,11 +858,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -950,11 +950,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -1042,11 +1042,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -1134,11 +1134,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -1226,11 +1226,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
@@ -1318,11 +1318,11 @@
 
             if ($sql) {
 
-               echo "<script> alert ('Tambah Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
+               echo "<script> alert ('Simpan/Update Kegiatan Berhasil!');window.location.href='?p=shiftsore' </script>" ;
 
              } else {
 
-              echo "<script> alert ('Tambah Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
+              echo "<script> alert ('Simpan/Update Kegiatan Gagal!');window.location.href='?p=shiftsore' </script>" ;
 
              }
 
