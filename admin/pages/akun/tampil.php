@@ -223,8 +223,9 @@ if ($cek > 0){
                     <?php 
 
                   $no = 1;
+                  $takun = $_SESSION['id_akun'];
 
-$query = mysqli_query($koneksi,"SELECT * FROM tb_akun WHERE level_akses NOT LIKE '%super%' GROUP BY id_akun DESC");
+$query = mysqli_query($koneksi,"SELECT * FROM tb_akun WHERE level_akses NOT LIKE '%super%' AND id_akun NOT LIKE '$takun' GROUP BY id_akun DESC");
 
 while($data  = mysqli_fetch_assoc($query)){
 
@@ -420,6 +421,8 @@ while($data  = mysqli_fetch_assoc($query)){
 
                           <option value="admin">Admin</option>
                           <option value="karyawan">Karyawan</option>
+                          <option value="personalia">Personalia</option>
+                          <option value="kabid">Kabid</option>
 
                         </select>
 

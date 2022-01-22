@@ -337,7 +337,7 @@ overflow-x:scroll;
 
     
 
-    if($_SESSION['level_akses']=="super"){
+    if($_SESSION['level_akses']=="super" || $_SESSION['level_akses']=="personalia"){
 
         
 
@@ -787,7 +787,7 @@ overflow-x:scroll;
 
     
 
-    if($_SESSION['level_akses']=="admin" || $_SESSION['level_akses']=="super" || $_SESSION['level_akses']=="karyawan"){
+    if($_SESSION['level_akses']=="admin" || $_SESSION['level_akses']=="super" || $_SESSION['level_akses']=="karyawan" || $_SESSION['level_akses']=="personalia" || $_SESSION['level_akses']=="kabid"){
 
         
 
@@ -809,9 +809,15 @@ overflow-x:scroll;
 
           </li>
 
-          <li class="nav-item">
+        <?php } ?>
 
-            <a href="?p=#" class="nav-link">
+        <?php 
+        if($_SESSION['level_akses']=="personalia" || $_SESSION['level_akses']=="kabid" || $_SESSION['level_akses']=="super"){
+        ?>
+
+        <li class="nav-item">
+
+            <a href="?p=rekaptimeline" class="nav-link">
 
               <i class="nav-icon fas fa-file-alt"></i>
 
@@ -1388,6 +1394,14 @@ overflow-x:scroll;
 
 
 
+        case "rekaptimeline";
+
+        include "pages/laporan_rekap_timeline/tampil.php";
+
+        break;
+
+
+
 
 
        
@@ -1789,6 +1803,12 @@ overflow-x:scroll;
     });
 
     $('#reservationdate1').datetimepicker({
+
+        format: 'YYYY-MM-DD'
+
+    });
+
+    $('#reservationdate2').datetimepicker({
 
         format: 'YYYY-MM-DD'
 
