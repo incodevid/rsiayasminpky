@@ -222,7 +222,7 @@ JL. Tjilik Riwut, No. 04 KM. 1, 5, Palangka, Kec. Jekan Raya, Kota Palangka Raya
 								$dt 	= $_GET['dt'];
 								$mulai  = $_GET['tgl_mulai'];
 								$akhir  = $_GET['tgl_akhir'];
-								$qtimeline=mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE tgl_timeline BETWEEN '$mulai' AND '$akhir' AND id_akun='$dt' ORDER BY waktu ASC ");
+								$qtimeline=mysqli_query($koneksi,"SELECT * FROM tb_timelineunit WHERE tgl_timeline BETWEEN '$mulai' AND '$akhir' AND id_akun='$dt' ORDER BY tgl_timeline ASC, waktu ASC");
 
 								while($data=mysqli_fetch_assoc($qtimeline)){
 								?>
